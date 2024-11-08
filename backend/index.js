@@ -32,7 +32,7 @@ async function getStockOverviewData(sheetName, revenueRow, quarterRow) {
     const response = await axios.get(url);
     return response.data.valueRanges;
   } catch (error) {
-    console.error('Fehler beim Abrufen der Daten:', error);
+    console.error('Error while retrieving data:', error);
   }
 }
 
@@ -80,7 +80,7 @@ async function syncSpreadsheetToFirestore() {
 // API-Route to manual Synchronisation
 app.post('/api/sync', async (req, res) => {
   await syncSpreadsheetToFirestore();
-  res.send('Spreadsheet synchronisiert.');
+  res.send('Spreadsheet synchronized.');
 });
 
 // Cronjob every 24 hours
@@ -89,5 +89,5 @@ cron.schedule('0 0 * * *', syncSpreadsheetToFirestore);
 // Start Server
 const PORT = 5001;
 app.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT}`);
+  console.log(`Server runs on port ${PORT}`);
 });
