@@ -1,0 +1,41 @@
+:host {
+  background: var(--sys-primary-container);
+  color: var(--sys-on-primary-container);
+  position: absolute;
+  right: 1.5rem;
+  top: 5rem;
+  width: 6;
+  z-index: 100;
+  border-radius: 1rem;
+}
+
+.widget-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: var(--sys-surface-container);
+  color: var(--sys-inverse-surface);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+
+  &:hover {
+    background: var(--sys-surface-container-high);
+  }
+}
+
+.widgets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.widgets-panel-header {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: move;
+}

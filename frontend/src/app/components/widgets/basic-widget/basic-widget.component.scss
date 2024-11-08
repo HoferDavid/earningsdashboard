@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  :host {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .widget-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  
+    .name {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+  
+    .ticker {
+      margin: 0;
+      font-size: 0.625rem;
+      margin-block-end: 0;
+    }
+  
+    img {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // width: 40px;
+      // background-color: white;
+      // padding: 0.25rem;
+      // border-radius: 100%;
+      // border: 1px solid black;
+    }
+  }
+  
+  .widget-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  
+    .revenueText {
+      margin: 0;
+      font-size: 0.75rem;
+    }
+  
+    .revenueNumber {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+  
+    .infoText {
+      font-size: 0.5rem;
+    }
+  }
+  

@@ -1,0 +1,5 @@
+# added by dh
+backend/node_modules
+backend/.env
+backend/serviceAccountKey.json
+backend/stocks.json

@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@use "./app/scss/" as *;
+
+@use "./app/scss/themes/dark-theme.scss";
+@use "./app/scss/themes/light-theme.scss";
+
+@use "@angular/material" as mat;
+@include mat.core();
+
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+$custom-theme: mat.define-theme(
+  (
+    color: (
+      use-system-variables: true,
+    ),
+  )
+);
+
+html {
+  @include mat.core-theme($custom-theme);
+  @include mat.toolbar-theme($custom-theme);
+  @include mat.button-theme($custom-theme);
+  @include mat.icon-button-theme($custom-theme);
+  @include mat.sidenav-theme($custom-theme);
+  @include mat.tabs-theme($custom-theme);
+  @include mat.list-theme($custom-theme);
+  @include mat.card-theme($custom-theme);
+  @include mat.select-theme($custom-theme);
+  @include mat.form-field-theme($custom-theme);
+  @include mat.button-toggle-theme($custom-theme);
+  @include mat.menu-theme($custom-theme);
+  @include mat.divider-theme($custom-theme);
+}
+
+
+.cdk-drop-list-dragging {
+  opacity: 0.5;
+  border-left: 5px solid var(--sys-outline);
+  padding-left: 0.5rem;
+}

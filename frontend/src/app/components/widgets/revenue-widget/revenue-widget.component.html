@@ -1,0 +1,12 @@
+<!-- <h2>{{ data.name }} ({{ data.ticker }}) Revenue</h2> -->
+
+
+    <div class="revenue-widget" *ngIf="data">
+        <app-widget>
+            <h2>Revenue last 3 Years</h2>
+            <p>Last Quarter Revenue:</p>
+            <!-- <p>Last Quarter Revenue: {{ data.lastRevenue | currency }}</p> -->
+            <!-- Hier kannst du dein Diagramm einfügen -->
+            <!-- <app-revenue-chart [data]="data.revenueData"></app-revenue-chart> -->
+        </app-widget>
+      </div>

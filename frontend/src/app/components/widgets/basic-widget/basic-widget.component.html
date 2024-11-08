@@ -1,0 +1,21 @@
+<div (click)="goToDashboard()">
+
+    <app-widget>
+      <div class="widget-header">
+        <img [src]="data.logo" [alt]="data.ticker + ' logo'" />
+        <div>
+          <p class="name">{{ data.name }}</p>
+          <p class="ticker">{{ data.ticker }}</p>
+        </div>
+      </div>
+  
+      <div class="widget-body">
+        <p class="revenueText">Revenue {{ data.lastQuarter | quarterFormat }}</p>
+        <p class="revenueNumber">
+          {{ data.lastRevenue ? (data.lastRevenue | billionFormat) : "-" }}
+        </p>
+        <p class="infoText">in Bill. USD</p>
+      </div>
+    </app-widget>
+    
+  </div>

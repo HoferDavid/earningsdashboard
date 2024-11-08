@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    img {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+button {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: var(--sys-secondary-container);
+
+  a {
+    color: var(--sys-inverse-surface);
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,7 @@
+<app-overview-header />
+
+<div class="dashboard-widgets">
+  @for (stock of stocks$ | async; track stock.ticker) {
+    <app-basic-widget [data]="stock"></app-basic-widget>
+  }
+</div>

@@ -42,3 +42,6 @@ testem.log
 Thumbs.db
 
 # added by dh
+/src/environments
+public
+

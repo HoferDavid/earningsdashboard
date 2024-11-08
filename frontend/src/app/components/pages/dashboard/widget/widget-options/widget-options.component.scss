@@ -1,0 +1,56 @@
+:host {
+  position: absolute;
+  z-index: 2;
+  background: var(--sys-surface-container);
+  color: var(--sys-inverse-surface);
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  --mat-standard-button-toggle-height: 1rem;
+
+  > div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .remove-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--sys-error);
+  }
+
+  .size-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .move-forward-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -5px;
+  }
+
+  .move-backward-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -5px;
+  }
+}
