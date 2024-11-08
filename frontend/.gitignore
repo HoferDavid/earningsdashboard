@@ -41,6 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-
 # added by dh
-test.ts

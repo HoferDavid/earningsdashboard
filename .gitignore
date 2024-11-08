@@ -42,3 +42,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
+
+# Backend
+# added by dh
+backend/.env
+backend/serviceAccountKey.json
+backend/stocks.json
+
