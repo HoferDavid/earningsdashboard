@@ -7,7 +7,7 @@
 }
 
 mat-sidenav-container {
-  height: calc(100dvh - 4rem);
+  height: calc(100vh - var(--header-height-desktop));
   --mat-sidenav-container-background-color: var(--sys-surface-container);
 }
 
@@ -62,4 +62,10 @@ mat-sidenav-content {
 
 .indented {
   --mat-list-list-item-leading-icon-start-space: 3rem;
+}
+
+@media (max-width: 599px) {
+  mat-sidenav-container {
+    height: calc(100vh - var(--header-height-mobile));
+  }
 }

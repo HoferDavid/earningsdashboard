@@ -43,6 +43,12 @@ testem.log
 Thumbs.db
 
 # added by dh
+/src/environments
+public
+
+
+# Backend .gitignore
+# added by dh
 backend/node_modules
 backend/.env
 backend/serviceAccountKey.json

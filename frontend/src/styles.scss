@@ -49,3 +49,18 @@ html {
   border-left: 5px solid var(--sys-outline);
   padding-left: 0.5rem;
 }
+
+:root {
+  --header-height-desktop: 64px; // Desktop-Height
+  --header-height-mobile: 56px; // Mobile-Height
+}
+
+mat-toolbar {
+  height: var(--header-height-desktop);
+}
+
+@media (max-width: 600px) {
+  mat-toolbar {
+    height: var(--header-height-mobile);
+  }
+}
