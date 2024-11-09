@@ -1,7 +1,18 @@
-<app-overview-header />
+<div class="search-bar">
+  <mat-form-field appearance="fill">
+    <mat-label>search</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="name or ticker"
+      [formControl]="searchControl"
+    />
+  </mat-form-field>
+</div>
 
 <div class="dashboard-widgets">
-  @for (stock of stocks$ | async; track stock.ticker) {
+  @for (stock of (filteredStocks$ | async); track stock) {
     <app-basic-widget [data]="stock"></app-basic-widget>
   }
 </div>
+

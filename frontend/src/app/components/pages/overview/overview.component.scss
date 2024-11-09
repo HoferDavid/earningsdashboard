@@ -1,7 +1,8 @@
 :host {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+
 }
 
 .dashboard-widgets {
@@ -9,4 +10,15 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+
+.search-bar {
+  margin-bottom: 16px;
+}
+
+.dashboard-widgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
