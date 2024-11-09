@@ -61,7 +61,8 @@ async function syncSpreadsheetToFirestore() {
           ticker: stock.ticker,
           revenue: revenueData,
           quarter: quarterData,
-          url: stock.url  // Add this line to save the URL
+          url: stock.url,  // Add this line to save the URL
+          updatedAt: admin.firestore.FieldValue.serverTimestamp() // Set the timestamp
         });
         
         console.log(`Data for ${stockName} successfully saved to Firestore.`);

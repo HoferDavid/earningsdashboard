@@ -1,16 +1,18 @@
 <mat-sidenav-container>
-  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()" class="shared-header-sidebar mat-elevation-z3">
+  <mat-sidenav
+    opened
+    mode="side"
+    [style.width]="sidenavWidth()"
+    class="shared-header-sidebar mat-elevation-z3"
+  >
     <div class="sidenav-header">
-      <img
-        src="img/supermario.jpg"
-        [style.width]="profilePicSize()"
-        alt="Photo"
-      />
-      <div class="header-text" [class.hide-header-text]="isCollapsed()">
+      <div class="sidenav-header-text" [class.hide-header-text]="isCollapsed()">
         <h2>Hello</h2>
         <p>Fellow Investor</p>
       </div>
+      <img src="img/logo.png" [style.width]="profilePicSize()" alt="Photo" />
     </div>
+
     <mat-nav-list>
       @for (item of menuItems(); track item.label; let i = $index) {
       <a
@@ -69,10 +71,18 @@
       </div>
       } }
     </mat-nav-list>
+
+
+      <div class="lastUpdate-container" [class.hide-header-text]="isCollapsed()">
+        @if (stockDetails) {
+          <p class="date-text">Database Last updated:</p>
+          <p class="date">{{ stockDetails.updatedAt | date : "dd/MM/yyyy" }}</p>
+        }
+      </div>
+
   </mat-sidenav>
 
   <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
-  
 </mat-sidenav-container>

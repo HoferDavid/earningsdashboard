@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { SidenavService } from '../../../services/sidenav.service';
+import { FirestoreService } from '../../../services/firestore.service';
+import { Observable } from 'rxjs';
 
 export type MenuItem = {
   icon: string;
@@ -32,8 +34,18 @@ export type MenuItem = {
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   sidenavService = inject(SidenavService);
+  firestoreService = inject(FirestoreService);
+
+  stockDetails: any;
+
+  ngOnInit(): void {
+    this.firestoreService.getStockDetails('AAPL').subscribe(data => {
+      this.stockDetails = data;
+    });
+  }
+
 
   menuItems = signal<MenuItem[]>([
     {

@@ -16,28 +16,39 @@ mat-sidenav {
 }
 
 .sidenav-header {
-  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   text-align: center;
-  gap: 0.5rem;
 
-  > img {
+  img {
     border-radius: 100%;
     object-fit: cover;
   }
+
+  .sidenav-header-text {
+    margin: 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.75rem;
+    }
+  }
 }
 
-.header-text {
-  height: 3rem;
+.lastUpdate-container {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
 
-  > h2 {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  > p {
-    margin: 0;
-    font-size: 0.8rem;
+  .date-text {
+    font-size: 0.75rem;
+    text-align: center;
   }
 }
 
@@ -61,7 +72,7 @@ mat-sidenav-content {
 }
 
 .indented {
-  --mat-list-list-item-leading-icon-start-space: 3rem;
+  --mat-list-list-item-leading-icon-start-space: 2rem;
 }
 
 @media (max-width: 599px) {

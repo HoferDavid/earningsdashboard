@@ -26,16 +26,16 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent {
   firestoreService = inject(FirestoreService);
   
-  // Observable für alle Aktien (ungefiltert)
+
   stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
 
-  // FormControl für das Suchfeld
+
   searchControl = new FormControl<string>('');
 
-  // Gefilterte Aktienliste basierend auf Suchtext
+
   filteredStocks$: Observable<BasicWidget[]> = combineLatest([
     this.stocks$,
     this.searchControl.valueChanges.pipe(startWith(''))
@@ -48,11 +48,7 @@ export class OverviewComponent implements OnInit {
     )
   );
 
-  ngOnInit() {
-    // Falls zusätzliche Initialisierung nötig ist
-  }
 
-  // TrackBy-Funktion für Performance
   trackByTicker(index: number, stock: BasicWidget) {
     return stock.ticker;
   }

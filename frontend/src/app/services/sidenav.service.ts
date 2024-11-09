@@ -11,10 +11,10 @@ export class SidenavService {
   }
 
   get sidenavWidth(): string {
-    return this.collapsed() ? '65px' : '250px';
+    return this.collapsed() ? '64px' : '200px';
   }
 
   get profilPicWidth(): string {
-    return this.collapsed() ? '32px' : '100px';
+    return this.collapsed() ? '32px' : '80px';
   }
 }

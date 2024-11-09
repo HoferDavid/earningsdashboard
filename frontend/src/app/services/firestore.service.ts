@@ -47,24 +47,6 @@ export class FirestoreService {
   }
 
 
-  // getStockDetails(ticker: string): Observable<StockData> {
-  //   const stockDoc = doc(this.firestore, 'stocks', ticker);
-  //   return from(getDoc(stockDoc)).pipe(
-  //     map(docSnap => {
-  //       if (docSnap.exists()) {
-  //         return { id: docSnap.id, ...docSnap.data() } as StockData;
-  //       } else {
-  //         throw new Error('Stock not found');
-  //       }
-  //     }),
-  //     catchError(error => {
-  //       console.error('Error fetching stock details:', error);
-  //       throw error;
-  //     })
-  //   );
-  // }
-
-
   getStockDetails(ticker: string): Observable<StockData> {
     const stockDoc = doc(this.firestore, 'stocks', ticker);
     return from(getDoc(stockDoc)).pipe(
@@ -77,7 +59,8 @@ export class FirestoreService {
             ticker: data['ticker'],
             revenue: data['revenue'],
             quarter: data['quarter'],
-            url: data['url'], // Fügen Sie dies hinzu
+            url: data['url'],
+            updatedAt: data['updatedAt'] ? data['updatedAt'].toDate() : null
           } as StockData;
         } else {
           throw new Error('Stock not found');
