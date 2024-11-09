@@ -4,10 +4,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { OverviewHeaderComponent } from "./overview-header/overview-header.component";
 import { CommonModule } from '@angular/common';
-import { FirestoreService } from '../../../services/firestore.service';
 import { Observable } from 'rxjs';
 import { BasicWidgetComponent } from '../../widgets/basic-widget/basic-widget.component';
 import { BasicWidget } from '../../../interfaces/basic-widget';
+import { FirestoreService } from '../../../services/firestore.service';
 
 @Component({
   selector: 'app-overview',
