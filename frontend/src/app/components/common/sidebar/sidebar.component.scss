@@ -13,48 +13,59 @@ mat-sidenav-container {
 
 mat-sidenav {
   border-right: 1px solid var(--sys-outline);
+  padding-top: 1rem;
+  display: flex;
 }
 
-.sidenav-header {
-  padding-bottom: 1.5rem;
-  text-align: center;
+// .sidenav-header {
+//   padding-bottom: 1.5rem;
+//   text-align: center;
 
-  img {
-    border-radius: 100%;
-    object-fit: cover;
-  }
+//   img {
+//     border-radius: 100%;
+//     object-fit: cover;
+//   }
 
-  .sidenav-header-text {
-    margin: 1rem;
+//   .sidenav-header-text {
+//     margin: 1rem;
 
-    h2 {
-      font-size: 1.5rem;
-      margin: 0;
-    }
+//     h2 {
+//       font-size: 1.5rem;
+//       margin: 0;
+//     }
 
-    p {
-      font-size: 0.75rem;
-    }
-  }
-}
+//     p {
+//       font-size: 0.75rem;
+//     }
+//   }
+// }
 
 .lastUpdate-container {
   display: flex;
-  position: absolute;
-  bottom: 0;
   flex-direction: column;
   align-items: center;
-  margin: 2rem;
-
-  .date-text {
-    font-size: 0.75rem;
-    text-align: center;
-  }
+  margin-top: 8rem;
+  font-size: 0.75rem;
+  text-align: center;
 }
+
+.lastUpdate-vertical {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8rem;
+  transform: rotate(180deg);
+  writing-mode: vertical-lr;
+  width: 100%;
+}
+
+
 
 .hide-header-text {
   opacity: 0;
   height: 0px;
+  display: none;
 }
 
 .menu-item {

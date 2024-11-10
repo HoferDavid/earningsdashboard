@@ -1,36 +1,19 @@
 <mat-sidenav-container>
-  <mat-sidenav
-    opened
-    mode="side"
-    [style.width]="sidenavWidth()"
-    class="shared-header-sidebar mat-elevation-z3"
-  >
-    <div class="sidenav-header">
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()" class="shared-header-sidebar mat-elevation-z3">
+
+    <!-- <div class="sidenav-header">
       <div class="sidenav-header-text" [class.hide-header-text]="isCollapsed()">
         <h2>Hello</h2>
         <p>Fellow Investor</p>
       </div>
       <img src="img/logo.png" [style.width]="profilePicSize()" alt="Photo" />
-    </div>
+    </div> -->
 
     <mat-nav-list>
       @for (item of menuItems(); track item.label; let i = $index) {
-      <a
-        mat-list-item
-        class="menu-item"
-        (click)="toggleNested(i)"
-        [routerLink]="item.route"
-        routerLinkActive="selected-menu-item"
-        #rla="routerLinkActive"
-        [activated]="rla.isActive"
-      >
-        <mat-icon
-          [fontSet]="
-            rla.isActive ? 'material-icons' : 'material-icons-outlined'
-          "
-          matListItemIcon
-          >{{ item.icon }}</mat-icon
-        >
+      <a mat-list-item class="menu-item" (click)="toggleNested(i)" [routerLink]="item.route" routerLinkActive="selected-menu-item" #rla="routerLinkActive" [activated]="rla.isActive">
+        <mat-icon [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'" matListItemIcon>{{ item.icon }}</mat-icon>
+
         @if (!isCollapsed()) {
         <span matListItemTitle>{{ item.label }}</span>
         } @if (item.subItems) {
@@ -47,22 +30,8 @@
       @if (item.subItems && isNestedMenuOpen(i)) {
       <div @expandContractMenu>
         @for (subItem of item.subItems; track subItem.label) {
-        <a
-          mat-list-item
-          class="menu-item"
-          [class.indented]="!isCollapsed()"
-          [routerLink]="item.route + '/' + subItem.route"
-          routerLinkActive
-          #rla="routerLinkActive"
-          [activated]="rla.isActive"
-        >
-          <mat-icon
-            [fontSet]="
-              rla.isActive ? 'material-icons' : 'material-icons-outlined'
-            "
-            matListItemIcon
-            >{{ subItem.icon }}</mat-icon
-          >
+        <a mat-list-item class="menu-item" [class.indented]="!isCollapsed()" [routerLink]="item.route + '/' + subItem.route" routerLinkActive #rla="routerLinkActive" [activated]="rla.isActive">
+          <mat-icon [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'" matListItemIcon>{{ subItem.icon }}</mat-icon>
           @if (!isCollapsed()) {
           <span>{{ subItem.label }}</span>
           }
@@ -73,14 +42,19 @@
     </mat-nav-list>
 
 
-      <div class="lastUpdate-container" [class.hide-header-text]="isCollapsed()">
-        @if (stockDetails) {
-          <p class="date-text">Database Last updated:</p>
-          <p class="date">{{ stockDetails.updatedAt | date : "dd/MM/yyyy" }}</p>
-        }
-      </div>
+    <div class="lastUpdate-container" [class.lastUpdate-vertical]="isCollapsed()">
+        <p class="date-text">Last updated:</p>
+        <p class="date">{{ stockDetails.updatedAt | date : "dd/MM/yyyy" }}</p>
+    </div>
+
+
+    <!-- <div class="lastUpdate-vertical">
+      <p class="date-text">Last updated:</p>
+      <p class="date">{{ stockDetails.updatedAt | date : "dd/MM/yyyy" }}</p>
+    </div> -->
 
   </mat-sidenav>
+
 
   <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
     <router-outlet></router-outlet>
