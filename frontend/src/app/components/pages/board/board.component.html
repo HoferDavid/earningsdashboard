@@ -1,12 +1,13 @@
-<section *ngIf="stockData$ | async as stockData">
-    
-  <app-board-header 
-    [name]="stockData.name" 
-    [ticker]="stockData.id" 
-    [logo]="'/logos/' + stockData.name.toLowerCase() + '.png'"
-    [url]="stockData.url">
-  </app-board-header>
-
-  <!-- <app-revenue-widget [data]="revenueWidget"></app-revenue-widget> -->
-
+<section>
+  @if (stockData()) {
+    <app-board-header
+      [name]="stockData()!.name"
+      [ticker]="stockData()!.ticker"
+      [logo]="'/logos/' + stockData()!.name.toLowerCase() + '.png'"
+      [url]="stockData()!.url"
+    >
+    </app-board-header>
+    } @else {
+    <p>loading...</p>
+  }
 </section>

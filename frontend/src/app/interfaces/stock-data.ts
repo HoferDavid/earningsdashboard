@@ -3,6 +3,4 @@ export interface StockData {
   name: string;
   ticker: string;
   url: string;
-  revenue: number[];
-  quarter: string[];
 }
