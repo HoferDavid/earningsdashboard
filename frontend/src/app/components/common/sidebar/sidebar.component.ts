@@ -40,6 +40,7 @@ export class SidebarComponent implements OnInit {
 
   stockDetails: any;
 
+
   ngOnInit(): void {
     this.firestoreService.getStockDetails('AAPL').subscribe(data => {
       this.stockDetails = data;
@@ -84,7 +85,7 @@ export class SidebarComponent implements OnInit {
 
 
   sidenavWidth = computed(() => this.sidenavService.sidenavWidth);
-  profilePicSize = computed(() => this.sidenavService.profilPicWidth);
+  imgWidth = computed(() => this.sidenavService.imgWidth);
   isCollapsed = computed(() => this.sidenavService.collapsed());
 
 
