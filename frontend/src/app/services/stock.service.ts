@@ -1,5 +1,4 @@
-// stock.service.ts
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { FirestoreService } from '../services/firestore.service';
 import { StockData } from '../interfaces/stock-data';
 
@@ -7,7 +6,7 @@ import { StockData } from '../interfaces/stock-data';
 export class StockService {
   private stockDataSignal = signal<StockData | null>(null);
 
-  constructor(private firestoreService: FirestoreService) {}
+  firestoreService = inject(FirestoreService);
 
   loadStockData(ticker: string) {
     this.firestoreService.getStockDetails(ticker).subscribe(data => {
