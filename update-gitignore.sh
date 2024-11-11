@@ -23,4 +23,4 @@ if [ -f backend/.gitignore ]; then
     echo "" >> "$CENTRAL_GITIGNORE"
 fi
 
-echo "Zentrale .gitignore wurde aktualisiert!"
+echo "Central .gitignore has been updated!"
