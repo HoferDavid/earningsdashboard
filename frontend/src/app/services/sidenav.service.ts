@@ -11,7 +11,7 @@ export class SidenavService {
   }
 
   get sidenavWidth(): string {
-    return this.collapsed() ? '64px' : '160px';
+    return this.collapsed() ? '0px' : '160px';
   }
 
   get profilPicWidth(): string {

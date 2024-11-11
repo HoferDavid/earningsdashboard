@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()" class="shared-header-sidebar mat-elevation-z3">
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()" class="shared-header-sidebar mat-elevation-z3" [ngClass]="{'collapsed': sidenavService.collapsed()}">
 
     <!-- <div class="sidenav-header">
       <div class="sidenav-header-text" [class.hide-header-text]="isCollapsed()">
