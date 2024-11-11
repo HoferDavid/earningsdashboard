@@ -1,13 +1,3 @@
 <section>
-  @if (stockData()) {
-    <app-board-header
-      [name]="stockData()!.name"
-      [ticker]="stockData()!.ticker"
-      [logo]="'/logos/' + stockData()!.name.toLowerCase() + '.png'"
-      [url]="stockData()!.url"
-    >
-    </app-board-header>
-    } @else {
-    <p>loading...</p>
-  }
+    <app-board-header></app-board-header>
 </section>

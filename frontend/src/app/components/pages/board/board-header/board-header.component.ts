@@ -1,16 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { StockService } from '../../../../services/stock.service';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-board-header',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, CommonModule],
   templateUrl: './board-header.component.html',
   styleUrl: './board-header.component.scss'
 })
 export class BoardHeaderComponent {
-  @Input() name: string = '';
-  @Input() ticker: string = '';
-  @Input() logo: string = '';
-  @Input() url: string = '';
+  stockService = inject(StockService);
 }

@@ -1,18 +1,21 @@
-import { Injectable } from '@angular/core';
-import { signal } from '@angular/core';
+// stock.service.ts
+import { Injectable, signal } from '@angular/core';
+import { FirestoreService } from '../services/firestore.service';
 import { StockData } from '../interfaces/stock-data';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class StockService {
-  private stockData = signal<StockData | null>(null); // Signal für die Stock-Daten
+  private stockDataSignal = signal<StockData | null>(null);
 
-  setStockData(data: StockData) {
-    this.stockData.set(data); // Setzen der Daten im Signal
+  constructor(private firestoreService: FirestoreService) {}
+
+  loadStockData(ticker: string) {
+    this.firestoreService.getStockDetails(ticker).subscribe(data => {
+      this.stockDataSignal.set(data);
+    });
   }
 
-  get stockData$() {
-    return this.stockData; // Rückgabe des Signals
+  stockData() {
+    return this.stockDataSignal();
   }
 }
