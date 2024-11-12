@@ -26,6 +26,9 @@ export class QuarterlyRevenueWidgetComponent {
     const labels = last12Quarters.map(item => item.quarter);
     const data = last12Quarters.map(item => item.revenue);
 
+    const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
+    const chartColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-color').trim();
+
     new Chart(this.chart.nativeElement, {
       type: 'bar',
       data: {
@@ -34,8 +37,7 @@ export class QuarterlyRevenueWidgetComponent {
           {
             label: 'Revenue (in Bill. USD)',
             data: data,
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: '#284777',
+            backgroundColor: chartColor,
           },
         ],
       },
@@ -49,19 +51,19 @@ export class QuarterlyRevenueWidgetComponent {
         plugins: {
           legend: {
             labels: {
-              color: '#e2e2e9',
+              color: scaleColor,
             },
           },
         },
         scales: {
           x: {
             ticks: {
-              color: '#e2e2e9'
+              color: scaleColor
             }
           },
           y: {
             ticks: {
-              color: '#e2e2e9'
+              color: scaleColor
             }
           }
         }
