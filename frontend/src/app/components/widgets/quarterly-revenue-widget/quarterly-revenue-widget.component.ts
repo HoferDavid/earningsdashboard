@@ -3,20 +3,17 @@ import { CommonModule } from '@angular/common';
 import { StockService } from '../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { BasicWidget } from '../../../interfaces/basic-widget';
-import { WidgetComponent } from "../../widget/widget.component";
 
 @Component({
   selector: 'app-quarterly-revenue-widget',
   standalone: true,
-  imports: [WidgetComponent],
+  imports: [],
   templateUrl: './quarterly-revenue-widget.component.html',
   styleUrl: './quarterly-revenue-widget.component.scss'
 })
 export class QuarterlyRevenueWidgetComponent {
 
   @Input() data!: BasicWidget;
-
-  widgetWidth: string = '500px';
 
   @ViewChild('chart', { static: true }) chart!: ElementRef;
 
