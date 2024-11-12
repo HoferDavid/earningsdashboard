@@ -1,17 +1,16 @@
-// revenue-widget.component.ts
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StockService } from '../../../services/stock.service';
 import Chart from 'chart.js/auto';
 
 @Component({
-  selector: 'app-revenue-widget',
+  selector: 'app-quarterly-revenue-widget',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './revenue-widget.component.html',
-  styleUrls: ['./revenue-widget.component.scss']
+  imports: [],
+  templateUrl: './quarterly-revenue-widget.component.html',
+  styleUrl: './quarterly-revenue-widget.component.scss'
 })
-export class RevenueWidgetComponent implements OnInit {
+export class QuarterlyRevenueWidgetComponent {
   @ViewChild('chart', { static: true }) chart!: ElementRef;
 
   private stockService = inject(StockService);
