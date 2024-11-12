@@ -5,17 +5,17 @@ import { QuarterlyRevenueData } from '../interfaces/quarterly-revenue-data';
 
 @Injectable({ providedIn: 'root' })
 export class StockService {
-  private stockDataSignal = signal<StockData | null>(null);
 
+  private stockDataSignal = signal<StockData | null>(null);
   firestoreService = inject(FirestoreService);
 
+
   loadStockData(ticker: string) {
-    this.firestoreService.getStockDetails(ticker).subscribe(data => {
-      this.stockDataSignal.set(data);
-    });
+    this.firestoreService.getStockDetails(ticker).subscribe(data => { this.stockDataSignal.set(data) });
   }
 
-  stockData() {
+  
+  stockData() {    
     return this.stockDataSignal();
   }
 
@@ -23,11 +23,11 @@ export class StockService {
   last12Quarters = computed(() => {
     const data = this.stockDataSignal();
     
-    console.log('Stock Data:', data); // Debug-Ausgabe für vollständige Stock-Daten
+    console.log('Stock Data:', data);
   
     if (data && data.revenue && data.quarter) {
-      console.log('Revenue:', data.revenue); // Debug für Revenue-Werte
-      console.log('Quarter:', data.quarter); // Debug für Quarter-Werte
+      console.log('Revenue:', data.revenue);
+      console.log('Quarter:', data.quarter);
       
       const quarters = data.quarter.slice(-12);
       const revenues = data.revenue.slice(-12).map((rev) => {

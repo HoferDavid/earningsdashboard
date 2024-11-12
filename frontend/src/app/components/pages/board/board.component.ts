@@ -17,9 +17,6 @@ export class BoardComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const ticker = params['ticker'];
-      this.stockService.loadStockData(ticker);
-    });
+    this.route.params.subscribe(params => { this.stockService.loadStockData(params['ticker']) });
   }
 }
