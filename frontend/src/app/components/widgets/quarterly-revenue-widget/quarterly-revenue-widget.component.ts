@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StockService } from '../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { BasicWidget } from '../../../interfaces/basic-widget';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-quarterly-revenue-widget',
@@ -14,10 +15,9 @@ import { BasicWidget } from '../../../interfaces/basic-widget';
 export class QuarterlyRevenueWidgetComponent {
 
   @Input() data!: BasicWidget;
-
   @ViewChild('chart', { static: true }) chart!: ElementRef;
-
   private stockService = inject(StockService);
+  private themeService = inject(ThemeService);
 
   ngOnInit(): void {
     const last12Quarters = this.stockService.last12Quarters();
@@ -35,7 +35,7 @@ export class QuarterlyRevenueWidgetComponent {
             label: 'Revenue (in Bill. USD)',
             data: data,
             borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgb(255, 99, 132, 0.5)',
+            backgroundColor: '#284777',
           },
         ],
       },
@@ -44,6 +44,25 @@ export class QuarterlyRevenueWidgetComponent {
         elements: {
           line: {
             tension: 0.4,
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#e2e2e9',
+            },
+          },
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#e2e2e9'
+            }
+          },
+          y: {
+            ticks: {
+              color: '#e2e2e9'
+            }
           }
         }
       }
