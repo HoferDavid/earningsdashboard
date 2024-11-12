@@ -1,11 +1,10 @@
 import { Component, ElementRef, OnInit, viewChild } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
 import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-revenue',
   standalone: true,
-  imports: [MatIcon],
+  imports: [],
   templateUrl: './revenue.component.html',
   styleUrl: './revenue.component.scss'
 })

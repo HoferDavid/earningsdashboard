@@ -2,11 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StockService } from '../../../services/stock.service';
 import { BoardHeaderComponent } from './board-header/board-header.component';
+import { RevenueWidgetComponent } from "../../widgets/revenue-widget/revenue-widget.component";
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [BoardHeaderComponent],
+  imports: [BoardHeaderComponent, RevenueWidgetComponent],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })

@@ -53,12 +53,14 @@ export class FirestoreService {
       map(docSnap => {
         if (docSnap.exists()) {
           const data = docSnap.data();
+          console.log('Firestore Data:', data); // Debug-Ausgabe für Daten aus Firestore
+  
           return {
             id: docSnap.id,
             name: data['name'],
             ticker: data['ticker'],
-            revenue: data['revenue'],
-            quarter: data['quarter'],
+            revenue: data['revenue'], // sicherstellen, dass dies vorhanden ist
+            quarter: data['quarter'], // sicherstellen, dass dies vorhanden ist
             url: data['url'],
             updatedAt: data['updatedAt'] ? data['updatedAt'].toDate() : null
           } as StockData;
