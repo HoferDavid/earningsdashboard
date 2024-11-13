@@ -11,8 +11,12 @@ export class StockService {
 
 
   loadStockData(ticker: string) {
-    this.firestoreService.getStockDetails(ticker).subscribe(data => { this.stockDataSignal.set(data) });
-  }
+    this.stockDataSignal.set(null); // Zurücksetzen der Daten
+    this.firestoreService.getStockDetails(ticker).subscribe({
+      next: data => this.stockDataSignal.set(data),
+      error: error => console.error('Fehler beim Laden der Aktie:', error)
+    });
+  }  
 
   
   stockData() {    

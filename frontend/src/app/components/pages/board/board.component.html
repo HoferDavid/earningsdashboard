@@ -1,7 +1,9 @@
 <section>
-
-    <app-board-header></app-board-header>
-
-    <app-quarterly-revenue-widget></app-quarterly-revenue-widget>
-    
+    @if (stockService.stockData()) {
+        <app-board-header></app-board-header>
+        <app-quarterly-revenue-widget></app-quarterly-revenue-widget>
+    }
+    @else {
+        loading data...
+    }
 </section>
