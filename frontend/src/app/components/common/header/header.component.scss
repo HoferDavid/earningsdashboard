@@ -3,4 +3,8 @@ mat-toolbar {
   z-index: 5;
   justify-content: space-between;
   --mat-toolbar-container-background-color: var(--sys-surface-container-low);
+
+  h1 {
+    cursor: pointer;
+  }
 }

@@ -56,11 +56,6 @@ export class SidebarComponent implements OnInit {
     },
     {
       icon: 'dashboard',
-      label: 'board',
-      route: 'board/:ticker',
-    },
-    {
-      icon: 'dashboard',
       label: 'Dashboard',
       route: 'dashboard/:ticker',
     },
