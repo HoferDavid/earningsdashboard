@@ -61,6 +61,8 @@ export class FirestoreService {
             ticker: data['ticker'],
             revenue: data['revenue'],
             quarter: data['quarter'],
+            grossmargin: data['grossMargin'],
+            netIncome: data['netIncome'],
             url: data['url'],
             updatedAt: data['updatedAt'] ? data['updatedAt'].toDate() : null
           } as StockData;
@@ -68,6 +70,7 @@ export class FirestoreService {
           throw new Error('Stock not found');
         }
       }),
+      
       catchError(error => {
         console.error('Error fetching stock details:', error);
         throw error;

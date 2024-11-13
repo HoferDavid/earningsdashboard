@@ -4,11 +4,12 @@ import { StockService } from '../../../services/stock.service';
 import { BoardHeaderComponent } from './board-header/board-header.component';
 import { QuarterlyRevenueWidgetComponent } from '../../widgets/quarterly-revenue-widget/quarterly-revenue-widget.component';
 import { CommonModule } from '@angular/common';
+import { QuarterlyGrossmarginWidgetComponent } from '../../widgets/quarterly-grossmargin-widget/quarterly-grossmargin-widget.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [BoardHeaderComponent, QuarterlyRevenueWidgetComponent, CommonModule],
+  imports: [CommonModule, BoardHeaderComponent, QuarterlyRevenueWidgetComponent, QuarterlyGrossmarginWidgetComponent],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })

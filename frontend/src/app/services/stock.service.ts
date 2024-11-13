@@ -32,6 +32,8 @@ export class StockService {
     if (data && data.revenue && data.quarter) {
       console.log('Revenue:', data.revenue);
       console.log('Quarter:', data.quarter);
+      console.log('Quarter:', data.netIncome);
+      console.log('Quarter:', data.grossmargin);
       
       const quarters = data.quarter.slice(-12);
       const revenues = data.revenue.slice(-12).map((rev) => {

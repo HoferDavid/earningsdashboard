@@ -1,9 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { StockService } from '../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { BasicWidget } from '../../../interfaces/basic-widget';
-import { ThemeService } from '../../../services/theme.service';
+import { QuarterlyRevenueData } from '../../../interfaces/quarterly-revenue-data';
 
 @Component({
   selector: 'app-quarterly-revenue-widget',
@@ -14,10 +13,10 @@ import { ThemeService } from '../../../services/theme.service';
 })
 export class QuarterlyRevenueWidgetComponent {
 
-  @Input() data!: BasicWidget;
+  @Input() data!: QuarterlyRevenueData;
   @ViewChild('chart', { static: true }) chart!: ElementRef;
   private stockService = inject(StockService);
-  private themeService = inject(ThemeService);
+
 
   ngOnInit(): void {
     const last12Quarters = this.stockService.last12Quarters();
