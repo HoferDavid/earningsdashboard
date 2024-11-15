@@ -18,8 +18,7 @@ export class QuarterlyRevenueWidgetComponent {
 
 
   ngOnInit(): void {
-    const last12Quarters = this.stockService.last12Quarters();
-    console.log('Last 12 Quarters for Chart:', last12Quarters);
+    const last12Quarters = this.stockService.revenueLast12Quarters();
 
     const labels = last12Quarters.map(item => item.quarter);
     const data = last12Quarters.map(item => item.revenue);

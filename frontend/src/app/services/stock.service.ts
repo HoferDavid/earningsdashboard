@@ -1,7 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { FirestoreService } from '../services/firestore.service';
 import { StockData } from '../interfaces/stock-data';
-import { QuarterlyRevenueData } from '../interfaces/quarterly-revenue-data';
 
 @Injectable({ providedIn: 'root' })
 export class StockService {
@@ -24,17 +23,10 @@ export class StockService {
   }
 
 
-  last12Quarters = computed(() => {
+  revenueLast12Quarters = computed(() => {
     const data = this.stockDataSignal();
-    
-    console.log('Stock Data:', data);
   
     if (data && data.revenue && data.quarter) {
-      console.log('Revenue:', data.revenue);
-      console.log('Quarter:', data.quarter);
-      console.log('Quarter:', data.netIncome);
-      console.log('Quarter:', data.grossmargin);
-      
       const quarters = data.quarter.slice(-12);
       const revenues = data.revenue.slice(-12).map((rev) => {
         if (typeof rev === 'string') {
@@ -52,4 +44,35 @@ export class StockService {
     }
     return [];
   });
+
+
+
+
+  grossmarginLast12Quarters = computed(() => {
+    const data = this.stockDataSignal();
+    
+    console.log('Stock Data:', data);
+  
+    if (data && data.revenue && data.quarter) {
+      console.log('Quarter:', data.quarter);
+      console.log('grossmargin:', data.grossmargin);
+      
+      const quarters = data.quarter.slice(-12);
+      const revenues = data.grossmargin.slice(-12).map((rev) => {
+        if (typeof rev === 'string') {
+          return parseFloat((rev as string).replace(',', '.'));
+        } else if (typeof rev === 'number') {
+          return rev;
+        }
+        return null;
+      }).filter((rev): rev is number => rev !== null);
+      
+      return quarters.map((quarter, index) => ({
+        quarter,
+        revenue: revenues[index] ?? 0,
+      }));
+    }
+    return [];
+  });
 }
+

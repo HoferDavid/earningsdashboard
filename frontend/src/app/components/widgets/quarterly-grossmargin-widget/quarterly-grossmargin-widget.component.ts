@@ -17,7 +17,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const last12Quarters = this.stockService.last12Quarters();
+    const last12Quarters = this.stockService.grossmarginLast12Quarters();
     console.log('Last 12 Quarters for Chart:', last12Quarters);
 
 
@@ -28,6 +28,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
     const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
     const datasetPrimary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-primary-color').trim();
     const datasetSecondary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-secondary-color').trim();
+    const grid = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
 
 
     new Chart(this.chart.nativeElement, {
@@ -68,17 +69,19 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
               color: scaleColor,
             },
             grid: {
-              color: 'rgba(255, 255, 255, 0.2)',
-              lineWidth: 0.5,
+              color: grid,
+              lineWidth: 0.2,
             },
           },
           y: {
+            min: 0,
             ticks: {
               color: scaleColor,
+              callback: function(value) { return Number.isInteger(value) ? value : ''; }
             },
             grid: {
-              color: 'rgba(255, 255, 255, 0.2)',
-              lineWidth: 0.5,
+              color: grid,
+              lineWidth: 0.2,
             },
           },
         },
