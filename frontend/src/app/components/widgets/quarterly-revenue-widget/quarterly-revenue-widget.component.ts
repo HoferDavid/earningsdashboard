@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { StockService } from '../../../services/stock.service';
 import Chart from 'chart.js/auto';
-import { BasicWidget } from '../../../interfaces/basic-widget';
 import { QuarterlyRevenueData } from '../../../interfaces/quarterly-revenue-data';
 
 @Component({
@@ -26,7 +25,7 @@ export class QuarterlyRevenueWidgetComponent {
     const data = last12Quarters.map(item => item.revenue);
 
     const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
-    const chartColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-color').trim();
+    const datasetPrimary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-primary-color').trim();
 
     new Chart(this.chart.nativeElement, {
       type: 'bar',
@@ -36,7 +35,7 @@ export class QuarterlyRevenueWidgetComponent {
           {
             label: 'Revenue (B/M USD)',
             data: data,
-            backgroundColor: chartColor,
+            backgroundColor: datasetPrimary,
           },
         ],
       },
@@ -48,6 +47,11 @@ export class QuarterlyRevenueWidgetComponent {
           }
         },
         plugins: {
+          title: {
+            display: true,
+            text: 'Revenue last 12 quarters',
+            color: scaleColor,
+          },
           legend: {
             labels: {
               color: scaleColor,

@@ -2,7 +2,7 @@
 
 <section>
   @if (stockService.stockData()) {
-  <app-quarterly-revenue-widget></app-quarterly-revenue-widget>
-  <app-quarterly-grossmargin-widget></app-quarterly-grossmargin-widget>
+    <app-quarterly-grossmargin-widget></app-quarterly-grossmargin-widget>
+    <app-quarterly-revenue-widget></app-quarterly-revenue-widget>
   } @else { loading data... }
 </section>
