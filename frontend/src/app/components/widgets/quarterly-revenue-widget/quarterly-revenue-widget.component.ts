@@ -32,7 +32,7 @@ export class QuarterlyRevenueWidgetComponent {
         labels,
         datasets: [
           {
-            label: 'Revenue (B/M USD)',
+            label: 'in Bill/Mill USD',
             data: data,
             backgroundColor: datasetPrimary,
           },

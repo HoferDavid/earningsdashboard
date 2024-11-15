@@ -1,22 +1,25 @@
-import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
-import { QuarterlyRevenueData } from '../../../interfaces/quarterly-revenue-data';
+import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { StockService } from '../../../services/stock.service';
 import Chart from 'chart.js/auto';
+import { QuarterlyNetincomeData } from '../../../interfaces/quarterly-netincome-data';
 
 @Component({
-  selector: 'app-quarterly-grossmargin-widget',
+  selector: 'app-quarterly-netincome-widget',
   standalone: true,
   imports: [],
-  templateUrl: './quarterly-grossmargin-widget.component.html',
-  styleUrl: './quarterly-grossmargin-widget.component.scss',
+  templateUrl: './quarterly-netincome-widget.component.html',
+  styleUrl: './quarterly-netincome-widget.component.scss'
 })
-export class QuarterlyGrossmarginWidgetComponent implements OnInit {
-  @Input() data!: QuarterlyRevenueData;
+export class QuarterlyNetincomeWidgetComponent {
+
+  @Input() data!: QuarterlyNetincomeData;
   @ViewChild('chart', { static: true }) chart!: ElementRef;
   private stockService = inject(StockService);
 
   ngOnInit(): void {
-    const last12Quarters = this.stockService.grossmarginLast12Quarters();
+
+    const last12Quarters = this.stockService.netIncomeLast12Quarters();
+    console.log('Last 12 Quarters for Chart:', last12Quarters);
 
 
     const labels = last12Quarters.map((item) => item.quarter);
@@ -35,7 +38,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
         labels,
         datasets: [
           {
-            label: 'in %',
+            label: 'in Bill. USD',
             data: data,
             backgroundColor: datasetPrimary,
             borderColor: datasetSecondary,
@@ -52,7 +55,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'Gross margin last 12 quarters',
+            text: 'Net income last 12 quarters',
             color: scaleColor,
           },
           legend: {

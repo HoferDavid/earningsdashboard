@@ -37,26 +37,16 @@ export class StockService {
         return null;
       }).filter((rev): rev is number => rev !== null);
       
-      return quarters.map((quarter, index) => ({
-        quarter,
-        revenue: revenues[index] ?? 0,
-      }));
+      return quarters.map((quarter, index) => ({ quarter, revenue: revenues[index] ?? 0 }));
     }
     return [];
   });
 
 
-
-
   grossmarginLast12Quarters = computed(() => {
     const data = this.stockDataSignal();
-    
-    console.log('Stock Data:', data);
   
     if (data && data.revenue && data.quarter) {
-      console.log('Quarter:', data.quarter);
-      console.log('grossmargin:', data.grossmargin);
-      
       const quarters = data.quarter.slice(-12);
       const revenues = data.grossmargin.slice(-12).map((rev) => {
         if (typeof rev === 'string') {
@@ -67,10 +57,32 @@ export class StockService {
         return null;
       }).filter((rev): rev is number => rev !== null);
       
-      return quarters.map((quarter, index) => ({
-        quarter,
-        revenue: revenues[index] ?? 0,
-      }));
+      return quarters.map((quarter, index) => ({ quarter, revenue: revenues[index] ?? 0 }));
+    }
+    return [];
+  });
+
+
+  netIncomeLast12Quarters = computed(() => {
+    const data = this.stockDataSignal();
+    
+    console.log('Stock Data:', data);
+  
+    if (data && data.revenue && data.quarter) {
+      console.log('quarter:', data.quarter);
+      console.log('netIncome:', data.netIncome);
+      
+      const quarters = data.quarter.slice(-12);
+      const revenues = data.netIncome.slice(-12).map((rev) => {
+        if (typeof rev === 'string') {
+          return parseFloat((rev as string).replace(',', '').replace('.', '') ) / 1000;
+        } else if (typeof rev === 'number') {
+          return rev / 1000;
+        }
+        return null;
+      }).filter((rev): rev is number => rev !== null);
+      
+      return quarters.map((quarter, index) => ({ quarter, revenue: revenues[index] ?? 0 }));
     }
     return [];
   });
