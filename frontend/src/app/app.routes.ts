@@ -5,6 +5,7 @@ import { ImprintComponent } from './components/pages/info/imprint/imprint.compon
 import { OverviewComponent } from './components/pages/overview/overview.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { BoardComponent } from './components/pages/board/board.component';
+import { MagsevenComponent } from './components/pages/magseven/magseven.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,10 @@ export const routes: Routes = [
   {
     path: 'overview',
     component: OverviewComponent,
+  },
+  {
+    path: 'magseven',
+    component: MagsevenComponent,
   },
   {
     path: 'board/:ticker',
