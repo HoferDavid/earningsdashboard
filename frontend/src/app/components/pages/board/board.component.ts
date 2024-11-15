@@ -2,10 +2,10 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StockService } from '../../../services/stock.service';
 import { BoardHeaderComponent } from './board-header/board-header.component';
-import { QuarterlyRevenueWidgetComponent } from '../../widgets/quarterly-revenue-widget/quarterly-revenue-widget.component';
 import { CommonModule } from '@angular/common';
-import { QuarterlyGrossmarginWidgetComponent } from '../../widgets/quarterly-grossmargin-widget/quarterly-grossmargin-widget.component';
-import { QuarterlyNetincomeWidgetComponent } from '../../widgets/quarterly-netincome-widget/quarterly-netincome-widget.component';
+import { QuarterlyNetincomeWidgetComponent } from './widgets/quarterly-netincome-widget/quarterly-netincome-widget.component';
+import { QuarterlyRevenueWidgetComponent } from './widgets/quarterly-revenue-widget/quarterly-revenue-widget.component';
+import { QuarterlyGrossmarginWidgetComponent } from './widgets/quarterly-grossmargin-widget/quarterly-grossmargin-widget.component';
 
 @Component({
   selector: 'app-board',

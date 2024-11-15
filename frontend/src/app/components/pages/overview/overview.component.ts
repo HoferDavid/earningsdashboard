@@ -6,10 +6,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { Observable, combineLatest, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BasicWidgetComponent } from '../../widgets/basic-widget/basic-widget.component';
 import { BasicWidget } from '../../../interfaces/basic-widget';
 import { FirestoreService } from '../../../services/firestore.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { BasicWidgetComponent } from './widgets/basic-widget/basic-widget.component';
 
 @Component({
   selector: 'app-overview',

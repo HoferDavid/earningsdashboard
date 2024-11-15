@@ -1,7 +1,7 @@
 import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { StockService } from '../../../services/stock.service';
+import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
-import { QuarterlyNetincomeData } from '../../../interfaces/quarterly-netincome-data';
+import { QuarterlyNetincomeData } from '../../../../../interfaces/quarterly-netincome-data';
 
 @Component({
   selector: 'app-quarterly-netincome-widget',

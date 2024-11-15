@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BillionFormatPipe } from '../../../pipes/billion-format.pipe';
-import { QuarterFormatPipe } from '../../../pipes/quarter-format.pipe';
-import { BasicWidget } from '../../../interfaces/basic-widget';
+import { BasicWidget } from '../../../../../interfaces/basic-widget';
+import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
+import { QuarterFormatPipe } from '../../../../../pipes/quarter-format.pipe';
 
 @Component({
   selector: 'app-basic-widget',

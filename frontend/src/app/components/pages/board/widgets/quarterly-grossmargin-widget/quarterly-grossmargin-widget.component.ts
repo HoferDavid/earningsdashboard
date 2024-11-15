@@ -1,7 +1,7 @@
 import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
-import { QuarterlyRevenueData } from '../../../interfaces/quarterly-revenue-data';
-import { StockService } from '../../../services/stock.service';
 import Chart from 'chart.js/auto';
+import { QuarterlyRevenueData } from '../../../../../interfaces/quarterly-revenue-data';
+import { StockService } from '../../../../../services/stock.service';
 
 @Component({
   selector: 'app-quarterly-grossmargin-widget',
