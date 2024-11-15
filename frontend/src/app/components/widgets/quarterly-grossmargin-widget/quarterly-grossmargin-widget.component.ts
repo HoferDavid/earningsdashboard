@@ -27,7 +27,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
 
     const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
     const datasetPrimary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-primary-color').trim();
-    const dataseSecondary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-secondary-color').trim();
+    const datasetSecondary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-secondary-color').trim();
 
 
     new Chart(this.chart.nativeElement, {
@@ -39,7 +39,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
             label: 'Margin (%)',
             data: data,
             backgroundColor: datasetPrimary,
-            borderColor: datasetPrimary,
+            borderColor: datasetSecondary,
           },
         ],
       },
