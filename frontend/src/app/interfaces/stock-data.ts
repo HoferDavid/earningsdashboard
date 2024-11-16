@@ -3,7 +3,7 @@ export interface StockData {
   name: string;
   ticker: string;
   url: string;
-  revenue: number[];
+  revenue: (string | number)[];
   quarter: string[];
   grossmargin: string[];
   netIncome: string[];
