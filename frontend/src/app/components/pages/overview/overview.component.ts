@@ -14,25 +14,14 @@ import { BasicWidgetComponent } from './widgets/basic-widget/basic-widget.compon
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatMenuModule,
-    BasicWidgetComponent,
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [MatButtonModule, MatIconModule, MatInputModule, MatMenuModule, BasicWidgetComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent {
+
   firestoreService = inject(FirestoreService);
-  
-
   stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
-
-
   searchControl = new FormControl<string>('');
 
 

@@ -1,16 +1,16 @@
-import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { QuarterlyRevenueData } from '../../../../../interfaces/quarterly-revenue-data';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 
 @Component({
-  selector: 'app-quarterly-revenue-widget',
+  selector: 'app-revenue-widget-magseven',
   standalone: true,
   imports: [],
-  templateUrl: './quarterly-revenue-widget.component.html',
-  styleUrl: './quarterly-revenue-widget.component.scss'
+  templateUrl: './revenue-widget-magseven.component.html',
+  styleUrl: './revenue-widget-magseven.component.scss'
 })
-export class QuarterlyRevenueWidgetComponent {
+export class RevenueWidgetMagsevenComponent {
 
   @Input() data!: QuarterlyRevenueData;
   @ViewChild('chart', { static: true }) chart!: ElementRef;
@@ -74,4 +74,5 @@ export class QuarterlyRevenueWidgetComponent {
       }
     });
   }
+
 }

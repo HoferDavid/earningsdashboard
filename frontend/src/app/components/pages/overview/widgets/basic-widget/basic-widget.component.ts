@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BasicWidget } from '../../../../../interfaces/basic-widget';
 import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
-import { QuarterFormatPipe } from '../../../../../pipes/quarter-format.pipe';
 
 @Component({
   selector: 'app-basic-widget',
   standalone: true,
-  imports: [CommonModule, BillionFormatPipe, QuarterFormatPipe],
+  imports: [CommonModule, BillionFormatPipe],
   templateUrl: './basic-widget.component.html',
   styleUrl: './basic-widget.component.scss'
 })
