@@ -4,6 +4,7 @@ import { from, Observable, of } from 'rxjs';
 import { map, shareReplay, catchError } from 'rxjs/operators';
 import { BasicWidget } from '../interfaces/basic-widget';
 import { StockData } from '../interfaces/stock-data';
+import { QuarterFormatPipe } from '../pipes/quarter-format.pipe';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { StockData } from '../interfaces/stock-data';
 export class FirestoreService {
 
   private stocksCache$: Observable<BasicWidget[]>;
+  private quarterFormatPipe = new QuarterFormatPipe();
 
 
   constructor(private firestore: Firestore) {
@@ -42,7 +44,9 @@ export class FirestoreService {
       ticker: stock.id,
       logo: `/logos/${stock.name.toLowerCase()}.png`,
       lastRevenue: stock.revenue ? stock.revenue[stock.revenue.length - 1] : undefined,
-      lastQuarter: stock.quarter ? stock.quarter[stock.quarter.length - 1] : undefined
+      lastQuarter: stock.quarter
+        ? this.quarterFormatPipe.transform(stock.quarter[stock.quarter.length - 1]) // Formatierung anwenden
+        : undefined,
     }));
   }
 
@@ -60,7 +64,7 @@ export class FirestoreService {
             name: data['name'],
             ticker: data['ticker'],
             revenue: data['revenue'],
-            quarter: data['quarter'],
+            quarter: data['quarter']?.map((q: string) => this.quarterFormatPipe.transform(q)),
             grossmargin: data['grossMargin'],
             netIncome: data['netIncome'],
             url: data['url'],

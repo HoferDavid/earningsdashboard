@@ -3,5 +3,5 @@ export interface BasicWidget {
   ticker: string;
   logo: string;
   lastRevenue: number;
-  lastQuarter: string;
+  lastQuarter?: string;
 }
