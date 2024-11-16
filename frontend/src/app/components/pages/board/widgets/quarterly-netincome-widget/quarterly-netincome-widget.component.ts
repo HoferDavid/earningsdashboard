@@ -67,6 +67,8 @@ export class QuarterlyNetincomeWidgetComponent {
         scales: {
           x: {
             ticks: {
+              maxTicksLimit: 6,
+              minRotation: 45,
               color: scaleColor,
             },
             grid: {

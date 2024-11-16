@@ -64,6 +64,8 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
         scales: {
           x: {
             ticks: {
+              maxTicksLimit: 6,
+              minRotation: 45,
               color: scaleColor,
             },
             grid: {

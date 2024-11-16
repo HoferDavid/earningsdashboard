@@ -61,6 +61,8 @@ export class QuarterlyRevenueWidgetComponent {
         scales: {
           x: {
             ticks: {
+              maxTicksLimit: 6,
+              minRotation: 45,
               color: scaleColor
             }
           },
