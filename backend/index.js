@@ -28,10 +28,10 @@ const apiKey = process.env.API_KEY;
 
 // Function, to load Data from Google Spreadsheet
 async function getStockOverviewData(sheetName, revenueRow, quarterRow, netIncomeRow, grossMarginRow) {
-  const revenueRange = `${sheetName}!A${revenueRow}:AZ${revenueRow}`;
-  const quarterRange = `${sheetName}!A${quarterRow}:AZ${quarterRow}`;
-  const netIncomeRange = `${sheetName}!A${netIncomeRow}:AZ${netIncomeRow}`;
-  const grossMarginRange = `${sheetName}!A${grossMarginRow}:AZ${grossMarginRow}`;
+  const revenueRange = `${sheetName}!A${revenueRow}:BZ${revenueRow}`;
+  const quarterRange = `${sheetName}!A${quarterRow}:BZ${quarterRow}`;
+  const netIncomeRange = `${sheetName}!A${netIncomeRow}:BZ${netIncomeRow}`;
+  const grossMarginRange = `${sheetName}!A${grossMarginRow}:BZ${grossMarginRow}`;
 
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchGet?ranges=${revenueRange}&ranges=${quarterRange}&ranges=${netIncomeRange}&ranges=${grossMarginRange}&key=${apiKey}`;
 
