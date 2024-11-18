@@ -17,89 +17,109 @@ export class RevenueWidgetMagsevenComponent {
   private stockService = inject(StockService);
   private chartInstance: Chart | null = null;
 
+
   async ngOnInit(): Promise<void> {
     await this.loadAllStockData();
   }
 
+
   async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
-    const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#66FF66'];
+    const colors = ['#A2AAAD', '#FF9900', '#34A853', '#0081FB', '#727272', '#76B900', '#E31937'];
 
-    // Alle Requests gleichzeitig ausführen
+
+    // All Requests together
     const requests = this.tickers.map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
         
         if (stockData && stockData.revenue && stockData.quarter) {
-          const last12Quarters = stockData.quarter.slice(-4);
+          const last12Quarters = stockData.quarter.slice(-12);
           const revenues = stockData.revenue
-            .slice(-4)
+            .slice(-12)
             .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
 
-          // Labels setzen (nur einmal, da sie für alle Aktien gleich sind)
+          // Labels
           if (index === 0) {
             chartData.labels = last12Quarters;
           }
 
-          // Dataset hinzufügen
+          // Add Dataset
           chartData.datasets.push({
-            label: `${stockData.name} (${ticker})`,
+            label: `${ticker}`,
             data: revenues,
             backgroundColor: colors[index % colors.length],
           });
         }
       } catch (error) {
-        console.error(`Fehler beim Laden der Daten für ${ticker}:`, error);
+        console.error(`Error while loading data for ${ticker}:`, error);
       }
     });
 
-    // Warten, bis alle Daten geladen sind
+    // Wait until all data is loaded
     await Promise.all(requests);
 
-    // Chart rendern
+    // Render Chart
     this.renderChart(chartData);
   }
 
+
   renderChart(data: { labels: string[]; datasets: any[] }): void {
     const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
+    const grid = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
+    const colors = ['#A2AAAD', '#FF9900', '#34A853', '#0081FB', '#727272', '#76B900', '#E31937'];
 
-    // Vorherige Chart-Instanz zerstören, falls vorhanden
+    // Destroy previous chart instance, if available
     if (this.chartInstance) {
-      this.chartInstance.destroy();
+        this.chartInstance.destroy();
     }
 
-    // Neue Chart-Instanz erstellen
+    // Create new chart instance
     this.chartInstance = new Chart(this.chart.nativeElement, {
-      type: 'bar',
-      data: data,
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Revenue last 12 quarters',
-            color: scaleColor,
-          },
-          legend: {
-            labels: {
-              color: scaleColor,
-            },
-          },
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: data.datasets.map((dataset, index) => ({
+                label: dataset.label, // Setzen des Labels für die jeweilige Aktie
+                data: dataset.data,
+                borderColor: colors[index % colors.length], // Verwendung der definierten Farben
+                backgroundColor: colors[index % colors.length], // Hintergrundfarbe (optional)
+                fill: false, // Setzen Sie auf true, um die Fläche unter der Linie zu füllen
+            })),
         },
-        scales: {
-          x: {
-            ticks: {
-              color: scaleColor,
-              maxRotation: 45,
+        options: {
+            maintainAspectRatio: false,
+            elements: {
+                line: {
+                    tension: 0.4,
+                },
             },
-          },
-          y: {
-            ticks: {
-              color: scaleColor,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Revenue last 12 quarters',
+                    color: scaleColor,
+                },
+                legend: {
+                    labels: {
+                        color: scaleColor,
+                    },
+                },
             },
-          },
+            scales: {
+                x: {
+                    ticks: {
+                        color: scaleColor,
+                        maxRotation: 45,
+                    },
+                },
+                y: {
+                    ticks: {
+                        color: scaleColor,
+                    },
+                },
+            },
         },
-      },
     });
   }
 }
