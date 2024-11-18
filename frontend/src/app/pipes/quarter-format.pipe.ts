@@ -12,6 +12,7 @@ export class QuarterFormatPipe implements PipeTransform {
 
     // Patterns for different formats
     const regexExtended = /^Q(\d) (\d{4})$/; // Match "Q1 2019"
+    const regexExtendedDashed = /^Q(\d)-(\d{4})$/; // Match "Q1-2019"
     const regexCompact = /^(\d{2})Q(\d)$/; // Match "24Q1"
     const regexDashed = /^Q(\d)-(\d{2})$/; // Match "Q1-18"
     const regexShortYear = /^Q(\d) (\d{2})$/; // Match "Q1 19"
@@ -24,6 +25,12 @@ export class QuarterFormatPipe implements PipeTransform {
     // "Q1 2019" -> "19Q1"
     if (regexExtended.test(value)) {
       const [, quarter, year] = value.match(regexExtended)!;
+      return `${year.slice(2)}Q${quarter}`;
+    }
+
+    // "Q1-2019" -> "19Q1"
+    if (regexExtendedDashed.test(value)) {
+      const [, quarter, year] = value.match(regexExtendedDashed)!;
       return `${year.slice(2)}Q${quarter}`;
     }
 
