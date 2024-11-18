@@ -10,7 +10,7 @@ import Chart from 'chart.js/auto';
   styleUrl: './revenue-widget-magseven.component.scss',
 })
 export class RevenueWidgetMagsevenComponent {
-  tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'MSFT', 'NVDA', 'TSLA'];
+  tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
   @ViewChild('chart', { static: true }) chart!: ElementRef;
   private stockService = inject(StockService);
 
@@ -58,7 +58,7 @@ export class RevenueWidgetMagsevenComponent {
         plugins: {
           title: {
             display: true,
-            text: 'Revenue von 7 Aktien (letzte 12 Quartale)',
+            text: 'Revenue last 12 quarters',
             color: scaleColor,
           },
           legend: {
