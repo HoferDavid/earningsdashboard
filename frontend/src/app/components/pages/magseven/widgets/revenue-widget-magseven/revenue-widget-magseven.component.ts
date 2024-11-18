@@ -1,6 +1,7 @@
-import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
+import { firstValueFrom } from 'rxjs'; // Neuere Methode für Observables
 
 @Component({
   selector: 'app-revenue-widget-magseven',
@@ -10,19 +11,26 @@ import Chart from 'chart.js/auto';
   styleUrl: './revenue-widget-magseven.component.scss',
 })
 export class RevenueWidgetMagsevenComponent {
+
   tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
-  @ViewChild('chart', { static: true }) chart!: ElementRef;
+  @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
   private stockService = inject(StockService);
+  private chartInstance: Chart | null = null;
 
-  ngOnInit(): void {
-    // Daten für die 7 Aktien laden
+  async ngOnInit(): Promise<void> {
+    await this.loadAllStockData();
+  }
+
+  async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
-    const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#66FF66']; // Farben für jede Aktie
+    const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#66FF66'];
 
-    // Alle Tickers durchlaufen und Revenue-Daten abrufen
-    this.tickers.forEach((ticker, index) => {
-      this.stockService.firestoreService.getStockDetails(ticker).subscribe((stockData) => {
-        if (stockData.revenue && stockData.quarter) {
+    // Alle Requests gleichzeitig ausführen
+    const requests = this.tickers.map(async (ticker, index) => {
+      try {
+        const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
+        
+        if (stockData && stockData.revenue && stockData.quarter) {
           const last12Quarters = stockData.quarter.slice(-4);
           const revenues = stockData.revenue
             .slice(-4)
@@ -37,20 +45,31 @@ export class RevenueWidgetMagsevenComponent {
           chartData.datasets.push({
             label: `${stockData.name} (${ticker})`,
             data: revenues,
-            backgroundColor: colors[index % colors.length], // Zyklische Farben verwenden
+            backgroundColor: colors[index % colors.length],
           });
-
-          // Chart aktualisieren
-          this.renderChart(chartData);
         }
-      });
+      } catch (error) {
+        console.error(`Fehler beim Laden der Daten für ${ticker}:`, error);
+      }
     });
+
+    // Warten, bis alle Daten geladen sind
+    await Promise.all(requests);
+
+    // Chart rendern
+    this.renderChart(chartData);
   }
 
   renderChart(data: { labels: string[]; datasets: any[] }): void {
     const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
 
-    new Chart(this.chart.nativeElement, {
+    // Vorherige Chart-Instanz zerstören, falls vorhanden
+    if (this.chartInstance) {
+      this.chartInstance.destroy();
+    }
+
+    // Neue Chart-Instanz erstellen
+    this.chartInstance = new Chart(this.chart.nativeElement, {
       type: 'bar',
       data: data,
       options: {

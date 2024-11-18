@@ -74,7 +74,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
             },
           },
           y: {
-            min: 0,
+            // min: 0,
             ticks: {
               color: scaleColor,
               callback: function(value) { return Number.isInteger(value) ? value : ''; }
