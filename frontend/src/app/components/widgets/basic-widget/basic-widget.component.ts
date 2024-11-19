@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BasicWidget } from '../../../../../interfaces/basic-widget';
-import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
+import { BasicWidget } from '../../../interfaces/basic-widget';
+import { BillionFormatPipe } from '../../../pipes/billion-format.pipe';
 
 @Component({
   selector: 'app-basic-widget',

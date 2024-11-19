@@ -44,9 +44,7 @@ export class FirestoreService {
       ticker: stock.id,
       logo: `/logos/${stock.name.toLowerCase()}.png`,
       lastRevenue: stock.revenue ? stock.revenue[stock.revenue.length - 1] : undefined,
-      lastQuarter: stock.quarter
-        ? this.quarterFormatPipe.transform(stock.quarter[stock.quarter.length - 1]) // Formatierung anwenden
-        : undefined,
+      lastQuarter: stock.quarter ? this.quarterFormatPipe.transform(stock.quarter[stock.quarter.length - 1]) : undefined,
     }));
   }
 

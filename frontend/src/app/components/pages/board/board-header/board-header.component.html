@@ -9,6 +9,11 @@
     <button mat-fab extended>
       <a [href]="stockService.stockData()!.url" target="_blank" rel="noopener noreferrer">View Spreadsheet</a>
     </button>
+
+    <!-- Favorite Button -->
+    <button mat-button (click)="toggleFavorite()">
+      {{ isFavorite() ? 'Remove from Favorites' : 'Add to Favorites' }}
+    </button>
   }
   @else {
     <p>Sorry! Stock not found!</p>
