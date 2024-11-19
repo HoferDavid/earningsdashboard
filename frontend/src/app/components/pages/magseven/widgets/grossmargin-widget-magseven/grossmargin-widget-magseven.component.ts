@@ -2,14 +2,15 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
+
 @Component({
-  selector: 'app-revenue-widget-magseven',
+  selector: 'app-grossmargin-widget-magseven',
   standalone: true,
   imports: [],
-  templateUrl: './revenue-widget-magseven.component.html',
-  styleUrl: './revenue-widget-magseven.component.scss',
+  templateUrl: './grossmargin-widget-magseven.component.html',
+  styleUrl: './grossmargin-widget-magseven.component.scss'
 })
-export class RevenueWidgetMagsevenComponent {
+export class GrossmarginWidgetMagsevenComponent {
 
   tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
   colors = ['#A2AAAD', '#FF9900', '#34A853', '#0081FB', '#727272', '#76B900', '#E31937'];
@@ -34,7 +35,7 @@ export class RevenueWidgetMagsevenComponent {
         
         if (stockData && stockData.revenue && stockData.quarter) {
           const last12Quarters = stockData.quarter.slice(-12);
-          const revenues = stockData.revenue
+          const grossmargins = stockData.grossmargin
             .slice(-12)
             .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
 
@@ -46,7 +47,7 @@ export class RevenueWidgetMagsevenComponent {
           // Add Dataset
           chartData.datasets.push({
             label: `${ticker}`,
-            data: revenues,
+            data: grossmargins,
             backgroundColor: this.colors[index % this.colors.length],
           });
         }
@@ -97,7 +98,7 @@ export class RevenueWidgetMagsevenComponent {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Revenue last 12 quarters',
+                    text: 'Gross margin last 12 quarters',
                     color: scaleColor,
                 },
                 legend: {

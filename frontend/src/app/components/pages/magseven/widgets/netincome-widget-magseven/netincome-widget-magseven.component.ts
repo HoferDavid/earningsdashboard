@@ -2,14 +2,15 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
+
 @Component({
-  selector: 'app-revenue-widget-magseven',
+  selector: 'app-netincome-widget-magseven',
   standalone: true,
   imports: [],
-  templateUrl: './revenue-widget-magseven.component.html',
-  styleUrl: './revenue-widget-magseven.component.scss',
+  templateUrl: './netincome-widget-magseven.component.html',
+  styleUrl: './netincome-widget-magseven.component.scss'
 })
-export class RevenueWidgetMagsevenComponent {
+export class NetincomeWidgetMagsevenComponent {
 
   tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
   colors = ['#A2AAAD', '#FF9900', '#34A853', '#0081FB', '#727272', '#76B900', '#E31937'];
@@ -33,9 +34,9 @@ export class RevenueWidgetMagsevenComponent {
         const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
         
         if (stockData && stockData.revenue && stockData.quarter) {
-          const last12Quarters = stockData.quarter.slice(-12);
-          const revenues = stockData.revenue
-            .slice(-12)
+          const last12Quarters = stockData.quarter.slice(-4);
+          const netincoms = stockData.netIncome
+            .slice(-4)
             .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
 
           // Labels
@@ -46,7 +47,7 @@ export class RevenueWidgetMagsevenComponent {
           // Add Dataset
           chartData.datasets.push({
             label: `${ticker}`,
-            data: revenues,
+            data: netincoms,
             backgroundColor: this.colors[index % this.colors.length],
           });
         }
@@ -97,7 +98,7 @@ export class RevenueWidgetMagsevenComponent {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Revenue last 12 quarters',
+                    text: 'Net income last 4 quarters',
                     color: scaleColor,
                 },
                 legend: {
