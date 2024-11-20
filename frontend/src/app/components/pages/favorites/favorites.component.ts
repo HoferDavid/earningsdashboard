@@ -13,11 +13,11 @@ import { BasicWidget } from '../../../interfaces/basic-widget';
   styleUrl: './favorites.component.scss'
 })
 export class FavoritesComponent implements OnInit {
-  widgets: Signal<BasicWidget[]>; // Angular Signal, um die Daten reaktiv zu verwalten
+  // widgets: Signal<BasicWidget[]>; // Angular Signal, um die Daten reaktiv zu verwalten
 
   constructor(private stockService: StockService) {
     // Initialisierung des Signals
-    this.widgets = this.stockService.getBasicWidgets();
+    // this.widgets = this.stockService.getBasicWidgets();
   }
 
   ngOnInit(): void {
