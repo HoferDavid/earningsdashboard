@@ -4,13 +4,17 @@ import { StockData } from '../interfaces/stock-data';
 
 @Injectable({ providedIn: 'root' })
 export class StockService {
+  
+  basicWidgets() {
+    throw new Error('Method not implemented.');
+  }
 
   private stockDataSignal = signal<StockData | null>(null);
   firestoreService = inject(FirestoreService);
 
 
   loadStockData(ticker: string) {
-    this.stockDataSignal.set(null); // Zurücksetzen der Daten
+    this.stockDataSignal.set(null); // Setback Data
     this.firestoreService.getStockDetails(ticker).subscribe({
       next: data => this.stockDataSignal.set(data),
       error: error => console.error('Fehler beim Laden der Aktie:', error)

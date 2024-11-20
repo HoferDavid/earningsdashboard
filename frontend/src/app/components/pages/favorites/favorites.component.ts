@@ -1,26 +1,25 @@
-import { Component, computed, inject, OnInit, Signal } from '@angular/core';
-import { FavoritesService } from '../../../services/favorites.service';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BasicWidgetComponent } from '../../widgets/basic-widget/basic-widget.component';
-import { StockService } from '../../../services/stock.service';
+import { FavoritesService } from '../../../services/favorites.service';
+import { FirestoreService } from '../../../services/firestore.service';
 import { BasicWidget } from '../../../interfaces/basic-widget';
+import { BasicWidgetComponent } from '../../widgets/basic-widget/basic-widget.component';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
   imports: [CommonModule, BasicWidgetComponent],
   templateUrl: './favorites.component.html',
-  styleUrl: './favorites.component.scss'
+  styleUrls: ['./favorites.component.scss']
 })
-export class FavoritesComponent implements OnInit {
-  // widgets: Signal<BasicWidget[]>; // Angular Signal, um die Daten reaktiv zu verwalten
+export class FavoritesComponent {
+  favoritesService = inject(FavoritesService);
+  firestoreService = inject(FirestoreService);
 
-  constructor(private stockService: StockService) {
-    // Initialisierung des Signals
-    // this.widgets = this.stockService.getBasicWidgets();
-  }
-
-  ngOnInit(): void {
-    // Keine zusätzlichen Aktionen erforderlich, da das Signal die Daten aktualisiert
-  }
+  // Computed Signal: Holt alle Favoriten-Daten aus Firestore
+  widgets = computed<BasicWidget[]>(() => {
+    const favoriteTickers = this.favoritesService.favorites(); // Liste der Favoriten-Ticker
+    const allStocks = this.firestoreService.getStocksSnapshot(); // Holt den aktuellen Snapshot aller Aktien
+    return allStocks.filter(stock => favoriteTickers.includes(stock.ticker));
+  });
 }

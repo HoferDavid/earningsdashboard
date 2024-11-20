@@ -31,14 +31,9 @@ export class OverviewComponent {
   ]).pipe(
     map(([stocks, searchText]) => 
       stocks.filter(stock => 
-        stock.name.toLowerCase().includes(searchText!.toLowerCase()) || 
+        stock.name.toLowerCase().includes(searchText!.toLowerCase()) ||
         stock.ticker.toLowerCase().includes(searchText!.toLowerCase())
       )
     )
   );
-
-
-  trackByTicker(index: number, stock: BasicWidget) {
-    return stock.ticker;
-  }
 }

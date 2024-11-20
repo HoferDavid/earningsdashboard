@@ -79,4 +79,11 @@ export class FirestoreService {
       })
     );
   }
+
+
+  getStocksSnapshot(): BasicWidget[] {
+    let stocks: BasicWidget[] = [];
+    this.stocksCache$.subscribe(data => stocks = data);
+    return stocks;
+  }
 }

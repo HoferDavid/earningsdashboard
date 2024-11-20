@@ -1,22 +1,11 @@
-
 <h1>Your Favorites</h1>
 
-
-<!-- <div *ngIf="widgets().length; else noData">
-    <div *ngFor="let widget of widgets()">
-      <app-basic-widget [data]="widget"></app-basic-widget>
-    </div>
+<div *ngIf="widgets().length; else noData">
+  <div *ngFor="let widget of widgets()">
+    <app-basic-widget [data]="widget"></app-basic-widget>
   </div>
-  
-  <ng-template #noData>
-    <p>No favorites available.</p>
-  </ng-template> -->
+</div>
 
-
-
-
-<!-- <ul>
-  <li *ngFor="let ticker of favorites">
-    {{ ticker }}
-  </li>
-</ul> -->
+<ng-template #noData>
+  <p>No favorites available.</p>
+</ng-template>
