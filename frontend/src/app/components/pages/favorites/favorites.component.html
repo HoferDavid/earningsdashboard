@@ -1,11 +1,10 @@
 <h1>Your Favorites</h1>
 
-<div *ngIf="widgets().length; else noData">
-  <div *ngFor="let widget of widgets()">
+@if (widgets().length) {
+  @for (widget of widgets(); track $index) {
     <app-basic-widget [data]="widget"></app-basic-widget>
-  </div>
-</div>
-
-<ng-template #noData>
-  <p>No favorites available.</p>
-</ng-template>
+  }
+}
+@else {
+  <p>No favorites available!</p>
+}
