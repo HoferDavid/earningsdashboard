@@ -6,15 +6,18 @@ import { FavoritesService } from '../../../services/favorites.service';
 import { FirestoreService } from '../../../services/firestore.service';
 import { BasicWidget } from '../../../interfaces/basic-widget';
 import { BasicWidgetComponent } from './../../widgets/basic-widget/basic-widget.component';
+import { PagesHeaderComponent } from '../../common/pages-header/pages-header.component';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, BasicWidgetComponent],
+  imports: [CommonModule, BasicWidgetComponent, PagesHeaderComponent],
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
 })
 export class FavoritesComponent {
+
+  pageTitle = 'Your Favorites';
 
   favoritesService = inject(FavoritesService);
   firestoreService = inject(FirestoreService);

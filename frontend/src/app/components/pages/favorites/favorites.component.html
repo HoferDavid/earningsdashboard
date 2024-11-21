@@ -1,4 +1,5 @@
-<h1>Your Favorites</h1>
+<app-pages-header [title]="pageTitle"></app-pages-header>
+
 
 <div class="dashboard-widgets">
   @for (stock of (filteredFavorites() | async); track stock) {

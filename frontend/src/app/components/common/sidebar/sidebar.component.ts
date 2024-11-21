@@ -60,14 +60,14 @@ export class SidebarComponent implements OnInit {
       route: 'magseven',
     },
     {
-      icon: 'dashboard',
-      label: 'Dashboard',
-      route: 'dashboard',
-    },
-    {
       icon: 'favorite',
       label: 'Favorites',
       route: 'favorites',
+    },
+    {
+      icon: 'dashboard',
+      label: 'Dashboard',
+      route: 'dashboard',
     },
     {
       icon: 'info',
