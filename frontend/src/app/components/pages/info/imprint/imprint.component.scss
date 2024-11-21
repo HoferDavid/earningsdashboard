@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+span {
+    font-size: 1rem;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+
+  address {
+    display: flex;
+    flex-direction: column;
+    font-style: normal;
+  }
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+}
