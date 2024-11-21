@@ -1,6 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
   align-items: center;
   margin-bottom: 4rem;
 }
@@ -16,4 +17,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
 }

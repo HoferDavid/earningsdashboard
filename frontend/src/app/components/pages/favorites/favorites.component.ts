@@ -17,7 +17,7 @@ import { PagesHeaderComponent } from '../../common/pages-header/pages-header.com
 })
 export class FavoritesComponent {
 
-  pageTitle = 'Your Favorites';
+  pageTitle = 'Favorites';
 
   favoritesService = inject(FavoritesService);
   firestoreService = inject(FirestoreService);

@@ -1,12 +1,13 @@
 <app-pages-header [title]="pageTitle"></app-pages-header>
 
-
-<div class="dashboard-widgets">
-  @for (stock of (filteredFavorites() | async); track stock) {
+<section>
+  <div class="dashboard-widgets">
+    @for (stock of (filteredFavorites() | async); track stock) {
     <app-basic-widget [data]="stock"></app-basic-widget>
-  }
-</div>
+    }
+  </div>
 
-@if (!(filteredFavorites() | async)?.length) {
+  @if (!(filteredFavorites() | async)?.length) {
   <p>No favorites available!</p>
-}
+  }
+</section>
