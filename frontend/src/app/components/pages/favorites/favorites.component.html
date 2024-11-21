@@ -1,10 +1,11 @@
 <h1>Your Favorites</h1>
 
-@if (widgets().length) {
-  @for (widget of widgets(); track $index) {
-    <app-basic-widget [data]="widget"></app-basic-widget>
+<div class="dashboard-widgets">
+  @for (stock of (filteredFavorites() | async); track stock) {
+    <app-basic-widget [data]="stock"></app-basic-widget>
   }
-}
-@else {
+</div>
+
+@if (!(filteredFavorites() | async)?.length) {
   <p>No favorites available!</p>
 }

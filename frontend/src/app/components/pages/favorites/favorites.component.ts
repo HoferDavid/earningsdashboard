@@ -1,25 +1,35 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { FavoritesService } from '../../../services/favorites.service';
 import { FirestoreService } from '../../../services/firestore.service';
 import { BasicWidget } from '../../../interfaces/basic-widget';
-import { BasicWidgetComponent } from '../../widgets/basic-widget/basic-widget.component';
+import { BasicWidgetComponent } from './../../widgets/basic-widget/basic-widget.component';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
   imports: [CommonModule, BasicWidgetComponent],
   templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss']
+  styleUrls: ['./favorites.component.scss'],
 })
 export class FavoritesComponent {
+
   favoritesService = inject(FavoritesService);
   firestoreService = inject(FirestoreService);
 
-  // Computed Signal: Holt alle Favoriten-Daten aus Firestore
-  widgets = computed<BasicWidget[]>(() => {
-    const favoriteTickers = this.favoritesService.favorites(); // Liste der Favoriten-Ticker
-    const allStocks = this.firestoreService.getStocksSnapshot(); // Holt den aktuellen Snapshot aller Aktien
-    return allStocks.filter(stock => favoriteTickers.includes(stock.ticker));
+  // Signal for Favorites Ticker
+  favoriteTickers = this.favoritesService.favorites;
+
+  // Observable for all Stocks
+  stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
+
+  // Computed Signal for filtered Favorites
+  filteredFavorites = computed(() => {
+    const tickers = this.favoriteTickers();
+    return this.stocks$.pipe(
+      map(stocks => stocks.filter(stock => tickers.includes(stock.ticker)))
+    );
   });
 }
