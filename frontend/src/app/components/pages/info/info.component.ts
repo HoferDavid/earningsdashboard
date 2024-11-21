@@ -16,4 +16,7 @@ export class InfoComponent {
     return this.router.url.includes('/info/imprint');
   }
 
+  isDgActive(): boolean {
+    return this.router.url.includes('/info/doppelgaenger');
+  }
 }

@@ -1,5 +1,5 @@
-<div *ngIf="!isImprintActive()">
+@if (!isImprintActive() && !isDgActive()) {
   <p>info works!</p>
-</div>
+}
 
 <router-outlet></router-outlet>

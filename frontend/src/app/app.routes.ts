@@ -6,6 +6,7 @@ import { OverviewComponent } from './components/pages/overview/overview.componen
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { BoardComponent } from './components/pages/board/board.component';
 import { MagsevenComponent } from './components/pages/magseven/magseven.component';
+import { DoppelgaengerComponent } from './components/pages/info/doppelgaenger/doppelgaenger.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,10 @@ export const routes: Routes = [
     path: 'info',
     component: InfoComponent,
     children: [
+      {
+        path: 'doppelgaenger',
+        component: DoppelgaengerComponent,
+      },
       {
         path: 'imprint',
         component: ImprintComponent,

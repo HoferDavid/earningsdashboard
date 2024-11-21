@@ -75,6 +75,11 @@ export class SidebarComponent implements OnInit {
       route: 'info',
       subItems: [
         {
+          icon: 'group',
+          label: 'DG',
+          route: 'doppelgaenger',
+        },
+        {
           icon: 'policy',
           label: 'Imprint',
           route: 'imprint',
