@@ -1,13 +1,15 @@
 <mat-toolbar class="shared-header-sidebar mat-elevation-z3">
 
-  <button mat-icon-button (click)="toggleSidenav()">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <div class="wrapper">
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    <h1 [routerLink]="['/overview']">Earnings Dashboard</h1>
   
-  <h1 [routerLink]="['/overview']">Earnings Dashboard</h1>
-
-  <button mat-icon-button (click)="toggleTheme()">
-    <mat-icon>{{ lightMode ? "light_mode" : "dark_mode" }}</mat-icon>
-  </button>
+    <button mat-icon-button (click)="toggleTheme()">
+      <mat-icon>{{ lightMode ? "light_mode" : "dark_mode" }}</mat-icon>
+    </button>
+  </div>
 
 </mat-toolbar>

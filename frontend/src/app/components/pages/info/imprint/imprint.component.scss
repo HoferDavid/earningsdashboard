@@ -3,17 +3,14 @@
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 4rem;
-}
-
-.header {
-    display: flex;
-    justify-content: center;
+  align-items: center;
 }
 
 section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  max-width: 1440px;
 }
 
 a {
@@ -26,7 +23,7 @@ h3 {
 }
 
 span {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .address {
