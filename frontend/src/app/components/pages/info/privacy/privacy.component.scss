@@ -13,4 +13,23 @@ section {
   max-width: 1440px;
   max-width: 800px;
   margin: 0 auto;
+  word-break: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: lightblue;
+  word-break: break-all;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
 }

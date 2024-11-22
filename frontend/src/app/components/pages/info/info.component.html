@@ -1,5 +1,29 @@
-@if (!isImprintActive() && !isDgActive()) {
-  <p>info works!</p>
+@if (!isImprintActive() && !isDgActive() && !isDisclaimerActive() && !isPrivacyActive()) {
+
+<app-pages-header [title]="pageTitle"></app-pages-header>
+
+<section>
+  <article>
+    <p>
+      Diese Website wurde unter Verwendung eines öffentlich zugänglichen
+      Spreadsheet erstellt, das von den Produzenten des Doppelgänger-Podcasts
+      bereitgestellt wurde.
+    </p>
+    <p>
+      Ich danke herzlich für die wertvolle Ressource, die dieses Projekt
+      ermöglicht hat. Bitte beachten Sie, dass diese Website unabhängig vom
+      Doppelgänger-Podcast entwickelt wurde und keinerlei offizielle Verbindung
+      zu dessen Produzenten, Hosts oder der Marke hat.
+    </p>
+    <p>
+      Der Inhalt und die Funktionalität dieser Website spiegeln ausschließlich
+      die Ideen und Bemühungen dess Entwicklers wider. Ich schätze die großartige
+      Arbeit des Doppelgänger-Podcasts und danke für die inspirierende
+      Grundlage, die durch die Veröffentlichung des Spreadsheets geschaffen
+      wurde.
+    </p>
+  </article>
+</section>
 }
 
 <router-outlet></router-outlet>

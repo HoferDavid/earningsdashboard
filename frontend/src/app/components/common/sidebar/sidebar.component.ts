@@ -80,9 +80,19 @@ export class SidebarComponent implements OnInit {
           route: 'doppelgaenger',
         },
         {
+          icon: 'warning',
+          label: 'Disclaimer',
+          route: 'disclaimer',
+        },
+        {
           icon: 'policy',
           label: 'Imprint',
           route: 'imprint',
+        },
+        {
+          icon: 'privacy_tip',
+          label: 'Privacy',
+          route: 'privacy',
         },
       ],
     },

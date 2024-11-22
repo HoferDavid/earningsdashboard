@@ -7,6 +7,8 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { BoardComponent } from './components/pages/board/board.component';
 import { MagsevenComponent } from './components/pages/magseven/magseven.component';
 import { DoppelgaengerComponent } from './components/pages/info/doppelgaenger/doppelgaenger.component';
+import { DisclaimerComponent } from './components/pages/info/disclaimer/disclaimer.component';
+import { PrivacyComponent } from './components/pages/info/privacy/privacy.component';
 
 export const routes: Routes = [
   {
@@ -39,8 +41,16 @@ export const routes: Routes = [
         component: DoppelgaengerComponent,
       },
       {
+        path: 'disclaimer',
+        component: DisclaimerComponent,
+      },
+      {
         path: 'imprint',
         component: ImprintComponent,
+      },
+      {
+        path: 'privacy',
+        component: PrivacyComponent,
       },
     ],
   },
