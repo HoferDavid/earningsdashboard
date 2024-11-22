@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  align-items: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1440px;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+article {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .podcast-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    a {
+      button {
+        min-width: 8rem;
+      }
+    }
+  }
+}
+
+a {
+  color: var(--sys-inverse-surface);
+  text-decoration: none;
+
+  button {
+    color: var(--sys-inverse-surface);
+    background-color: var(--sys-secondary-container);
+  }
+}

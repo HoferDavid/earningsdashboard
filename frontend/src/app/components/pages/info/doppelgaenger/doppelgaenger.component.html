@@ -1,5 +1,50 @@
-
+<app-pages-header [title]="pageTitle"></app-pages-header>
 
 <section>
-    <img src="/img/dg.jpg" alt="">
+  <img src="/img/dg.jpg" alt="" />
+
+  <a [href]="doppelgaengerUrl" target="_blank" rel="noopener noreferrer" class="button-link">
+    <button mat-fab extended>View Website</button>
+  </a>
+
+  <article>
+    <p class="description">
+      Philipp Glöckler und Philipp Klöckner telefonieren zweimal die Woche über
+      die aktuellen Ereignisse der relevanten Technologie-Unternehmen.
+      Tiefgründig und unterhaltsam.
+    </p>
+
+    <div class="podcast-btn-container">
+        <a [href]="applePodcastsUrl" target="_blank" rel="noopener noreferrer" class="button-link">
+            <button mat-fab extended>Apple Podcasts</button>
+        </a>
+        <a [href]="spotifyUrl" target="_blank" rel="noopener noreferrer" class="button-link">
+            <button mat-fab extended>Spotify</button>
+        </a>
+    </div>
+
+    <p>
+      Philipp & Philipp geben sich zweimal die Woche ein Update über die (ihrer
+      Meinung nach) relevantesten Ereignisse im Bereich Technologie, Start-ups
+      und Neuigkeiten aus dem World Wide Web. Ganz nebenbei lassen sie ein paar
+      Tausend Hörer daran teilhaben und per Mail und Discord Fragen stellen.
+    </p>
+
+    <p>
+      Neben dem Austausch über aktuelle Tech News, analysieren sie auch gern
+      Geschäftsmodelle und versuchen Risiken & Chancen ausgewogen, aber nicht
+      erschöpfend zu diskutieren.
+    </p>
+
+    <p>
+      Der Doppelgänger Tech Talk wird mittwochs und samstags veröffentlicht.
+    </p>
+  </article>
+
+  <article>
+    <a [href]="discordUrl" target="_blank" rel="noopener noreferrer" class="button-link">
+        <button mat-fab extended>Discord</button>
+    </a>
+    <p>Hier kannst du der Doppelgänger Discord Community beizutreten.</p>
+  </article>
 </section>

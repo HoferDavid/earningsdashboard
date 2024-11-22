@@ -6,12 +6,12 @@
       <h3>{{ stockService.stockData()!.ticker }}</h3>
     </div>
 
-    <button mat-fab extended>
-      <a [href]="stockService.stockData()!.url" target="_blank" rel="noopener noreferrer">View Spreadsheet</a>
-    </button>
+    <a [href]="stockService.stockData()!.url" target="_blank" rel="noopener noreferrer" class="button-link">
+      <button mat-fab extended>View Spreadsheet</button>
+    </a>
 
     <!-- Favorite Button -->
-    <button mat-button (click)="toggleFavorite()">
+    <button mat-button (click)="toggleFavorite()" class="favorites-btn">
       {{ isFavorite() ? 'Remove from Favorites' : 'Add to Favorites' }}
     </button>
   }
