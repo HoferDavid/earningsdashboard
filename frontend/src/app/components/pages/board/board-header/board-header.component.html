@@ -1,7 +1,7 @@
 <header>
   @if (stockService.stockData()) {
     <div>
-      <img [src]="'/logos/' + stockService.stockData()!.name.toLowerCase() + '.png'" alt="{{ stockService.stockData()!.name }}">
+      <img [src]="'/logos/' + stockService.stockData()!.ticker + '.png'" alt="{{ stockService.stockData()!.name }}">
       <h2>{{ stockService.stockData()!.name }}</h2>
       <h3>{{ stockService.stockData()!.ticker }}</h3>
     </div>

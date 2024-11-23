@@ -42,7 +42,7 @@ export class FirestoreService {
     return data.map(stock => ({
       name: stock.name,
       ticker: stock.id,
-      logo: `/logos/${stock.name.toLowerCase()}.png`,
+      logo: `/logos/${stock.ticker}.png`,
       lastRevenue: stock.revenue ? stock.revenue[stock.revenue.length - 1] : undefined,
       lastQuarter: stock.quarter ? this.quarterFormatPipe.transform(stock.quarter[stock.quarter.length - 1]) : undefined,
     }));

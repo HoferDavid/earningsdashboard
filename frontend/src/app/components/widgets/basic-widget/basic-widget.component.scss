@@ -19,21 +19,23 @@
   gap: 1rem;
 
   .name {
-    font-size: 1.5rem;
+    font-size: 0.625rem;
     margin: 0;
   }
 
   .ticker {
     margin: 0;
-    font-size: 0.625rem;
+    font-size: 1.5rem;
     margin-block-end: 0;
   }
 
   img {
     height: 40px;
+    width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    object-fit: scale-down;
   }
 }
 
