@@ -9,6 +9,7 @@ import { MagsevenComponent } from './components/pages/magseven/magseven.componen
 import { DoppelgaengerComponent } from './components/pages/info/doppelgaenger/doppelgaenger.component';
 import { DisclaimerComponent } from './components/pages/info/disclaimer/disclaimer.component';
 import { PrivacyComponent } from './components/pages/info/privacy/privacy.component';
+import { AboutComponent } from './components/pages/info/about/about.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
       {
         path: 'doppelgaenger',
         component: DoppelgaengerComponent,
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
       },
       {
         path: 'disclaimer',

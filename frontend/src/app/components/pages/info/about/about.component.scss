@@ -11,26 +11,17 @@ section {
   flex-direction: column;
   gap: 2rem;
   max-width: 1440px;
-  align-items: center;
   max-width: 800px;
   margin: 0 auto;
 }
 
 article {
-  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
+  text-align: center;
+}
 
-  .podcast-btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-
-    a {
-      button {
-        min-width: 8rem;
-      }
-    }
-  }
+.button-link {
+  align-self: center;
 }

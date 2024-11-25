@@ -36,17 +36,6 @@ header {
   }
 }
 
-a {
-  color: var(--sys-inverse-surface);
-  text-decoration: none;
-
-  button {
-    color: var(--sys-inverse-surface);
-    background-color: var(--sys-secondary-container);
-  }
-}
-
-
 .favorites-btn {
   border-radius: 0.75rem;
   background-color: var(--sys-secondary-container);

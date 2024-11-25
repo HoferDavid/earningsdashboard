@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { PagesHeaderComponent } from "../../common/pages-header/pages-header.component";
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-info',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, PagesHeaderComponent],
+  imports: [RouterOutlet, CommonModule, PagesHeaderComponent, MatButtonModule],
   templateUrl: './info.component.html',
   styleUrl: './info.component.scss'
 })
@@ -30,5 +31,9 @@ export class InfoComponent {
 
   isPrivacyActive(): boolean {
     return this.router.url.includes('/info/privacy');
+  }
+
+  isAboutActive(): boolean {
+    return this.router.url.includes('/info/about');
   }
 }

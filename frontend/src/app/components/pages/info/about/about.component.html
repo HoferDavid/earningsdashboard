@@ -1,0 +1,36 @@
+<app-pages-header [title]="pageTitle"></app-pages-header>
+
+<section>
+  <article>
+    <p>Mein Name ist David Hofer, und ich bin Frontend-Entwickler.</p>
+    <p>
+      Wenn Sie mehr über mich und meine Arbeit erfahren möchten, besuchen Sie
+      gerne meine Portfolio Website:
+    </p>
+
+    <a [href]="portfolioWebsiteUrl" target="_blank" rel="noopener noreferrer" class="button-link">
+      <button mat-fab extended>Portfolio</button>
+    </a>
+
+    <p>
+      Ich bin derzeit auf der Suche nach neuen beruflichen Herausforderungen und
+      würde mich freuen, wenn Sie mit mir zusammenarbeiten möchten. Falls Sie
+      Interesse haben, können Sie mich jederzeit kontaktieren!
+    </p>
+
+    <div class="separator-line"></div>
+
+    <p>
+      Außerdem bin ich immer offen für Tipps, Tricks und
+      Verbesserungsvorschläge. Wenn Sie Ideen haben, wie diese Website besser
+      werden könnte, oder Feedback für mich haben, lassen Sie es mich gerne
+      wissen.
+    </p>
+
+    <a href="mailto: {{ mail }}" target="_blank" rel="noopener noreferrer" class="button-link">
+        <button mat-fab extended>Email senden</button>
+      </a>
+
+    <p>Vielen Dank für Ihren Besuch!</p>
+  </article>
+</section>
