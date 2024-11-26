@@ -31,6 +31,8 @@ export class StockService {
     const data = this.stockDataSignal();
   
     if (data && data.revenue && data.quarter) {
+      console.log('revenue:', data.revenue);
+
       const quarters = data.quarter.slice(-12);
       const revenues = data.revenue.slice(-12).map((rev) => {
         if (typeof rev === 'string') {

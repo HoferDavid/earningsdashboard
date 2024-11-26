@@ -18,34 +18,36 @@ import { BasicWidgetComponent } from './../../widgets/basic-widget/basic-widget.
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent {
 
   firestoreService = inject(FirestoreService);
   stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
   searchControl = new FormControl<string>('');
 
 
-  ngOnInit(): void {
-    window.addEventListener('scroll', this.toggleScrollButtonVisibility);
-  }
+  // ngOnInit(): void {
+  //   window.addEventListener('scroll', this.toggleScrollButtonVisibility.bind(this));
+  // }  
 
 
-  scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  // scrollToTop() {
+  //   console.log('Scroll to top triggered');
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }
   
   
-  toggleScrollButtonVisibility() {
-    // Hier überprüfst du die Scroll-Position und blendest den Button ein oder aus
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const scrollButton = document.querySelector('.scroll-top-btn') as HTMLElement;
-
-    if (scrollTop > 100) {
-      scrollButton.classList.add('visible');
-    } else {
-      scrollButton.classList.remove('visible');
-    }
-  }
+  // toggleScrollButtonVisibility() {
+  //   const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  //   const scrollButton = document.querySelector('.scroll-top-btn') as HTMLElement;
+  
+  //   if (scrollButton) {
+  //     if (scrollTop > 100) {
+  //       scrollButton.classList.add('visible');
+  //     } else {
+  //       scrollButton.classList.remove('visible');
+  //     }
+  //   }
+  // }
 
 
   filteredStocks$: Observable<BasicWidget[]> = combineLatest([
