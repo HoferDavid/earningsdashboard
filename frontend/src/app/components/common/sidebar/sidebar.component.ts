@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { SidenavService } from '../../../services/sidenav.service';
 import { FirestoreService } from '../../../services/firestore.service';
-import { Observable } from 'rxjs';
 
 export type MenuItem = {
   icon: string;
@@ -76,7 +75,7 @@ export class SidebarComponent implements OnInit {
       subItems: [
         {
           icon: 'group',
-          label: 'DG',
+          label: 'Doppelgänger',
           route: 'doppelgaenger',
         },
         {

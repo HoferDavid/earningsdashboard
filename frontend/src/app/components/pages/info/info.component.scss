@@ -14,3 +14,10 @@ section {
   max-width: 800px;
   margin: 0 auto;
 }
+
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
