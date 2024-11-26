@@ -11,7 +11,7 @@ export class SidenavService {
   }
 
   get sidenavWidth(): string {
-    return this.collapsed() ? '0px' : '240px';
+    return this.collapsed() ? '0px' : '200px';
   }
 
   get imgWidth(): string {

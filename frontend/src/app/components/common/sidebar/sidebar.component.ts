@@ -117,8 +117,7 @@ export class SidebarComponent implements OnInit {
 
 
   toggleNested(index: number): void {
-    this.nestedMenuOpenIndex() === index
-      ? this.nestedMenuOpenIndex.set(null)
-      : this.nestedMenuOpenIndex.set(index);
+    this.nestedMenuOpenIndex() === index ? this.nestedMenuOpenIndex.set(null) : this.nestedMenuOpenIndex.set(index);
+    // this.sidenavService.toggle(); // Close Sidebar when clicking on a tab
   }
 }
