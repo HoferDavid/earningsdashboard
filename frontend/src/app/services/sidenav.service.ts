@@ -4,7 +4,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class SidenavService {
-  collapsed: WritableSignal<boolean> = signal(false);
+  collapsed: WritableSignal<boolean> = signal(true);
 
   toggle(): void {
     this.collapsed.set(!this.collapsed());

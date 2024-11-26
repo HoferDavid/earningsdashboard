@@ -18,11 +18,34 @@ import { BasicWidgetComponent } from './../../widgets/basic-widget/basic-widget.
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class OverviewComponent {
+export class OverviewComponent implements OnInit {
 
   firestoreService = inject(FirestoreService);
   stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
   searchControl = new FormControl<string>('');
+
+
+  ngOnInit(): void {
+    window.addEventListener('scroll', this.toggleScrollButtonVisibility);
+  }
+
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+  
+  toggleScrollButtonVisibility() {
+    // Hier überprüfst du die Scroll-Position und blendest den Button ein oder aus
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollButton = document.querySelector('.scroll-top-btn') as HTMLElement;
+
+    if (scrollTop > 100) {
+      scrollButton.classList.add('visible');
+    } else {
+      scrollButton.classList.remove('visible');
+    }
+  }
 
 
   filteredStocks$: Observable<BasicWidget[]> = combineLatest([

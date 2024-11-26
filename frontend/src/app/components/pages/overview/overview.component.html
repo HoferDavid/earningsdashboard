@@ -5,8 +5,15 @@
   </mat-form-field>
 </div>
 
-<div class="dashboard-widgets">
-  @for (stock of (filteredStocks$ | async); track stock) {
-    <app-basic-widget [data]="stock"></app-basic-widget>
-  }
-</div>
+<section>
+  <div class="dashboard-widgets">
+    @for (stock of (filteredStocks$ | async); track stock) {
+      <app-basic-widget [data]="stock"></app-basic-widget>
+    }
+  </div>
+</section>
+
+
+<button mat-fab class="scroll-top-btn" (click)="scrollToTop()">
+  <mat-icon>arrow_upward</mat-icon>
+</button>

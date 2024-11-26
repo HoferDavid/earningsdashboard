@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { SidenavService } from '../../../services/sidenav.service';
 import { FirestoreService } from '../../../services/firestore.service';
+import { MatButtonModule } from '@angular/material/button';
 
 export type MenuItem = {
   icon: string;
@@ -29,7 +30,7 @@ export type MenuItem = {
       ]),
     ]),
   ],
-  imports: [ MatSidenavModule, MatIconModule, RouterModule, MatListModule, CommonModule ],
+  imports: [ MatSidenavModule, MatIconModule, RouterModule, MatListModule, CommonModule, MatButtonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -41,9 +42,7 @@ export class SidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.firestoreService.getStockDetails('AAPL').subscribe(data => {
-      this.stockDetails = data;
-    });
+    this.firestoreService.getStockDetails('AAPL').subscribe(data => { this.stockDetails = data });
   }
 
 

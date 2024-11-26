@@ -2,7 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 7rem;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1440px;
 }
 
 .dashboard-widgets {
@@ -21,3 +28,23 @@
   flex-wrap: wrap;
   gap: 16px;
 }
+
+
+
+
+
+.scroll-top-btn {
+  position: fixed;
+  z-index: 1000;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+// .scroll-top-btn {
+//   display: none;
+// }
+
+// .scroll-top-btn.visible {
+//   display: block;
+// }
