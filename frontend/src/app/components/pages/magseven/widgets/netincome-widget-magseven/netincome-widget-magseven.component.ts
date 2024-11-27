@@ -26,101 +26,95 @@ export class NetincomeWidgetMagsevenComponent {
 
   async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
-
-
-    // All Requests together
+  
+    // Labels sollen die Ticker enthalten
+    chartData.labels = this.tickers;
+  
+    // Array für die Quartals-Datasets
+    const quarterDatasets: { label: string; data: number[]; backgroundColor: string }[] = [
+      { label: 'Q1', data: [], backgroundColor: '#C40C0C' },
+      { label: 'Q2', data: [], backgroundColor: '#FF6500' },
+      { label: 'Q3', data: [], backgroundColor: '#FF8A08' },
+      { label: 'Q4', data: [], backgroundColor: '#FFC100' },
+    ];
+  
+    // Daten für jeden Ticker laden
     const requests = this.tickers.map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
-        
-        if (stockData && stockData.revenue && stockData.quarter) {
-          const last12Quarters = stockData.quarter.slice(-4);
-          const netincoms = stockData.netIncome
+  
+        if (stockData && stockData.netIncome && stockData.quarter) {
+          const netIncomes = stockData.netIncome
             .slice(-4)
             .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
-
-          // Labels
-          if (index === 0) {
-            chartData.labels = last12Quarters;
-          }
-
-          // Add Dataset
-          chartData.datasets.push({
-            label: `${ticker}`,
-            data: netincoms,
-            backgroundColor: this.colors[index % this.colors.length],
+  
+          // Die Quartalsdaten zu den jeweiligen Datasets hinzufügen
+          netIncomes.forEach((income, quarterIndex) => {
+            quarterDatasets[quarterIndex].data.push(income);
           });
+        } else {
+          // Füge Nullwerte hinzu, wenn Daten fehlen
+          quarterDatasets.forEach((dataset) => dataset.data.push(0));
         }
       } catch (error) {
         console.error(`Error while loading data for ${ticker}:`, error);
+  
+        // Fehlerfall: Füge Nullwerte hinzu
+        quarterDatasets.forEach((dataset) => dataset.data.push(0));
       }
     });
-
-    // Wait until all data is loaded
+  
+    // Warten, bis alle Daten geladen sind
     await Promise.all(requests);
-
-    // Render Chart
+  
+    // Datasets hinzufügen
+    chartData.datasets = quarterDatasets;
+  
+    // Diagramm rendern
     this.renderChart(chartData);
   }
-
-
+  
   renderChart(data: { labels: string[]; datasets: any[] }): void {
     const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
     const grid = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
-
-
-    // Destroy previous chart instance, if available
+  
+    // Zerstöre bestehendes Diagramm
     if (this.chartInstance) {
-        this.chartInstance.destroy();
+      this.chartInstance.destroy();
     }
-
-
-    // Create new chart instance
+  
+    // Neues Diagramm erstellen
     this.chartInstance = new Chart(this.chart.nativeElement, {
-        type: 'line',
-        data: {
-            labels: data.labels,
-            datasets: data.datasets.map((dataset, index) => ({
-                label: dataset.label, // Setzen des Labels für die jeweilige Aktie
-                data: dataset.data,
-                borderColor: this.colors[index % this.colors.length], // Verwendung der definierten Farben
-                backgroundColor: this.colors[index % this.colors.length], // Hintergrundfarbe (optional)
-                fill: false, // Setzen Sie auf true, um die Fläche unter der Linie zu füllen
-            })),
+      type: 'bar',
+      data: {
+        labels: data.labels, // Labels sind die Ticker
+        datasets: data.datasets, // Die Quartals-Datasets
+      },
+      options: {
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Net income last 4 quarters',
+            color: scaleColor,
+          },
+          legend: {
+            display: false,
+          },
         },
-        options: {
-            maintainAspectRatio: false,
-            elements: {
-                line: {
-                    tension: 0.4,
-                },
+        scales: {
+          x: {
+            ticks: {
+              color: scaleColor,
             },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Net income last 4 quarters',
-                    color: scaleColor,
-                },
-                legend: {
-                    labels: {
-                        color: scaleColor,
-                    },
-                },
+          },
+          y: {
+            ticks: {
+              color: scaleColor,
             },
-            scales: {
-                x: {
-                    ticks: {
-                        color: scaleColor,
-                        maxRotation: 45,
-                    },
-                },
-                y: {
-                    ticks: {
-                        color: scaleColor,
-                    },
-                },
-            },
+          },
         },
+      },
     });
-  }
+  }  
 }

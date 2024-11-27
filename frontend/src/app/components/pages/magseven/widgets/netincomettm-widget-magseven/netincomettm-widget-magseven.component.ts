@@ -87,9 +87,7 @@ export class NetincomettmWidgetMagsevenComponent {
             color: scaleColor,
           },
           legend: {
-            labels: {
-              color: scaleColor,
-            },
+            display: false,
           },
         },
         scales: {
