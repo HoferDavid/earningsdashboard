@@ -61,6 +61,8 @@ export class QuarterlyNetincomeWidgetComponent {
           legend: {
             labels: {
               color: scaleColor,
+              boxWidth: 8,
+              boxHeight: 8,
             },
           },
         },

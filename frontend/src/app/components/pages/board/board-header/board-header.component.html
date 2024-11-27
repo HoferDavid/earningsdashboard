@@ -11,7 +11,7 @@
     </a>
 
     <!-- Favorite Button -->
-    <button mat-button (click)="toggleFavorite()" class="favorites-btn">
+    <button mat-fab extended (click)="toggleFavorite()" class="favorites-btn">
       {{ isFavorite() ? 'Remove from Favorites' : 'Add to Favorites' }}
     </button>
   }

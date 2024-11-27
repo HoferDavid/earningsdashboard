@@ -54,6 +54,8 @@ export class QuarterlyRevenueWidgetComponent {
           legend: {
             labels: {
               color: scaleColor,
+              boxWidth: 8,
+              boxHeight: 8,
             },
           },
         },

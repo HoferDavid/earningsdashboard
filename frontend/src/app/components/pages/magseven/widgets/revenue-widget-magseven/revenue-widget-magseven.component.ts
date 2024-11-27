@@ -103,9 +103,9 @@ export class RevenueWidgetMagsevenComponent {
                 legend: {
                     labels: {
                       color: scaleColor,
-                      boxWidth: 8, // Breite der Vierecke
-                      boxHeight: 8, // Höhe der Vierecke (falls verfügbar in deiner Chart.js-Version)
-                      padding: 8, // Abstand zwischen den Einträgen
+                      boxWidth: 8,
+                      boxHeight: 8,
+                      padding: 8,
                     },
                 },
             },

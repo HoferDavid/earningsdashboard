@@ -58,6 +58,8 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
           legend: {
             labels: {
               color: scaleColor,
+              boxWidth: 8,
+              boxHeight: 8,
             },
           },
         },

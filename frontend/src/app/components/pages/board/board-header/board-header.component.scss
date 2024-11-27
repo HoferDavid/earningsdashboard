@@ -42,11 +42,6 @@ header {
 }
 
 .favorites-btn {
-  border-radius: 0.75rem;
+  color: var(--sys-inverse-surface);
   background-color: var(--sys-secondary-container);
-
-  a {
-    color: var(--sys-inverse-surface);
-    text-decoration: none;
-  }
 }
