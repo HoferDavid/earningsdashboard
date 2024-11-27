@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
 export class RevenueWidgetMagsevenComponent {
 
   tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
-  colors = ['#A2AAAD', '#FF9900', '#34A853', '#0081FB', '#727272', '#76B900', '#E31937'];
+  colors = ['#f94144', '#f3722c', '#f8961e', '#f9c74f', '#90be6d', '#43aa8b', '#577590'];
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
   private stockService = inject(StockService);
   private chartInstance: Chart | null = null;
@@ -102,7 +102,10 @@ export class RevenueWidgetMagsevenComponent {
                 },
                 legend: {
                     labels: {
-                        color: scaleColor,
+                      color: scaleColor,
+                      boxWidth: 8, // Breite der Vierecke
+                      boxHeight: 8, // Höhe der Vierecke (falls verfügbar in deiner Chart.js-Version)
+                      padding: 8, // Abstand zwischen den Einträgen
                     },
                 },
             },
