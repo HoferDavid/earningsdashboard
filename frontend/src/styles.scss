@@ -74,6 +74,15 @@ mat-toolbar {
   }
 }
 
+.chart-container {
+  max-width: 480px;
+  height: 320px;
+  background-color: #191c20;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 2px 2px 4px 0px var(--sys-primary-container);
+}
+
 @media (max-width: 600px) {
   mat-toolbar {
     height: var(--header-height-mobile);
