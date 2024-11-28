@@ -3,7 +3,6 @@ import { InfoComponent } from './components/pages/info/info.component';
 import { FavoritesComponent } from './components/pages/favorites/favorites.component';
 import { ImprintComponent } from './components/pages/info/imprint/imprint.component';
 import { OverviewComponent } from './components/pages/overview/overview.component';
-import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { BoardComponent } from './components/pages/board/board.component';
 import { MagsevenComponent } from './components/pages/magseven/magseven.component';
 import { DoppelgaengerComponent } from './components/pages/info/doppelgaenger/doppelgaenger.component';
@@ -28,10 +27,6 @@ export const routes: Routes = [
   {
     path: 'board/:ticker',
     component: BoardComponent,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
   },
   {
     path: 'info',
