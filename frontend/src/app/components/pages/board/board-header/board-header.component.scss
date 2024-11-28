@@ -8,6 +8,10 @@ header {
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
+  background-color: var(--sys-secondary-container);
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+
 
  @media (min-width: 680px) {
   flex-direction: row;
@@ -43,5 +47,5 @@ header {
 
 .favorites-btn {
   color: var(--sys-inverse-surface);
-  background-color: var(--sys-secondary-container);
+  background-color: var(--sys-on-primary);
 }
