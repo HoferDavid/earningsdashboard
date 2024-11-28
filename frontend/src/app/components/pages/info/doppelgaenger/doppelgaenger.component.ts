@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class DoppelgaengerComponent {
 
-  pageTitle = 'Doppelgänger';
+  pageTitle = 'Doppelgänger Podcast';
   doppelgaengerUrl = 'https://www.doppelgaenger.io/';
   applePodcastsUrl = 'https://podcasts.apple.com/de/podcast/doppelg%C3%A4nger-tech-talk/id1519234952';
   spotifyUrl = 'https://open.spotify.com/show/3vBAacJIGDEb7hBHgdYlw3';
