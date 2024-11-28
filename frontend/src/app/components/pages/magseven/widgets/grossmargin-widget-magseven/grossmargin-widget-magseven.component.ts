@@ -110,8 +110,9 @@ export class GrossmarginWidgetMagsevenComponent {
             scales: {
                 x: {
                     ticks: {
-                      color: 'rgb(226 226 233)',
-                      maxRotation: 45,
+                      display: false,
+                      // color: 'rgb(226 226 233)',
+                      // maxRotation: 45,
                     },
                     grid: {
                       color: 'rgb(226 226 233)',
