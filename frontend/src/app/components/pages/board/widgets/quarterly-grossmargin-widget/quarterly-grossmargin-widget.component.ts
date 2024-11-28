@@ -33,6 +33,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
             data: data,
             backgroundColor: 'rgb(40 71 119)',
             borderColor: 'rgb(190 198 220)',
+            borderWidth: 1,
           },
         ],
       },
