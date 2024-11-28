@@ -23,12 +23,6 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
     const data = last12Quarters.map((item) => item.revenue);
 
 
-    const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
-    const datasetPrimary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-primary-color').trim();
-    const datasetSecondary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-secondary-color').trim();
-    const grid = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
-
-
     new Chart(this.chart.nativeElement, {
       type: 'line',
       data: {
@@ -37,8 +31,8 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
           {
             label: 'in %',
             data: data,
-            backgroundColor: datasetPrimary,
-            borderColor: datasetSecondary,
+            backgroundColor: 'rgb(40 71 119)',
+            borderColor: 'rgb(190 198 220)',
           },
         ],
       },
@@ -53,11 +47,11 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
           title: {
             display: true,
             text: 'Gross margin last 12 quarters',
-            color: scaleColor,
+            color: 'rgb(226 226 233)',
           },
           legend: {
             labels: {
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
               boxWidth: 8,
               boxHeight: 8,
             },
@@ -68,21 +62,21 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
             ticks: {
               maxTicksLimit: 6,
               minRotation: 45,
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
             },
             grid: {
-              color: grid,
+              color: 'rgb(226 226 233)',
               lineWidth: 0.2,
             },
           },
           y: {
             // min: 0,
             ticks: {
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
               callback: function(value) { return Number.isInteger(value) ? value : ''; }
             },
             grid: {
-              color: grid,
+              color: 'rgb(226 226 233)',
               lineWidth: 0.2,
             },
           },

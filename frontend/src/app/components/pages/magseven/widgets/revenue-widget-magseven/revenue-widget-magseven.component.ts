@@ -64,9 +64,6 @@ export class RevenueWidgetMagsevenComponent {
 
 
   renderChart(data: { labels: string[]; datasets: any[] }): void {
-    const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
-    const grid = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
-
 
     // Destroy previous chart instance, if available
     if (this.chartInstance) {
@@ -80,11 +77,12 @@ export class RevenueWidgetMagsevenComponent {
         data: {
             labels: data.labels,
             datasets: data.datasets.map((dataset, index) => ({
-                label: dataset.label, // Setzen des Labels für die jeweilige Aktie
+                label: dataset.label,
                 data: dataset.data,
-                borderColor: this.colors[index % this.colors.length], // Verwendung der definierten Farben
-                backgroundColor: this.colors[index % this.colors.length], // Hintergrundfarbe (optional)
-                fill: false, // Setzen Sie auf true, um die Fläche unter der Linie zu füllen
+                borderColor: this.colors[index % this.colors.length],
+                backgroundColor: this.colors[index % this.colors.length],
+                fill: false,
+                borderWidth: 1,
             })),
         },
         options: {
@@ -98,11 +96,11 @@ export class RevenueWidgetMagsevenComponent {
                 title: {
                     display: true,
                     text: 'Revenue last 12 quarters',
-                    color: scaleColor,
+                    color: 'rgb(226 226 233)',
                 },
                 legend: {
                     labels: {
-                      color: scaleColor,
+                      color: 'rgb(226 226 233)',
                       boxWidth: 8,
                       boxHeight: 8,
                       padding: 8,
@@ -112,13 +110,21 @@ export class RevenueWidgetMagsevenComponent {
             scales: {
                 x: {
                     ticks: {
-                        color: scaleColor,
+                      color: 'rgb(226 226 233)',
                         maxRotation: 45,
+                    },
+                    grid: {
+                      color: 'rgb(226 226 233)',
+                      lineWidth: 0.2,
                     },
                 },
                 y: {
                     ticks: {
-                        color: scaleColor,
+                      color: 'rgb(226 226 233)',
+                    },
+                    grid: {
+                      color: 'rgb(226 226 233)',
+                      lineWidth: 0.2,
                     },
                 },
             },

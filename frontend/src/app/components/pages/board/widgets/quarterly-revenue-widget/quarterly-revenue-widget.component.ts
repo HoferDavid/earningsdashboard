@@ -23,8 +23,6 @@ export class QuarterlyRevenueWidgetComponent {
     const labels = last12Quarters.map(item => item.quarter);
     const data = last12Quarters.map(item => item.revenue);
 
-    const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
-    const datasetPrimary = getComputedStyle(document.documentElement).getPropertyValue('--dataset-primary-color').trim();
 
     new Chart(this.chart.nativeElement, {
       type: 'bar',
@@ -34,7 +32,7 @@ export class QuarterlyRevenueWidgetComponent {
           {
             label: 'in Bill/Mill USD',
             data: data,
-            backgroundColor: datasetPrimary,
+            backgroundColor: 'rgb(40 71 119)'
           },
         ],
       },
@@ -49,11 +47,11 @@ export class QuarterlyRevenueWidgetComponent {
           title: {
             display: true,
             text: 'Revenue last 12 quarters',
-            color: scaleColor,
+            color: 'rgb(226 226 233)',
           },
           legend: {
             labels: {
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
               boxWidth: 8,
               boxHeight: 8,
             },
@@ -64,12 +62,12 @@ export class QuarterlyRevenueWidgetComponent {
             ticks: {
               maxTicksLimit: 6,
               minRotation: 45,
-              color: scaleColor
+              color: 'rgb(226 226 233)',
             }
           },
           y: {
             ticks: {
-              color: scaleColor
+              color: 'rgb(226 226 233)',
             }
           }
         }

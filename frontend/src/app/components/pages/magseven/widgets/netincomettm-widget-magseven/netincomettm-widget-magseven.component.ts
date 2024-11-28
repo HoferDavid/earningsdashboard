@@ -65,8 +65,6 @@ export class NetincomettmWidgetMagsevenComponent {
 
 
   renderChart(data: { labels: string[]; datasets: any[] }): void {
-    const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
-    const grid = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
   
     if (this.chartInstance) {
       this.chartInstance.destroy();
@@ -75,8 +73,8 @@ export class NetincomettmWidgetMagsevenComponent {
     this.chartInstance = new Chart(this.chart.nativeElement, {
       type: 'bar',
       data: {
-        labels: data.labels, // Labels sind die Ticker
-        datasets: data.datasets // Jedes Dataset hat nur einen Wert
+        labels: data.labels,
+        datasets: data.datasets
       },
       options: {
         maintainAspectRatio: false,
@@ -84,7 +82,7 @@ export class NetincomettmWidgetMagsevenComponent {
           title: {
             display: true,
             text: 'Net income TTM',
-            color: scaleColor,
+            color: 'rgb(226 226 233)',
           },
           legend: {
             display: false,
@@ -93,12 +91,12 @@ export class NetincomettmWidgetMagsevenComponent {
         scales: {
           x: {
             ticks: {
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
             },
           },
           y: {
             ticks: {
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
             },
           },
         },

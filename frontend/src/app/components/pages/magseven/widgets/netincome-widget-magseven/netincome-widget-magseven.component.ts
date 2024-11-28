@@ -27,10 +27,9 @@ export class NetincomeWidgetMagsevenComponent {
   async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
   
-    // Labels sollen die Ticker enthalten
     chartData.labels = this.tickers;
   
-    // Array für die Quartals-Datasets
+    // Array for Quarter Datasets
     const quarterDatasets: { label: string; data: number[]; backgroundColor: string }[] = [
       { label: 'Q1', data: [], backgroundColor: '#C40C0C' },
       { label: 'Q2', data: [], backgroundColor: '#FF6500' },
@@ -38,57 +37,42 @@ export class NetincomeWidgetMagsevenComponent {
       { label: 'Q4', data: [], backgroundColor: '#FFC100' },
     ];
   
-    // Daten für jeden Ticker laden
+
     const requests = this.tickers.map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
   
         if (stockData && stockData.netIncome && stockData.quarter) {
-          const netIncomes = stockData.netIncome
-            .slice(-4)
-            .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
+          const netIncomes = stockData.netIncome.slice(-4).map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
   
-          // Die Quartalsdaten zu den jeweiligen Datasets hinzufügen
           netIncomes.forEach((income, quarterIndex) => {
             quarterDatasets[quarterIndex].data.push(income);
           });
         } else {
-          // Füge Nullwerte hinzu, wenn Daten fehlen
           quarterDatasets.forEach((dataset) => dataset.data.push(0));
         }
       } catch (error) {
         console.error(`Error while loading data for ${ticker}:`, error);
-  
-        // Fehlerfall: Füge Nullwerte hinzu
         quarterDatasets.forEach((dataset) => dataset.data.push(0));
       }
     });
   
-    // Warten, bis alle Daten geladen sind
     await Promise.all(requests);
-  
-    // Datasets hinzufügen
     chartData.datasets = quarterDatasets;
-  
-    // Diagramm rendern
     this.renderChart(chartData);
   }
   
   renderChart(data: { labels: string[]; datasets: any[] }): void {
-    const scaleColor = getComputedStyle(document.documentElement).getPropertyValue('--scale-color').trim();
-    const grid = getComputedStyle(document.documentElement).getPropertyValue('--grid-color').trim();
-  
-    // Zerstöre bestehendes Diagramm
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }
   
-    // Neues Diagramm erstellen
+
     this.chartInstance = new Chart(this.chart.nativeElement, {
       type: 'bar',
       data: {
-        labels: data.labels, // Labels sind die Ticker
-        datasets: data.datasets, // Die Quartals-Datasets
+        labels: data.labels,
+        datasets: data.datasets,
       },
       options: {
         maintainAspectRatio: false,
@@ -96,7 +80,7 @@ export class NetincomeWidgetMagsevenComponent {
           title: {
             display: true,
             text: 'Net income last 4 quarters',
-            color: scaleColor,
+            color: 'rgb(226 226 233)',
           },
           legend: {
             display: false,
@@ -105,12 +89,12 @@ export class NetincomeWidgetMagsevenComponent {
         scales: {
           x: {
             ticks: {
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
             },
           },
           y: {
             ticks: {
-              color: scaleColor,
+              color: 'rgb(226 226 233)',
             },
           },
         },
