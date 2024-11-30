@@ -82,9 +82,9 @@ mat-toolbar {
   height: 320px;
   background-color: #191c20;
   padding: 1rem;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   // box-shadow: 2px 2px 4px 0px var(--sys-primary);
-  box-shadow: 2px 2px 4px 0px #28ebcf;
+  box-shadow: 1px 1px 2px 0px #26ebd0;
 }
 
 @media (max-width: 600px) {

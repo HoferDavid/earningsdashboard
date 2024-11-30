@@ -4,10 +4,11 @@ header {
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
-  background-color: var(--sys-secondary-container);
+  // background-color: var(--sys-secondary-container);
+  background-color: #28ebcf;;
   padding: 0.5rem;
-  border-radius: 0.75rem;
-  // color: #28ebcf;
+  border-radius: 0.5rem;
+  color: #101112;
 }
 
 h3 {
