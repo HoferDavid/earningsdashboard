@@ -3,12 +3,13 @@ import { StockService } from '../../../../services/stock.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FavoritesService } from '../../../../services/favorites.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-board-header',
   standalone: true,
-  imports: [MatButtonModule, CommonModule],
+  imports: [MatButtonModule, CommonModule, MatIconModule],
   templateUrl: './board-header.component.html',
   styleUrl: './board-header.component.scss'
 })

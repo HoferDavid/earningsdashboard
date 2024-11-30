@@ -45,9 +45,27 @@ header {
 }
 
 .favorites-btn {
-  color: #101112;
-  background-color: #28ebcf;
-  border-radius: 0.5rem;
-  font-size: 16px;
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: none;
+  cursor: pointer;
+
+  mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-size: 2rem;
+    transition: color 0.3s ease;
+  }
+
+  .favorite-filled {
+    color: #28ebcf;
+  }
+
+  .favorite-outline {
+    color: red;
+  }
 }
