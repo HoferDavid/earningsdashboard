@@ -32,7 +32,7 @@ export class QuarterlyRevenueWidgetComponent {
           {
             label: 'in Bill/Mill USD',
             data: data,
-            backgroundColor: 'rgb(40 71 119)'
+            backgroundColor: '#26ebd0'
           },
         ],
       },

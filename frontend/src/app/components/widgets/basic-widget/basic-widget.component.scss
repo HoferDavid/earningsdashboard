@@ -10,7 +10,8 @@
   gap: 1rem;
   width: 200px;
   background-color: var(--sys-surface-container-low);
-  box-shadow: 2px 2px 4px 0px var(--sys-primary);
+  // box-shadow: 2px 2px 4px 0px var(--sys-primary);
+  box-shadow: 2px 2px 4px 0px #26ebd0;
   cursor: pointer;
 }
 
@@ -18,7 +19,9 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background-color: var(--sys-secondary-container);
+  // background-color: var(--sys-secondary-container);
+  background-color: #26ebd0;
+  color: #0f1112;
   padding: 0.25rem;
   border-radius: 0.75rem;
 

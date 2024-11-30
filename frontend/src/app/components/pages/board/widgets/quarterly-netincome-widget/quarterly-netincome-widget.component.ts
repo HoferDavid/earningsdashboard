@@ -34,7 +34,7 @@ export class QuarterlyNetincomeWidgetComponent {
           {
             label: 'in Bill. USD',
             data: data,
-            backgroundColor: 'rgb(40 71 119)',
+            backgroundColor: '#26ebd0',
             borderColor: 'rgb(190 198 220)',
             borderWidth: 1,
           },
