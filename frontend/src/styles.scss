@@ -69,10 +69,11 @@ mat-toolbar {
   text-decoration: none;
 
   button {
-    // color: var(--sys-inverse-surface);
-    // background-color: var(--sys-on-primary);
-    color: #0f1112;
-    background-color: #26ebd0;
+    color: #101112;
+    background-color: #28ebcf;
+    border-radius: 0.5rem;
+    font-size: 16px;
+    font-weight: 700;
   }
 }
 
@@ -83,7 +84,7 @@ mat-toolbar {
   padding: 1rem;
   border-radius: 0.75rem;
   // box-shadow: 2px 2px 4px 0px var(--sys-primary);
-  box-shadow: 2px 2px 4px 0px #26ebd0;;
+  box-shadow: 2px 2px 4px 0px #28ebcf;
 }
 
 @media (max-width: 600px) {

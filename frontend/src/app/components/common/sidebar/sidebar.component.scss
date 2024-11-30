@@ -56,7 +56,8 @@ mat-sidenav {
 }
 
 .selected-menu-item {
-  border-left-color: var(--selected-menu-item-border-color);
+  // border-left-color: var(--selected-menu-item-border-color);
+  border-left-color: #28ebcf;
 }
 
 mat-sidenav,

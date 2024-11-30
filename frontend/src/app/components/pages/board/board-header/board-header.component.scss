@@ -45,8 +45,9 @@ header {
 }
 
 .favorites-btn {
-  // color: var(--sys-inverse-surface);
-  // background-color: var(--sys-on-primary);
-  color: #0f1112;
-  background-color: #26ebd0;
+  color: #101112;
+  background-color: #28ebcf;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  font-weight: 700;
 }
