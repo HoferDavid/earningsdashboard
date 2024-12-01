@@ -23,6 +23,7 @@ header {
   overflow-y: hidden;
   padding: 1rem;
   max-width: 1408px;
+  box-sizing: border-box; /* Füge dies hinzu */
 }
 
 .main-widget-container {
