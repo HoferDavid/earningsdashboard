@@ -1,11 +1,9 @@
-<section>
-    <div class="dashboard-widgets">
-      @for (stock of (tickerList() | async); track stock) {
-      <app-basic-widget [data]="stock"></app-basic-widget>
-      }
-    </div>
-  
-    @if (!(tickerList() | async)?.length) {
-    <p>No favorites added!</p>
-    }
-  </section>
+<div class="dashboard-widgets">
+  @for (stock of (tickerList() | async); track stock) {
+  <app-basic-widget [data]="stock"></app-basic-widget>
+  }
+</div>
+
+@if (!(tickerList() | async)?.length) {
+<p>No favorites added!</p>
+}
