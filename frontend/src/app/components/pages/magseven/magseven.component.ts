@@ -4,11 +4,12 @@ import { GrossmarginWidgetMagsevenComponent } from './widgets/grossmargin-widget
 import { NetincomeWidgetMagsevenComponent } from './widgets/netincome-widget-magseven/netincome-widget-magseven.component';
 import { PagesHeaderComponent } from "../../common/pages-header/pages-header.component";
 import { NetincomettmWidgetMagsevenComponent } from "./widgets/netincomettm-widget-magseven/netincomettm-widget-magseven.component";
+import { BasicWidgetMagsevenComponent } from "./widgets/basic-widget-magseven/basic-widget-magseven.component";
 
 @Component({
   selector: 'app-magseven',
   standalone: true,
-  imports: [RevenueWidgetMagsevenComponent, GrossmarginWidgetMagsevenComponent, NetincomeWidgetMagsevenComponent, PagesHeaderComponent, NetincomettmWidgetMagsevenComponent],
+  imports: [RevenueWidgetMagsevenComponent, GrossmarginWidgetMagsevenComponent, NetincomeWidgetMagsevenComponent, PagesHeaderComponent, NetincomettmWidgetMagsevenComponent, BasicWidgetMagsevenComponent],
   templateUrl: './magseven.component.html',
   styleUrl: './magseven.component.scss'
 })
