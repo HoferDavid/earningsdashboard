@@ -20,26 +20,18 @@ section {
 }
 
 .search-bar {
-  margin-bottom: 16px;
-}
-
-.dashboard-widgets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  margin-bottom: 1rem;
 }
 
 
 
-
-
-.scroll-top-btn {
-  position: fixed;
-  z-index: 1000;
-  bottom: 5%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-}
+// .scroll-top-btn {
+//   position: fixed;
+//   z-index: 1000;
+//   bottom: 5%;
+//   left: 50%;
+//   transform: translate(-50%, 50%);
+// }
 
 // .scroll-top-btn {
 //   display: none;
