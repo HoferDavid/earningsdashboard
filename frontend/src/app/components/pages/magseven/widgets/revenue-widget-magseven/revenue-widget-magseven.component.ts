@@ -2,6 +2,7 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
+import { TickersService } from '../../../../../services/tickers.service';
 @Component({
   selector: 'app-revenue-widget-magseven',
   standalone: true,
@@ -11,11 +12,14 @@ import { firstValueFrom } from 'rxjs';
 })
 export class RevenueWidgetMagsevenComponent {
 
-  tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
-  colors = ['#f94144', '#f3722c', '#f8961e', '#f9c74f', '#90be6d', '#43aa8b', '#577590'];
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
   private stockService = inject(StockService);
+  private magsevenTickers = inject(TickersService);
   private chartInstance: Chart | null = null;
+
+
+  tickers = this.magsevenTickers.getMagsevenTickers();
+  colors = this.magsevenTickers.getMagsevenColors();
 
 
   async ngOnInit(): Promise<void> {
@@ -28,7 +32,7 @@ export class RevenueWidgetMagsevenComponent {
 
 
     // All Requests together
-    const requests = this.tickers.map(async (ticker, index) => {
+    const requests = this.tickers().map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
         
@@ -47,7 +51,7 @@ export class RevenueWidgetMagsevenComponent {
           chartData.datasets.push({
             label: `${ticker}`,
             data: revenues,
-            backgroundColor: this.colors[index % this.colors.length],
+            backgroundColor: this.colors()[index % this.colors().length],
           });
         }
       } catch (error) {
@@ -79,8 +83,8 @@ export class RevenueWidgetMagsevenComponent {
             datasets: data.datasets.map((dataset, index) => ({
                 label: dataset.label,
                 data: dataset.data,
-                borderColor: this.colors[index % this.colors.length],
-                backgroundColor: this.colors[index % this.colors.length],
+                borderColor: this.colors()[index % this.colors().length],
+                backgroundColor: this.colors()[index % this.colors().length],
                 fill: false,
                 borderWidth: 1,
             })),

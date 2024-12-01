@@ -20,7 +20,7 @@ export class BasicWidgetMagsevenComponent {
   magsevenTickers = inject(TickersService);
 
 
-  tickers = this.magsevenTickers.getTickers();
+  tickers = this.magsevenTickers.getMagsevenTickers();
 
 
   // Observable for all Stocks

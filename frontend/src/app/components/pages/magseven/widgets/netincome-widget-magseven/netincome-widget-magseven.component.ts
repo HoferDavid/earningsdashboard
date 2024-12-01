@@ -2,6 +2,7 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
+import { TickersService } from '../../../../../services/tickers.service';
 
 @Component({
   selector: 'app-netincome-widget-magseven',
@@ -12,11 +13,14 @@ import { firstValueFrom } from 'rxjs';
 })
 export class NetincomeWidgetMagsevenComponent {
 
-  tickers: string[] = ['AAPL', 'AMZN', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
-  colors = ['#A2AAAD', '#FF9900', '#34A853', '#0081FB', '#727272', '#76B900', '#E31937'];
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
   private stockService = inject(StockService);
+  private magsevenTickers = inject(TickersService);
   private chartInstance: Chart | null = null;
+
+
+  tickers = this.magsevenTickers.getMagsevenTickers();
+  colors = this.magsevenTickers.getMagsevenColors();
 
 
   async ngOnInit(): Promise<void> {
@@ -27,7 +31,7 @@ export class NetincomeWidgetMagsevenComponent {
   async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
   
-    chartData.labels = this.tickers;
+    chartData.labels = this.tickers();
   
     // Array for Quarter Datasets
     const quarterDatasets: { label: string; data: number[]; backgroundColor: string }[] = [
@@ -38,7 +42,7 @@ export class NetincomeWidgetMagsevenComponent {
     ];
   
 
-    const requests = this.tickers.map(async (ticker, index) => {
+    const requests = this.tickers().map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
   
