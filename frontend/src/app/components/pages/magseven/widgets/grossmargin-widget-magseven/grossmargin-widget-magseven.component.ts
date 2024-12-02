@@ -1,8 +1,8 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
+import { FirestoreService } from '../../../../../services/firestore.service';
 
 @Component({
   selector: 'app-grossmargin-widget-magseven',
@@ -14,7 +14,7 @@ import { TickersService } from '../../../../../services/tickers.service';
 export class GrossmarginWidgetMagsevenComponent {
 
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
-  private stockService = inject(StockService);
+  private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);
   private chartInstance: Chart | null = null;
 
@@ -35,7 +35,7 @@ export class GrossmarginWidgetMagsevenComponent {
     // All Requests together
     const requests = this.tickers().map(async (ticker, index) => {
       try {
-        const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
+        const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
         
         if (stockData && stockData.revenue && stockData.quarter) {
           const last12Quarters = stockData.quarter.slice(-12);

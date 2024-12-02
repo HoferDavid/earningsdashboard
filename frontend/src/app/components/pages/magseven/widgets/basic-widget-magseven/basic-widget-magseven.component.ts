@@ -18,12 +18,7 @@ export class BasicWidgetMagsevenComponent {
 
   firestoreService = inject(FirestoreService);
   magsevenTickers = inject(TickersService);
-
-
   tickers = this.magsevenTickers.getMagsevenTickers();
-
-
-  // Observable for all Stocks
   stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
 
 

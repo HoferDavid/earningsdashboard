@@ -1,8 +1,8 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
+import { FirestoreService } from '../../../../../services/firestore.service';
 
 @Component({
   selector: 'app-netincomettm-widget-magseven',
@@ -14,7 +14,7 @@ import { TickersService } from '../../../../../services/tickers.service';
 export class NetincomettmWidgetMagsevenComponent {
 
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
-  private stockService = inject(StockService);
+  private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);
   private chartInstance: Chart | null = null;
 
@@ -33,7 +33,7 @@ export class NetincomettmWidgetMagsevenComponent {
   
     const requests = this.tickers().map(async (ticker, index) => {
       try {
-        const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
+        const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
   
         if (stockData && stockData.netIncome) {
           const netincoms = stockData.netIncome.slice(-4).map((rev) =>
@@ -42,16 +42,13 @@ export class NetincomettmWidgetMagsevenComponent {
   
           const sum = netincoms.reduce((a, b) => a + b, 0);
   
-          console.log('sum', sum);
-  
-          // Add Dataset
           chartData.datasets.push({
             label: `${ticker}`,
-            data: this.tickers().map((t, i) => (i === index ? sum : null)), // Wert an der richtigen Position
+            data: this.tickers().map((t, i) => (i === index ? sum : null)),
             backgroundColor: this.colors()[index % this.colors().length],
             // barThickness: 'flex', // Flexible Balkenbreite
             // maxBarThickness: 40,  // Maximale Breite der Balken in Pixeln
-            categoryPercentage: 0.5, // Platz für die Kategorie (zwischen 0 und 1)
+            categoryPercentage: 0.5,
             barPercentage: 8, 
           });
         }
@@ -60,10 +57,8 @@ export class NetincomettmWidgetMagsevenComponent {
       }
     });
   
-    // Wait until all data is loaded
     await Promise.all(requests);
   
-    // Render Chart
     this.renderChart(chartData);
   }
 
