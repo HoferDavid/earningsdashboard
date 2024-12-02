@@ -1,8 +1,8 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
+import { FirestoreService } from '../../../../../services/firestore.service';
 
 @Component({
   selector: 'app-revenue-breakdown-widget-magseven',
@@ -14,7 +14,7 @@ import { TickersService } from '../../../../../services/tickers.service';
 export class RevenueBreakdownWidgetMagsevenComponent {
 
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
-  private stockService = inject(StockService);
+  private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);
   private chartInstance: Chart<"doughnut"> | null = null;
 
@@ -29,25 +29,25 @@ export class RevenueBreakdownWidgetMagsevenComponent {
 
 
   async loadAllStockData(): Promise<void> {
-    const totalNetIncomes: number[] = [];
+    const totalRevenues: number[] = [];
 
     const requests = this.tickers().map(async (ticker) => {
         try {
-            const stockData = await firstValueFrom(this.stockService.firestoreService.getStockDetails(ticker));
+            const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
 
-            if (stockData && stockData.netIncome) {
+            if (stockData && stockData.revenue) {
                 // Nehme die letzten 4 Quartalswerte
-                const netIncomes = stockData.netIncome.slice(-4).map((rev) =>
+                const revenues = stockData.revenue.slice(-4).map((rev) =>
                     typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev
                 );
 
                 // Summiere die letzten 4 Quartalswerte
-                const sum = netIncomes.reduce((a, b) => a + b, 0);
-                totalNetIncomes.push(sum); // Füge zur Gesamtliste hinzu
+                const sum = revenues.reduce((a, b) => a + b, 0);
+                totalRevenues.push(sum); // Füge zur Gesamtliste hinzu
             }
         } catch (error) {
             console.error(`Error while loading data for ${ticker}:`, error);
-            totalNetIncomes.push(0); // Bei Fehler Null hinzufügen
+            totalRevenues.push(0); // Bei Fehler Null hinzufügen
         }
     });
 
@@ -59,7 +59,7 @@ export class RevenueBreakdownWidgetMagsevenComponent {
         labels: this.tickers(),
         datasets: [
             {
-                data: totalNetIncomes, // Verwende die Gesamtsummen direkt
+                data: totalRevenues, // Verwende die Gesamtsummen direkt
                 backgroundColor: this.colors(), // Farben aus dem Service
             },
         ],
