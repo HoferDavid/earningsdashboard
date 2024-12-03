@@ -57,9 +57,7 @@ async function syncSpreadsheetToFirestore() {
       const netIncomeRow = stock.netIncomeRow;
       const grossMarginRow = stock.grossMarginRow;
 
-
       console.log(`Synchronizing ${stockName} with ticker ${stock.ticker}, revenueRow: ${revenueRow}, quarterRow: ${quarterRow}, netIncomeRow: ${netIncomeRow}, grossMarginRow: ${grossMarginRow}`);
-
 
       const stockData = await getStockOverviewData(sheetName, revenueRow, quarterRow, netIncomeRow, grossMarginRow);
       console.log(`Received data for ${stockName}:`, stockData);
