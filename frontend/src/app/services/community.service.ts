@@ -16,17 +16,10 @@ export class StockDataService {
     return this.stockDataSignal;
   }
 
-  // fetchStockData() {
-  //   const stockGameCollection = collection(this.firestore, 'stockGame');
-  //   collectionData(stockGameCollection, { idField: 'id' }).subscribe((data: CommunityPrediction[]) => {
-  //     this.stockDataSignal.set(data as CommunityPrediction[]);
-  //   });
-  // }
-
 
   fetchStockData() {
     // Zugriff auf die gesamte Sammlung 'community'
-    const usersCollectionRef = collection(this.firestore, 'community');
+    const usersCollectionRef = collection(this.firestore, 'communityPrediction');
 
     from(getDocs(usersCollectionRef)).subscribe({
       next: (querySnapshot) => {
