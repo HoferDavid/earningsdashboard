@@ -1,0 +1,34 @@
+<header>
+  <app-pages-header [title]="pageTitle" class="header"></app-pages-header>
+</header>
+
+<section>
+    <div *ngIf="stockData().length; else noData">
+        <table>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Stock</th>
+              <th>Ticker</th>
+              <th>Start Price</th>
+              <th>Current Price</th>
+              <th>Last Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stock of stockData()">
+              <td>{{ stock.username }}</td>
+              <td>{{ stock.stock }}</td>
+              <td>{{ stock.ticker }}</td>
+              <td>{{ stock.startPrice }}</td>
+              <td>{{ stock.currentPrice }}</td>
+              <td>{{ stock.lastUpdate | date: 'dd/MM/yy' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <ng-template #noData>
+        <p>No data available.</p>
+      </ng-template>
+</section>

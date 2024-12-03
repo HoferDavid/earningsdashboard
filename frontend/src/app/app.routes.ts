@@ -9,6 +9,7 @@ import { DoppelgaengerComponent } from './components/pages/info/doppelgaenger/do
 import { DisclaimerComponent } from './components/pages/info/disclaimer/disclaimer.component';
 import { PrivacyComponent } from './components/pages/info/privacy/privacy.component';
 import { AboutComponent } from './components/pages/info/about/about.component';
+import { CommunityComponent } from './components/pages/community/community.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,14 @@ export const routes: Routes = [
   {
     path: 'magseven',
     component: MagsevenComponent,
+  },
+  {
+    path: 'favorites',
+    component: FavoritesComponent,
+  },
+  {
+    path: 'community',
+    component: CommunityComponent,
   },
   {
     path: 'board/:ticker',
@@ -53,13 +62,5 @@ export const routes: Routes = [
         component: PrivacyComponent,
       },
     ],
-  },
-  {
-    path: 'imprint',
-    component: ImprintComponent,
-  },
-  {
-    path: 'favorites',
-    component: FavoritesComponent,
   },
 ];

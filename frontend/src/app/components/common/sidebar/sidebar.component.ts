@@ -63,6 +63,11 @@ export class SidebarComponent implements OnInit {
       route: 'favorites',
     },
     {
+      icon: 'groups',
+      label: 'Community',
+      route: 'community',
+    },
+    {
       icon: 'info',
       label: 'Info',
       route: 'info',
