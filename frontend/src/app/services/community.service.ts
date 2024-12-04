@@ -9,42 +9,49 @@ import { catchError, from, map, Observable } from 'rxjs';
 })
 export class StockDataService {
   private stockDataSignal = signal<CommunityPrediction[]>([]);
+  private lastUpdateSignal = signal<string | null>(null);
 
   constructor(private firestore: Firestore) {}
+
 
   getStockDataSignal() {
     return this.stockDataSignal;
   }
 
 
+  getLastUpdateSignal() {
+    return this.lastUpdateSignal;
+  }
+
+
   fetchStockData() {
-    // Zugriff auf die gesamte Sammlung 'community'
     const usersCollectionRef = collection(this.firestore, 'communityPrediction');
 
     from(getDocs(usersCollectionRef)).subscribe({
       next: (querySnapshot) => {
         const allData: CommunityPrediction[] = [];
+        let lastUpdate: string | null = null;
 
         querySnapshot.forEach((docSnap) => {
           const data = docSnap.data();
-          console.log('community data:', data);
-
-          // Formatierte Daten für jedes Dokument
           const formattedData: CommunityPrediction = {
             username: data['username'],
             stock: data['stock'],
             ticker: data['ticker'],
             startPrice: parseFloat(data['startPrice']),
             currentPrice: parseFloat(data['currentPrice']),
-            lastUpdate: new Date(data['lastUpdated'].toDate()),
+            lastUpdate: data['lastUpdated'].toDate().toISOString(),
             performance: parseFloat(data['currentPrice']) - parseFloat(data['startPrice'])
           };
 
           allData.push(formattedData);
-        });
 
-        // Signal mit allen Benutzerdaten setzen
+          if (!lastUpdate) {
+            lastUpdate = formattedData.lastUpdate;
+          }
+        });
         this.stockDataSignal.set(allData);
+        this.lastUpdateSignal.set(lastUpdate);
       },
       error: (err) => console.error('Error fetching stock data:', err),
     });

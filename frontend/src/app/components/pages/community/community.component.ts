@@ -18,8 +18,9 @@ import { MatSortModule } from '@angular/material/sort';
 export class CommunityComponent implements AfterViewInit {
   pageTitle = 'Community Prediction';
   stockData: Signal<CommunityPrediction[]>;
+  lastUpdate!: Signal<string | null>;
   dataSource = new MatTableDataSource<CommunityPrediction>();
-  displayedColumns: string[] = ['username', 'stock', 'ticker', 'startPrice', 'currentPrice', 'performance', 'lastUpdate'];
+  displayedColumns: string[] = ['username', 'stock', 'ticker', 'startPrice', 'currentPrice', 'performance'];
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -30,6 +31,7 @@ export class CommunityComponent implements AfterViewInit {
       this.dataSource.data = data;
       return data;
     });
+    this.lastUpdate = this.stockDataService.getLastUpdateSignal();
   }
 
 

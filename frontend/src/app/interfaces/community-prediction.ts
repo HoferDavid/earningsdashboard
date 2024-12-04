@@ -4,6 +4,6 @@ export interface CommunityPrediction {
   ticker: string;
   startPrice: number;
   currentPrice: number;
-  lastUpdate: Date;
+  lastUpdate: string;
   performance: number;
 }

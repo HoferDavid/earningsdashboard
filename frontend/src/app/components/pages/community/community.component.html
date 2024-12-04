@@ -2,6 +2,11 @@
   <app-pages-header [title]="pageTitle" class="header"></app-pages-header>
 </header>
 
+
+@if (lastUpdate()) {
+  Last update: {{ lastUpdate() | date: 'dd/MM/yyyy' }}
+}
+
 <section>
   @if (stockData()) {
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -33,11 +38,6 @@
       <ng-container matColumnDef="performance">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Performance %</th>
         <td mat-cell *matCellDef="let stock"> {{stock.performance | number:'1.2-2'}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="lastUpdate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Update</th>
-        <td mat-cell *matCellDef="let stock"> {{stock.lastUpdate | date:'dd/MM/yy'}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
