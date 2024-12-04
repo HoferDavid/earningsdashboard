@@ -34,9 +34,9 @@ export class StockDataService {
             username: data['username'],
             stock: data['stock'],
             ticker: data['ticker'],
-            startPrice: data['startPrice'],
-            currentPrice: data['currentPrice'],
-            lastUpdate: data['lastUpdated'].toDate().toISOString(),
+            startPrice: parseFloat(data['startPrice']),
+            currentPrice: parseFloat(data['currentPrice']),
+            lastUpdate: new Date(data['lastUpdated'].toDate()),
             performance: parseFloat(data['currentPrice']) - parseFloat(data['startPrice'])
           };
 

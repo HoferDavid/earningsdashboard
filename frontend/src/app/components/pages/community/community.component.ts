@@ -1,4 +1,4 @@
-import { Component, computed, Signal, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, computed, Signal, ViewChild, AfterViewInit, effect } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { PagesHeaderComponent } from "../../common/pages-header/pages-header.component";
@@ -23,6 +23,7 @@ export class CommunityComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
+  
   constructor(private stockDataService: StockDataService) {
     this.stockData = computed(() => {
       const data = this.stockDataService.getStockDataSignal()();
@@ -31,9 +32,11 @@ export class CommunityComponent implements AfterViewInit {
     });
   }
 
+
   ngOnInit() {
     this.stockDataService.fetchStockData();
   }
+
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;

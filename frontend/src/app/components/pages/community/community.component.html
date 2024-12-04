@@ -3,7 +3,7 @@
 </header>
 
 <section>
-  <div *ngIf="stockData().length; else noData">
+  @if (stockData()) {
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
       <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
@@ -43,9 +43,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  </div>
-
-  <ng-template #noData>
-    <p>Keine Daten verfügbar.</p>
-  </ng-template>
+  }
+  @else {
+    <p>No data available!</p>
+  }
 </section>
