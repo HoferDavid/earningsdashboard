@@ -1,4 +1,4 @@
-import { Component, computed, Signal, ViewChild, AfterViewInit, effect, ChangeDetectorRef } from '@angular/core';
+import { Component, computed, Signal, ViewChild, AfterViewInit, effect, ChangeDetectorRef, HostListener } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { PagesHeaderComponent } from '../../common/pages-header/pages-header.component';
@@ -21,6 +21,7 @@ export class CommunityComponent implements AfterViewInit {
   lastUpdate!: Signal<string | null>;
   dataSource = new MatTableDataSource<CommunityPrediction>();
   displayedColumns: string[] = [ 'username', 'stock', 'ticker', 'startPrice', 'currentPrice', 'performance' ];
+  isMobile: boolean = false;
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -36,17 +37,28 @@ export class CommunityComponent implements AfterViewInit {
 
 
   ngOnInit() {
+    this.checkMobile();
     this.stockDataService.fetchStockData();
   }
 
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-
-    // Sort Standard
-    this.sort.active = 'performance';
+    this.sort.active = 'performance'; // Sort Standard
     this.sort.direction = 'desc';
     this.dataSource.sort = this.sort;
     this.cdr.detectChanges();
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.checkMobile();
+  }
+
+
+  checkMobile() {
+    this.isMobile = window.innerWidth <= 600;
+    this.displayedColumns = this.isMobile ? this.displayedColumns = ['username', 'stock', 'performance'] : this.displayedColumns;
   }
 }
