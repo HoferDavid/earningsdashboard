@@ -3,7 +3,7 @@
 </header>
 
 @if (lastUpdate()) {
-  Last update: {{ lastUpdate() | date: 'dd/MM/yyyy' }}
+  <p class="last-update">Last update: {{ lastUpdate() | date: 'dd/MM/yyyy' }}</p>
 }
 
 <section>

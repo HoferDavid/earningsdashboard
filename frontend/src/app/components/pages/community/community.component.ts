@@ -59,6 +59,6 @@ export class CommunityComponent implements AfterViewInit {
 
   checkMobile() {
     this.isMobile = window.innerWidth <= 600;
-    this.displayedColumns = this.isMobile ? this.displayedColumns = ['username', 'stock', 'performance'] : this.displayedColumns;
+    this.displayedColumns = this.isMobile ? this.displayedColumns = ['username', 'stock', 'performance'] : ['username', 'stock', 'ticker', 'startPrice', 'currentPrice', 'performance'];
   }
 }
