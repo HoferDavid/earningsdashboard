@@ -1,7 +1,7 @@
-import { Component, computed, Signal, ViewChild, AfterViewInit, effect } from '@angular/core';
+import { Component, computed, Signal, ViewChild, AfterViewInit, effect, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { PagesHeaderComponent } from "../../common/pages-header/pages-header.component";
+import { PagesHeaderComponent } from '../../common/pages-header/pages-header.component';
 import { CommunityPrediction } from '../../../interfaces/community-prediction';
 import { StockDataService } from '../../../services/community.service';
 import { CommonModule } from '@angular/common';
@@ -13,19 +13,19 @@ import { MatSortModule } from '@angular/material/sort';
   standalone: true,
   imports: [PagesHeaderComponent, CommonModule, MatTableModule, MatSortModule],
   templateUrl: './community.component.html',
-  styleUrls: ['./community.component.scss']
+  styleUrls: ['./community.component.scss'],
 })
 export class CommunityComponent implements AfterViewInit {
   pageTitle = 'Community Prediction';
   stockData: Signal<CommunityPrediction[]>;
   lastUpdate!: Signal<string | null>;
   dataSource = new MatTableDataSource<CommunityPrediction>();
-  displayedColumns: string[] = ['username', 'stock', 'ticker', 'startPrice', 'currentPrice', 'performance'];
+  displayedColumns: string[] = [ 'username', 'stock', 'ticker', 'startPrice', 'currentPrice', 'performance' ];
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  
-  constructor(private stockDataService: StockDataService) {
+
+  constructor(private stockDataService: StockDataService, private cdr: ChangeDetectorRef) {
     this.stockData = computed(() => {
       const data = this.stockDataService.getStockDataSignal()();
       this.dataSource.data = data;
@@ -42,5 +42,11 @@ export class CommunityComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+
+    // Sort Standard
+    this.sort.active = 'performance';
+    this.sort.direction = 'desc';
+    this.dataSource.sort = this.sort;
+    this.cdr.detectChanges();
   }
 }
