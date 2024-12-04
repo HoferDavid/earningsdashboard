@@ -71,33 +71,31 @@ export class SidebarComponent implements OnInit {
       icon: 'info',
       label: 'Info',
       route: 'info',
-      subItems: [
-        {
-          icon: 'group',
-          label: 'Doppelgänger',
-          route: 'doppelgaenger',
-        },
-        {
-          icon: 'sentiment_satisfied',
-          label: 'About',
-          route: 'about',
-        },
-        {
-          icon: 'warning',
-          label: 'Disclaimer',
-          route: 'disclaimer',
-        },
-        {
-          icon: 'policy',
-          label: 'Imprint',
-          route: 'imprint',
-        },
-        {
-          icon: 'privacy_tip',
-          label: 'Privacy',
-          route: 'privacy',
-        },
-      ],
+    },
+    {
+      icon: 'group',
+      label: 'Doppelgänger',
+      route: 'doppelgaenger',
+    },
+    {
+      icon: 'sentiment_satisfied',
+      label: 'About',
+      route: 'about',
+    },
+    {
+      icon: 'warning',
+      label: 'Disclaimer',
+      route: 'disclaimer',
+    },
+    {
+      icon: 'policy',
+      label: 'Imprint',
+      route: 'imprint',
+    },
+    {
+      icon: 'privacy_tip',
+      label: 'Privacy',
+      route: 'privacy',
     },
   ]);
 
@@ -117,6 +115,65 @@ export class SidebarComponent implements OnInit {
 
   toggleNested(index: number): void {
     this.nestedMenuOpenIndex() === index ? this.nestedMenuOpenIndex.set(null) : this.nestedMenuOpenIndex.set(index);
-    // this.sidenavService.toggle(); // Close Sidebar when clicking on a tab
+    this.sidenavService.toggle(); // Close Sidebar when clicking on a tab
   }
 }
+
+
+
+
+
+// menuItems = signal<MenuItem[]>([
+//   {
+//     icon: 'dashboard',
+//     label: 'Overview',
+//     route: 'overview',
+//   },
+//   {
+//     icon: 'star',
+//     label: 'Mag7',
+//     route: 'magseven',
+//   },
+//   {
+//     icon: 'favorite',
+//     label: 'Favorites',
+//     route: 'favorites',
+//   },
+//   {
+//     icon: 'groups',
+//     label: 'Community',
+//     route: 'community',
+//   },
+//   {
+//     icon: 'info',
+//     label: 'Info',
+//     route: 'info',
+//     subItems: [
+//       {
+//         icon: 'group',
+//         label: 'Doppelgänger',
+//         route: 'doppelgaenger',
+//       },
+//       {
+//         icon: 'sentiment_satisfied',
+//         label: 'About',
+//         route: 'about',
+//       },
+//       {
+//         icon: 'warning',
+//         label: 'Disclaimer',
+//         route: 'disclaimer',
+//       },
+//       {
+//         icon: 'policy',
+//         label: 'Imprint',
+//         route: 'imprint',
+//       },
+//       {
+//         icon: 'privacy_tip',
+//         label: 'Privacy',
+//         route: 'privacy',
+//       },
+//     ],
+//   },
+// ]);
