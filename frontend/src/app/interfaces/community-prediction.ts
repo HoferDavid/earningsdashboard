@@ -5,4 +5,5 @@ export interface CommunityPrediction {
   startPrice: string;
   currentPrice: string;
   lastUpdate: string;
+  performance?: number;
 }

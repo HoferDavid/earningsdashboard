@@ -36,7 +36,8 @@ export class StockDataService {
             ticker: data['ticker'],
             startPrice: data['startPrice'],
             currentPrice: data['currentPrice'],
-            lastUpdate: data['lastUpdated'].toDate().toISOString(), // Konvertiere Timestamp zu ISO-String
+            lastUpdate: data['lastUpdated'].toDate().toISOString(),
+            performance: parseFloat(data['currentPrice']) - parseFloat(data['startPrice'])
           };
 
           allData.push(formattedData);
