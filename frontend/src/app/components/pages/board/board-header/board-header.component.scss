@@ -2,6 +2,13 @@
   box-sizing: border-box;
 }
 
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -11,6 +18,8 @@ header {
   background-color: var(--sys-secondary-container);
   padding: 0.5rem;
   border-radius: 0.75rem;
+  width: 100%;
+  max-width: 1440px;
 
   @media (min-width: 680px) {
     flex-direction: row;

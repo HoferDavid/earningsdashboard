@@ -11,10 +11,6 @@ header {
   max-width: 1440px;
 }
 
-.header {
-  width: 100%;
-}
-
 .basic-widget-container {
   display: flex;
   width: 100%;
@@ -23,7 +19,7 @@ header {
   overflow-y: hidden;
   padding: 1rem;
   max-width: 1408px;
-  box-sizing: border-box; /* Füge dies hinzu */
+  box-sizing: border-box;
 }
 
 .main-widget-container {
@@ -32,8 +28,6 @@ header {
   justify-content: center;
   gap: 2rem;
 }
-
-
 
 .main-widget-container {
   display: flex;
@@ -53,15 +47,12 @@ app-grossmargin-widget-magseven {
   box-sizing: border-box;
 }
 
-
-
-
 @media (max-width: 768px) {
   app-revenue-widget-magseven,
   app-netincomettm-widget-magseven,
   app-netincome-widget-magseven,
   app-grossmargin-widget-magseven {
-      max-width: 100%; 
-      flex-basis: auto; 
+    max-width: 100%;
+    flex-basis: auto;
   }
 }
