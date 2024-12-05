@@ -50,7 +50,7 @@ export class QuarterlyNetincomeWidgetComponent {
         plugins: {
           title: {
             display: true,
-            text: 'Net income last 12 quarters',
+            text: 'Net income TTM',
             color: 'rgb(226 226 233)',
           },
           legend: {

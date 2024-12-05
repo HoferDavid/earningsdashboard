@@ -47,7 +47,7 @@ export class QuarterlyGrossmarginWidgetComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'Gross margin last 12 quarters',
+            text: 'Gross margin TTM',
             color: 'rgb(226 226 233)',
           },
           legend: {

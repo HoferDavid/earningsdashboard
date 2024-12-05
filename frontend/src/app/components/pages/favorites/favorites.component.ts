@@ -7,11 +7,12 @@ import { BasicWidgetFavoritesComponent } from "./widgets/basic-widget-favorites/
 import { Subscription } from 'rxjs';
 import { PagesHeaderComponent } from "../../common/pages-header/pages-header.component";
 import { GrossmarginWidgetFavoritesComponent } from "./widgets/grossmargin-widget-favorites/grossmargin-widget-favorites.component";
+import { NetincomeWidgetFavoritesComponent } from "./widgets/netincome-widget-favorites/netincome-widget-favorites.component";
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, BasicWidgetFavoritesComponent, PagesHeaderComponent, GrossmarginWidgetFavoritesComponent],
+  imports: [CommonModule, BasicWidgetFavoritesComponent, PagesHeaderComponent, GrossmarginWidgetFavoritesComponent, NetincomeWidgetFavoritesComponent],
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
 })

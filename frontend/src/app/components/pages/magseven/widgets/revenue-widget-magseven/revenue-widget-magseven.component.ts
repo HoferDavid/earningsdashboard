@@ -99,7 +99,7 @@ export class RevenueWidgetMagsevenComponent {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Revenue last 12 quarters',
+                    text: 'Revenue TTM',
                     color: 'rgb(226 226 233)',
                 },
                 legend: {
