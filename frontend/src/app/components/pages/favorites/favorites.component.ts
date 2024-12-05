@@ -1,38 +1,41 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { FavoritesService } from '../../../services/favorites.service';
 import { FirestoreService } from '../../../services/firestore.service';
 import { BasicWidget } from '../../../interfaces/basic-widget';
-import { BasicWidgetComponent } from './../../widgets/basic-widget/basic-widget.component';
-import { PagesHeaderComponent } from '../../common/pages-header/pages-header.component';
+import { BasicWidgetFavoritesComponent } from "./widgets/basic-widget-favorites/basic-widget-favorites.component";
+import { Subscription } from 'rxjs';
+import { PagesHeaderComponent } from "../../common/pages-header/pages-header.component";
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, BasicWidgetComponent, PagesHeaderComponent],
+  imports: [CommonModule, BasicWidgetFavoritesComponent, PagesHeaderComponent],
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit, OnDestroy {
 
   pageTitle = 'Favorites';
 
   favoritesService = inject(FavoritesService);
   firestoreService = inject(FirestoreService);
-
-  // Signal for Favorites Ticker
   favoriteTickers = this.favoritesService.favorites;
+  filteredFavorites = signal<BasicWidget[]>([]);
+  private subscriptions: Subscription = new Subscription();
 
-  // Observable for all Stocks
-  stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
 
-  // Computed Signal for filtered Favorites
-  filteredFavorites = computed(() => {
-    const tickers = this.favoriteTickers();
-    return this.stocks$.pipe(
-      map(stocks => stocks.filter(stock => tickers.includes(stock.ticker)))
-    );
-  });
+  ngOnInit(): void {
+    const sub = this.firestoreService.getStocks().subscribe((stocks) => {
+      const tickers = this.favoriteTickers();
+      const filtered = stocks.filter((stock) => tickers.includes(stock.ticker));
+      this.filteredFavorites.set(filtered);
+    });
+    this.subscriptions.add(sub);
+  }
+
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }

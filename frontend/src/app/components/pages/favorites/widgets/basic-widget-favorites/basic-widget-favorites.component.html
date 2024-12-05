@@ -1,0 +1,9 @@
+<div class="dashboard-widgets">
+  @for (stock of filteredFavorites(); track stock) {
+  <app-basic-widget [data]="stock"></app-basic-widget>
+  }
+</div>
+
+@if (!filteredFavorites()) {
+<p>No favorites added!</p>
+}

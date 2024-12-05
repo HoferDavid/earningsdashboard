@@ -3,13 +3,5 @@
 </header>
 
 <section>
-  <div class="dashboard-widgets">
-    @for (stock of (filteredFavorites() | async); track stock) {
-    <app-basic-widget [data]="stock"></app-basic-widget>
-    }
-  </div>
-
-  @if (!(filteredFavorites() | async)?.length) {
-  <p>No favorites added!</p>
-  }
+  <app-basic-widget-favorites [filteredFavorites]="filteredFavorites"></app-basic-widget-favorites>
 </section>
