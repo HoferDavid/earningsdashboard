@@ -6,11 +6,12 @@ import { BasicWidget } from '../../../interfaces/basic-widget';
 import { BasicWidgetFavoritesComponent } from "./widgets/basic-widget-favorites/basic-widget-favorites.component";
 import { Subscription } from 'rxjs';
 import { PagesHeaderComponent } from "../../common/pages-header/pages-header.component";
+import { GrossmarginWidgetFavoritesComponent } from "./widgets/grossmargin-widget-favorites/grossmargin-widget-favorites.component";
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, BasicWidgetFavoritesComponent, PagesHeaderComponent],
+  imports: [CommonModule, BasicWidgetFavoritesComponent, PagesHeaderComponent, GrossmarginWidgetFavoritesComponent],
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
 })
