@@ -62,7 +62,7 @@ async function fetchSpreadsheetData() {
 
 async function pushDataToFirestore(data) {
   try {
-    const collectionRef = firestore.collection('community');
+    const collectionRef = firestore.collection('communityPrediction');
     const timestamp = admin.firestore.FieldValue.serverTimestamp(); // Current Server Timestamp
 
     for (const entry of data) {

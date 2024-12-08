@@ -34,6 +34,10 @@ export class StockDataService {
 
         querySnapshot.forEach((docSnap) => {
           const data = docSnap.data();
+          const startPrice = parseFloat(data['startPrice']);
+          const currentPrice = parseFloat(data['currentPrice']);
+          const performancePercentage = ((currentPrice - startPrice) / startPrice) * 100;
+
           const formattedData: CommunityPrediction = {
             username: data['username'],
             stock: data['stock'],
@@ -41,9 +45,11 @@ export class StockDataService {
             startPrice: parseFloat(data['startPrice']),
             currentPrice: parseFloat(data['currentPrice']),
             lastUpdate: data['lastUpdated'].toDate().toISOString(),
-            performance: parseFloat(data['currentPrice']) - parseFloat(data['startPrice'])
+            performance: performancePercentage,
           };
 
+          console.log(performance);
+          
           allData.push(formattedData);
 
           if (!lastUpdate) {

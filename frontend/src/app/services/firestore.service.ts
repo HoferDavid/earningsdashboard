@@ -55,7 +55,7 @@ export class FirestoreService {
       map(docSnap => {
         if (docSnap.exists()) {
           const data = docSnap.data();
-          console.log('Firestore Data:', data);
+          // console.log('Firestore Data:', data);
   
           return {
             id: docSnap.id,
