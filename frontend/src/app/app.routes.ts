@@ -40,27 +40,82 @@ export const routes: Routes = [
   {
     path: 'info',
     component: InfoComponent,
-    children: [
-      {
-        path: 'doppelgaenger',
-        component: DoppelgaengerComponent,
-      },
-      {
-        path: 'about',
-        component: AboutComponent,
-      },
-      {
-        path: 'disclaimer',
-        component: DisclaimerComponent,
-      },
-      {
-        path: 'imprint',
-        component: ImprintComponent,
-      },
-      {
-        path: 'privacy',
-        component: PrivacyComponent,
-      },
-    ],
+  },
+  {
+    path: 'doppelgaenger',
+    component: DoppelgaengerComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'disclaimer',
+    component: DisclaimerComponent,
+  },
+  {
+    path: 'imprint',
+    component: ImprintComponent,
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent,
   },
 ];
+
+
+
+
+// export const routes: Routes = [
+//   {
+//     path: '',
+//     pathMatch: 'full',
+//     redirectTo: 'overview',
+//   },
+//   {
+//     path: 'overview',
+//     component: OverviewComponent,
+//   },
+//   {
+//     path: 'magseven',
+//     component: MagsevenComponent,
+//   },
+//   {
+//     path: 'favorites',
+//     component: FavoritesComponent,
+//   },
+//   {
+//     path: 'community',
+//     component: CommunityComponent,
+//   },
+//   {
+//     path: 'board/:ticker',
+//     component: BoardComponent,
+//   },
+//   {
+//     path: 'info',
+//     component: InfoComponent,
+//     children: [
+//       {
+//         path: 'doppelgaenger',
+//         component: DoppelgaengerComponent,
+//       },
+//       {
+//         path: 'about',
+//         component: AboutComponent,
+//       },
+//       {
+//         path: 'disclaimer',
+//         component: DisclaimerComponent,
+//       },
+//       {
+//         path: 'imprint',
+//         component: ImprintComponent,
+//       },
+//       {
+//         path: 'privacy',
+//         component: PrivacyComponent,
+//       },
+//     ],
+//   },
+// ];
