@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { QuarterlyRevenueData } from '../../../../../interfaces/quarterly-revenue-data';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
+import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
 
 @Component({
   selector: 'app-quarterly-revenue-widget',
@@ -18,10 +19,11 @@ export class QuarterlyRevenueWidgetComponent {
 
 
   ngOnInit(): void {
-    const last12Quarters = this.stockService.revenueLast12Quarters();
+    const billionFormatPipe = new BillionFormatPipe();
 
+    const last12Quarters = this.stockService.revenueLast12Quarters();
     const labels = last12Quarters.map(item => item.quarter);
-    const data = last12Quarters.map(item => item.revenue);
+    const data = last12Quarters.map(item => { return billionFormatPipe.transform(item.revenue) });
 
 
     new Chart(this.chart.nativeElement, {
@@ -30,7 +32,7 @@ export class QuarterlyRevenueWidgetComponent {
         labels,
         datasets: [
           {
-            label: 'in Bill/Mill USD',
+            label: 'in Bill. USD',
             data: data,
             backgroundColor: '#26ebd0'
           },
