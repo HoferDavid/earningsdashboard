@@ -15,8 +15,7 @@ export class BillionFormatPipe implements PipeTransform {
       return '-';
     }
 
-    let formattedValue = (value / 1000).toFixed(2);
+    let formattedValue = (value / 1000000000).toFixed(2);
     return formattedValue;
   }
-
 }

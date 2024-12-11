@@ -26,6 +26,22 @@ const spreadsheetId = process.env.SPREADSHEET_ID;
 const apiKey = process.env.API_KEY;
 
 
+function convertToAbsolute(value, format) {
+  // Entferne Tausendertrennzeichen
+  const numericValue = parseFloat(value.replace(/,/g, ''));
+
+  // Wähle den Multiplikator basierend auf dem Format
+  let multiplier = 1;
+  if (format === 'millions') {
+    multiplier = 1e3;
+  } else if (format === 'billions') {
+    multiplier = 1e6;
+  }
+
+  return numericValue * multiplier;
+}
+
+
 // Function, to load Data from Google Spreadsheet
 async function getStockOverviewData(sheetName, revenueRow, quarterRow, netIncomeRow, grossMarginRow) {
   const revenueRange = `${sheetName}!A${revenueRow}:BZ${revenueRow}`;
@@ -51,24 +67,25 @@ async function syncSpreadsheetToFirestore() {
 
     for (const stockName in stocks) {
       const stock = stocks[stockName];
-      const sheetName = `$${stock.ticker}`; // Prefix the ticker with '$'
+      const sheetName = `$${stock.ticker}`;
       const revenueRow = stock.revenueRow;
       const quarterRow = stock.quarterRow;
       const netIncomeRow = stock.netIncomeRow;
       const grossMarginRow = stock.grossMarginRow;
-
-      console.log(`Synchronizing ${stockName} with ticker ${stock.ticker}, revenueRow: ${revenueRow}, quarterRow: ${quarterRow}, netIncomeRow: ${netIncomeRow}, grossMarginRow: ${grossMarginRow}`);
-
+      const numbersFormat = stock.numbersFormat; // Format aus stocks.json lesen
+    
+      console.log(`Synchronizing ${stockName}...`);
+    
       const stockData = await getStockOverviewData(sheetName, revenueRow, quarterRow, netIncomeRow, grossMarginRow);
-      console.log(`Received data for ${stockName}:`, stockData);
-
+      
       if (stockData) {
-        // Save data in Firestore
-        const revenueData = stockData[0].values[0];
-        const quarterData = stockData[1].values[0];
-        const netIncomeData = stockData[2].values[0];
-        const grossMarginData = stockData[3].values[0];
-
+        // Datenbereinigung und Umrechnung
+        const revenueData = stockData[0].values[0].map(value => convertToAbsolute(value, numbersFormat));
+        const quarterData = stockData[1].values[0]; // Keine Umrechnung erforderlich
+        const netIncomeData = stockData[2].values[0].map(value => convertToAbsolute(value, numbersFormat));
+        const grossMarginData = stockData[3].values[0]; // Keine Umrechnung erforderlich
+    
+        // Speichern in Firestore
         const stockRef = firestore.collection('stocks').doc(stock.ticker);
         await stockRef.set({
           name: stockName,
@@ -77,11 +94,11 @@ async function syncSpreadsheetToFirestore() {
           quarter: quarterData,
           netIncome: netIncomeData,
           grossMargin: grossMarginData,
-          url: stock.url,  // Add this line to save the URL
-          updatedAt: admin.firestore.FieldValue.serverTimestamp() // Set the timestamp
+          url: stock.url,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp()
         });
-        
-        console.log(`Data for ${stockName} successfully saved to Firestore.`);
+    
+        console.log(`Data for ${stockName} saved.`);
       } else {
         console.error(`Failed to fetch data for ${stockName}`);
       }
