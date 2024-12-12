@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
 import { FirestoreService } from '../../../../../services/firestore.service';
+import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
 
 @Component({
   selector: 'app-revenue-breakdown-widget-magseven',
@@ -16,17 +17,21 @@ export class RevenueBreakdownWidgetMagsevenComponent {
   private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);
   private chartInstance: Chart<'doughnut'> | null = null;
+  private billionFormatPipe = inject(BillionFormatPipe);
+
 
   tickers = this.magsevenTickers.getMagsevenTickers();
   colors = this.magsevenTickers.getMagsevenColors();
+
 
   async ngOnInit(): Promise<void> {
     await this.loadAllStockData();
   }
 
+
   async loadAllStockData(): Promise<void> {
     const totalRevenues: number[] = [];
-
+    const formattedRevenues: string[] = [];
     const requests = this.tickers().map(async (ticker) => {
       try {
         const stockData = await firstValueFrom(
@@ -41,11 +46,14 @@ export class RevenueBreakdownWidgetMagsevenComponent {
             );
 
           const sum = revenues.reduce((a, b) => a + b, 0);
+          const formattedSum = this.billionFormatPipe.transform(sum);
           totalRevenues.push(sum);
+          formattedRevenues.push(formattedSum);
         }
       } catch (error) {
         console.error(`Error while loading data for ${ticker}:`, error);
         totalRevenues.push(0);
+        formattedRevenues.push('0');
       }
     });
 
@@ -60,13 +68,14 @@ export class RevenueBreakdownWidgetMagsevenComponent {
         },
       ],
     };
-    this.renderChart(chartData);
+    this.renderChart(chartData, formattedRevenues);
   }
 
+  
   renderChart(data: {
     labels: string[];
     datasets: { data: number[]; backgroundColor: string[] }[];
-  }): void {
+  }, formattedRevenues: string[]): void {
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }
@@ -94,6 +103,16 @@ export class RevenueBreakdownWidgetMagsevenComponent {
               boxWidth: 8,
               boxHeight: 8,
               padding: 8,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: (tooltipItem) => {
+                const index = tooltipItem.dataIndex;
+                const ticker = data.labels[index];
+                const formattedRevenue = formattedRevenues[index];
+                return `${ticker}: ${formattedRevenue}`;
+              },
             },
           },
         },
