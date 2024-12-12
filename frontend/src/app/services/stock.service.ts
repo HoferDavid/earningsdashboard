@@ -81,9 +81,9 @@ export class StockService {
       const quarters = data.quarter.slice(-12);
       const revenues = data.netIncome.slice(-12).map((rev) => {
         if (typeof rev === 'string') {
-          return parseFloat((rev as string).replace(',', '').replace('.', '') ) / 1000;
+          return parseFloat((rev as string).replace(',', '.'));
         } else if (typeof rev === 'number') {
-          return rev / 1000;
+          return rev;
         }
         return null;
       }).filter((rev): rev is number => rev !== null);

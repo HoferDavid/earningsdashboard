@@ -20,7 +20,6 @@ export class QuarterlyRevenueWidgetComponent {
 
   ngOnInit(): void {
     const billionFormatPipe = new BillionFormatPipe();
-
     const last12Quarters = this.stockService.revenueLast12Quarters();
     const labels = last12Quarters.map(item => item.quarter);
     const data = last12Quarters.map(item => { return billionFormatPipe.transform(item.revenue) });
