@@ -32,8 +32,6 @@ export class RevenueWidgetMagsevenComponent {
   async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
 
-
-    // All Requests together
     const requests = this.tickers().map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
@@ -44,16 +42,14 @@ export class RevenueWidgetMagsevenComponent {
           .slice(-12)
           .map((rev) => {
             const numericValue = typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev;
-            return numericValue !== null ? this.billionFormatPipe.transform(numericValue) : null;
+            return numericValue !== null ? this.billionFormatPipe.transform(numericValue) : '0';
           })
           .filter((rev): rev is string => rev !== null); 
 
-          // Labels
           if (index === 0) {
             chartData.labels = last12Quarters;
           }
 
-          // Add Dataset
           chartData.datasets.push({
             label: `${ticker}`,
             data: revenues,
@@ -65,23 +61,17 @@ export class RevenueWidgetMagsevenComponent {
       }
     });
 
-    // Wait until all data is loaded
     await Promise.all(requests);
-
-    // Render Chart
     this.renderChart(chartData);
   }
 
 
   renderChart(data: { labels: string[]; datasets: any[] }): void {
 
-    // Destroy previous chart instance, if available
     if (this.chartInstance) {
         this.chartInstance.destroy();
     }
 
-
-    // Create new chart instance
     this.chartInstance = new Chart(this.chart.nativeElement, {
         type: 'line',
         data: {

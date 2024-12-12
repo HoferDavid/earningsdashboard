@@ -20,7 +20,6 @@ export class NetincomeWidgetMagsevenComponent {
   private chartInstance: Chart | null = null;
   private billionFormatPipe = inject(BillionFormatPipe);
 
-
   tickers = this.magsevenTickers.getMagsevenTickers();
   colors = this.magsevenTickers.getMagsevenColors();
 
@@ -29,39 +28,39 @@ export class NetincomeWidgetMagsevenComponent {
     await this.loadAllStockData();
   }
 
-
+  
   async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
-  
     chartData.labels = this.tickers();
   
-    // Array for Quarter Datasets
-    const quarterDatasets: { label: string; data: number[]; backgroundColor: string }[] = [
+    const quarterDatasets: { label: string; data: string[]; backgroundColor: string }[] = [
       { label: 'Q1', data: [], backgroundColor: '#C40C0C' },
       { label: 'Q2', data: [], backgroundColor: '#FF6500' },
       { label: 'Q3', data: [], backgroundColor: '#FF8A08' },
       { label: 'Q4', data: [], backgroundColor: '#FFC100' },
     ];
   
-
     const requests = this.tickers().map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
   
         if (stockData && stockData.netIncome && stockData.quarter) {
           const netIncomes = stockData.netIncome
-          .slice(-4)
-          .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
-  
+            .slice(-4)
+            .map((income) => {
+              const numericValue = typeof income === 'string' ? parseFloat(income.replace(',', '.')) : income;
+              return numericValue !== null ? this.billionFormatPipe.transform(numericValue) : '0';
+            });
+
           netIncomes.forEach((income, quarterIndex) => {
             quarterDatasets[quarterIndex].data.push(income);
           });
         } else {
-          quarterDatasets.forEach((dataset) => dataset.data.push(0));
+          quarterDatasets.forEach((dataset) => dataset.data.push('0'));
         }
       } catch (error) {
         console.error(`Error while loading data for ${ticker}:`, error);
-        quarterDatasets.forEach((dataset) => dataset.data.push(0));
+        quarterDatasets.forEach((dataset) => dataset.data.push('0'));
       }
     });
   
@@ -74,7 +73,6 @@ export class NetincomeWidgetMagsevenComponent {
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }
-  
 
     this.chartInstance = new Chart(this.chart.nativeElement, {
       type: 'bar',
