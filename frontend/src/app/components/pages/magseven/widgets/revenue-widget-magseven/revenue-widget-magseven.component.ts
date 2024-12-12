@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
 import { FirestoreService } from '../../../../../services/firestore.service';
+import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
 @Component({
   selector: 'app-revenue-widget-magseven',
   standalone: true,
@@ -16,6 +17,7 @@ export class RevenueWidgetMagsevenComponent {
   private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);
   private chartInstance: Chart | null = null;
+  private billionFormatPipe = inject(BillionFormatPipe);
 
 
   tickers = this.magsevenTickers.getMagsevenTickers();
@@ -39,8 +41,12 @@ export class RevenueWidgetMagsevenComponent {
         if (stockData && stockData.revenue && stockData.quarter) {
           const last12Quarters = stockData.quarter.slice(-12);
           const revenues = stockData.revenue
-            .slice(-12)
-            .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
+          .slice(-12)
+          .map((rev) => {
+            const numericValue = typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev;
+            return numericValue !== null ? this.billionFormatPipe.transform(numericValue) : null;
+          })
+          .filter((rev): rev is string => rev !== null); 
 
           // Labels
           if (index === 0) {

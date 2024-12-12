@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
 import { FirestoreService } from '../../../../../services/firestore.service';
+import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
 
 @Component({
   selector: 'app-netincome-widget-magseven',
@@ -17,6 +18,7 @@ export class NetincomeWidgetMagsevenComponent {
   private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);
   private chartInstance: Chart | null = null;
+  private billionFormatPipe = inject(BillionFormatPipe);
 
 
   tickers = this.magsevenTickers.getMagsevenTickers();
@@ -47,7 +49,9 @@ export class NetincomeWidgetMagsevenComponent {
         const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
   
         if (stockData && stockData.netIncome && stockData.quarter) {
-          const netIncomes = stockData.netIncome.slice(-4).map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
+          const netIncomes = stockData.netIncome
+          .slice(-4)
+          .map((rev) => (typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev));
   
           netIncomes.forEach((income, quarterIndex) => {
             quarterDatasets[quarterIndex].data.push(income);

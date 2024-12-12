@@ -17,7 +17,7 @@ export class StockService {
     this.stockDataSignal.set(null); // Setback Data
     this.firestoreService.getStockDetails(ticker).subscribe({
       next: (data) => this.stockDataSignal.set(data),
-      error: (error) => console.error('Fehler beim Laden der Aktie:', error),
+      error: (error) => console.error('error while loading stock:', error),
     });
   }
 
