@@ -12,7 +12,6 @@ import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
   styleUrl: './revenue-widget-magseven.component.scss',
 })
 export class RevenueWidgetMagsevenComponent {
-
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
   private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);

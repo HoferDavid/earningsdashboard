@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
 import { FirestoreService } from '../../../../../services/firestore.service';
+import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
 
 @Component({
   selector: 'app-netincomettm-widget-magseven',
@@ -12,11 +13,11 @@ import { FirestoreService } from '../../../../../services/firestore.service';
   styleUrl: './netincomettm-widget-magseven.component.scss'
 })
 export class NetincomettmWidgetMagsevenComponent {
-
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
   private firestoreService = inject(FirestoreService);
   private magsevenTickers = inject(TickersService);
   private chartInstance: Chart | null = null;
+  private billionFormatPipe = inject(BillionFormatPipe);
 
 
   tickers = this.magsevenTickers.getMagsevenTickers();
@@ -30,21 +31,25 @@ export class NetincomettmWidgetMagsevenComponent {
 
   async loadAllStockData(): Promise<void> {
     const chartData: { labels: string[]; datasets: any[] } = { labels: this.tickers(), datasets: [] };
-  
+
     const requests = this.tickers().map(async (ticker, index) => {
       try {
         const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
-  
+
         if (stockData && stockData.netIncome) {
-          const netincoms = stockData.netIncome.slice(-4).map((rev) =>
-            typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev
-          );
-  
+          const netincoms = stockData.netIncome
+            .slice(-4)
+            .map((rev) =>
+              typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev
+            );
+
           const sum = netincoms.reduce((a, b) => a + b, 0);
+
+          const formattedSum = this.billionFormatPipe.transform(sum);
   
           chartData.datasets.push({
             label: `${ticker}`,
-            data: this.tickers().map((t, i) => (i === index ? sum : null)),
+            data: this.tickers().map((t, i) => (i === index ? formattedSum : null)),
             backgroundColor: this.colors()[index % this.colors().length],
             // barThickness: 'flex', // Flexible Balkenbreite
             // maxBarThickness: 40,  // Maximale Breite der Balken in Pixeln
@@ -58,7 +63,6 @@ export class NetincomettmWidgetMagsevenComponent {
     });
   
     await Promise.all(requests);
-  
     this.renderChart(chartData);
   }
 
