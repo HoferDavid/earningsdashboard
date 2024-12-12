@@ -11,17 +11,21 @@ import { StockService } from '../../../../../services/stock.service';
   styleUrl: './quarterly-grossmargin-widget.component.scss',
 })
 export class QuarterlyGrossmarginWidgetComponent implements OnInit {
+
   @Input() data!: QuarterlyRevenueData;
   @ViewChild('chart', { static: true }) chart!: ElementRef;
   private stockService = inject(StockService);
 
-  ngOnInit(): void {
+
+  async ngOnInit(): Promise<void> {
+    await this.loadAllStockData();
+  }
+
+
+  async loadAllStockData(): Promise<void> {
     const last12Quarters = this.stockService.grossmarginLast12Quarters();
-
-
     const labels = last12Quarters.map((item) => item.quarter);
     const data = last12Quarters.map((item) => item.revenue);
-
 
     new Chart(this.chart.nativeElement, {
       type: 'line',

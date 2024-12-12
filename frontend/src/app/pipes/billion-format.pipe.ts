@@ -1,21 +1,19 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, Injectable } from '@angular/core';
 
 @Pipe({
   name: 'billionFormat',
   standalone: true
 })
+@Injectable({ providedIn: 'root' })
 export class BillionFormatPipe implements PipeTransform {
 
   transform(value: number | string): string {
     if (typeof value === 'string') {
       value = parseFloat(value.replace(/,/g, ''));
     }
-
     if (isNaN(value)) {
       return '-';
     }
-
-    let formattedValue = (value / 1000000000).toFixed(2);
-    return formattedValue;
+    return `${(value / 1_000_000_000).toFixed(2)}`;
   }
 }

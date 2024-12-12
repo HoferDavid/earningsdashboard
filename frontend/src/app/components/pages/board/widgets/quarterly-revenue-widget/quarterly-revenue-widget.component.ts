@@ -2,7 +2,6 @@ import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { QuarterlyRevenueData } from '../../../../../interfaces/quarterly-revenue-data';
 import { StockService } from '../../../../../services/stock.service';
 import Chart from 'chart.js/auto';
-import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
 
 @Component({
   selector: 'app-quarterly-revenue-widget',
@@ -18,12 +17,15 @@ export class QuarterlyRevenueWidgetComponent {
   private stockService = inject(StockService);
 
 
-  ngOnInit(): void {
-    const billionFormatPipe = new BillionFormatPipe();
+  async ngOnInit(): Promise<void> {
+    await this.loadAllStockData();
+  }
+
+
+  async loadAllStockData(): Promise<void> {
     const last12Quarters = this.stockService.revenueLast12Quarters();
     const labels = last12Quarters.map(item => item.quarter);
-    const data = last12Quarters.map(item => { return billionFormatPipe.transform(item.revenue) });
-
+    const data = last12Quarters.map(item => item.revenue);
 
     new Chart(this.chart.nativeElement, {
       type: 'bar',
