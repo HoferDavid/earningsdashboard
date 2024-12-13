@@ -4,6 +4,6 @@
   }
 </div>
 
-@if (!filteredFavorites()) {
-<p>No favorites added!</p>
+@if (filteredFavorites().length === 0) {
+  <p>Please add your favorites!</p>
 }
