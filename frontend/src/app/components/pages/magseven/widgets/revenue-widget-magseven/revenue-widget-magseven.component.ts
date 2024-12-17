@@ -116,7 +116,7 @@ export class RevenueWidgetMagsevenComponent {
                           return ''; // Remove Title of Quarter
                       },
                   },
-              },
+                },
             },
             scales: {
                 x: {

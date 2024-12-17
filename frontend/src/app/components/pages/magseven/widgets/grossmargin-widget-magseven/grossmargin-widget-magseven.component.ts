@@ -99,7 +99,7 @@ export class GrossmarginWidgetMagsevenComponent {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Gross margin TTM',
+                    text: 'Gross margin last 3 years',
                     color: 'rgb(226 226 233)',
                 },
                 legend: {
@@ -109,6 +109,18 @@ export class GrossmarginWidgetMagsevenComponent {
                         boxHeight: 8,
                         padding: 8,
                     },
+                },
+                tooltip: {
+                  callbacks: {
+                      label: function (context) { // Tooltip Settings. What to show on hover
+                          const label = context.dataset.label || '';
+                          const value = context.raw || '';
+                          return `${label}: ${value}B`; // Show only Value and Ticker
+                      },
+                      title: function () {
+                          return ''; // Remove Title of Quarter
+                      },
+                  },
                 },
             },
             scales: {

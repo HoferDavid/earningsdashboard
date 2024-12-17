@@ -49,7 +49,7 @@ export class QuarterlyRevenueWidgetComponent {
         plugins: {
           title: {
             display: true,
-            text: 'Revenue TTM',
+            text: 'Revenue last 3 years',
             color: 'rgb(226 226 233)',
           },
           legend: {
