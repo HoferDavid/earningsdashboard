@@ -2,7 +2,7 @@
   <mat-sidenav opened mode="side" [style.width]="sidenavWidth()" class="shared-header-sidebar mat-elevation-z3" [ngClass]="{'collapsed': sidenavService.collapsed()}">
 
     <div class="sidenav-header">
-      <img src="img/logo.png" [style.width]="imgWidth()" alt="Photo"/>
+      <img src="img/finsight_logo.png" [style.width]="imgWidth()" alt="Photo"/>
       <div class="header-text" [class.hide-header-text]="isCollapsed()">
         <p>Last updated:</p>
         <p>{{ stockDetails?.updatedAt | date : "dd/MM/yy" }}</p>

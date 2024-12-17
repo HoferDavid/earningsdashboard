@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'overview',
+    redirectTo: 'community',
   },
   {
     path: 'overview',
