@@ -66,7 +66,6 @@ export class RevenueWidgetMagsevenComponent {
 
 
   renderChart(data: { labels: string[]; datasets: any[] }): void {
-
     if (this.chartInstance) {
         this.chartInstance.destroy();
     }
@@ -113,7 +112,7 @@ export class RevenueWidgetMagsevenComponent {
                           return `${label}: ${value}B`; // Show only Value and Ticker
                       },
                       title: function () {
-                          return ''; // Remove Title of Quarter
+                          return ''; // Remove Title
                       },
                   },
                 },

@@ -111,8 +111,11 @@ export class RevenueBreakdownWidgetMagsevenComponent {
                 const index = tooltipItem.dataIndex;
                 const ticker = data.labels[index];
                 const formattedRevenue = formattedRevenues[index];
-                return `${ticker}: ${formattedRevenue}`;
+                return `${ticker}: ${formattedRevenue}B`;
               },
+              title: function () {
+                return ''; // Remove Title
+            },
             },
           },
         },

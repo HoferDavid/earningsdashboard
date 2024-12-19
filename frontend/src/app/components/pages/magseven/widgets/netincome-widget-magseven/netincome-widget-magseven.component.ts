@@ -91,6 +91,18 @@ export class NetincomeWidgetMagsevenComponent {
           legend: {
             display: false,
           },
+          tooltip: {
+            callbacks: {
+                label: function (context) { // Tooltip Settings. What to show on hover
+                    const label = context.dataset.label || '';
+                    const value = context.raw || '';
+                    return `${value}B`; // Show only Value
+                },
+                title: function () {
+                    return ''; // Remove Title of Quarter
+                },
+            },
+          },
         },
         scales: {
           x: {
