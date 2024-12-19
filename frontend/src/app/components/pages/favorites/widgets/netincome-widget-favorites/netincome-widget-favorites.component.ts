@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { TickersService } from '../../../../../services/tickers.service';
 import { FirestoreService } from '../../../../../services/firestore.service';
 import { FavoritesService } from '../../../../../services/favorites.service';
+import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
 
 @Component({
   selector: 'app-netincome-widget-favorites',
@@ -13,93 +14,203 @@ import { FavoritesService } from '../../../../../services/favorites.service';
   styleUrl: './netincome-widget-favorites.component.scss',
 })
 export class NetincomeWidgetFavoritesComponent {
-  @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
-  private firestoreService = inject(FirestoreService);
-  private favoritesService = inject(FavoritesService);
-  private chartInstance: Chart | null = null;
+  // @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
+  // private firestoreService = inject(FirestoreService);
+  // private favoritesService = inject(FavoritesService);
+  // private chartInstance: Chart | null = null;
 
-  async ngOnInit(): Promise<void> {
-    await this.loadAllStockData();
-  }
+  // async ngOnInit(): Promise<void> {
+  //   await this.loadAllStockData();
+  // }
 
-  async loadAllStockData(): Promise<void> {
-    const chartData: { labels: string[]; datasets: any[] } = {
-      labels: [],
-      datasets: [],
-    };
-    const favoriteTickers = this.favoritesService.favorites();
+  // async loadAllStockData(): Promise<void> {
+  //   const chartData: { labels: string[]; datasets: any[] } = {
+  //     labels: [],
+  //     datasets: [],
+  //   };
+  //   const favoriteTickers = this.favoritesService.favorites();
 
 
-    const requests = favoriteTickers.map(async (ticker, index) => {
-      try {
-        const stockData = await firstValueFrom(
-          this.firestoreService.getStockDetails(ticker)
-        );
+  //   const requests = favoriteTickers.map(async (ticker, index) => {
+  //     try {
+  //       const stockData = await firstValueFrom(
+  //         this.firestoreService.getStockDetails(ticker)
+  //       );
 
-        if (stockData && stockData.netIncome && stockData.quarter) {
-          const last12Quarters = stockData.quarter.slice(-4);
-          const netIncomes = stockData.netIncome
-            .slice(-4)
-            .map((rev) =>
-              typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev
-            );
+  //       if (stockData && stockData.netIncome && stockData.quarter) {
+  //         const last12Quarters = stockData.quarter.slice(-4);
+  //         const netIncomes = stockData.netIncome
+  //           .slice(-4)
+  //           .map((rev) =>
+  //             typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev
+  //           );
 
-          if (index === 0) {
-            chartData.labels = last12Quarters;
-          }
+  //         if (index === 0) {
+  //           chartData.labels = last12Quarters;
+  //         }
 
-          chartData.datasets.push({
-            label: `${ticker}`,
-            data: netIncomes,
-            fill: false,
-            borderWidth: 1,
-          });
-        }
-      } catch (error) {
-        console.error(`Fehler beim Laden der Daten für ${ticker}:`, error);
-      }
-    });
+  //         chartData.datasets.push({
+  //           label: `${ticker}`,
+  //           data: netIncomes,
+  //           fill: false,
+  //           borderWidth: 1,
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error(`Fehler beim Laden der Daten für ${ticker}:`, error);
+  //     }
+  //   });
 
-    await Promise.all(requests);
-    this.renderChart(chartData);
-  }
+  //   await Promise.all(requests);
+  //   this.renderChart(chartData);
+  // }
 
-  renderChart(data: { labels: string[]; datasets: any[] }): void {
-    if (this.chartInstance) {
-      this.chartInstance.destroy();
+  // renderChart(data: { labels: string[]; datasets: any[] }): void {
+  //   if (this.chartInstance) {
+  //     this.chartInstance.destroy();
+  //   }
+
+  //   this.chartInstance = new Chart(this.chart.nativeElement, {
+  //     type: 'bar',
+  //     data: {
+  //       labels: data.labels,
+  //       datasets: data.datasets,
+  //     },
+  //     options: {
+  //       maintainAspectRatio: false,
+  //       plugins: {
+  //         title: {
+  //           display: true,
+  //           text: 'Net income last 4 quarters',
+  //           color: 'rgb(226 226 233)',
+  //         },
+  //         legend: {
+  //           display: false,
+  //         },
+  //       },
+  //       scales: {
+  //         x: {
+  //           ticks: {
+  //             display: false,
+  //           },
+  //         },
+  //         y: {
+  //           ticks: {
+  //             color: 'rgb(226 226 233)',
+  //           },
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
+
+
+
+
+
+   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
+    private firestoreService = inject(FirestoreService);
+    private magsevenTickers = inject(TickersService);
+    private chartInstance: Chart | null = null;
+    private billionFormatPipe = inject(BillionFormatPipe);
+    private favoritesService = inject(FavoritesService);
+  
+    tickers = this.favoritesService.favorites();
+  
+  
+    async ngOnInit(): Promise<void> {
+      await this.loadAllStockData();
     }
-
-    this.chartInstance = new Chart(this.chart.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: data.labels,
-        datasets: data.datasets,
-      },
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Net income last 4 quarters',
-            color: 'rgb(226 226 233)',
-          },
-          legend: {
-            display: false,
-          },
+  
+    
+    async loadAllStockData(): Promise<void> {
+      const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
+      chartData.labels = this.tickers;
+    
+      const quarterDatasets: { label: string; data: string[]; backgroundColor: string }[] = [
+        { label: 'Q1', data: [], backgroundColor: '#C40C0C' },
+        { label: 'Q2', data: [], backgroundColor: '#FF6500' },
+        { label: 'Q3', data: [], backgroundColor: '#FF8A08' },
+        { label: 'Q4', data: [], backgroundColor: '#FFC100' },
+      ];
+    
+      const requests = this.tickers.map(async (ticker, index) => {
+        try {
+          const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
+    
+          if (stockData && stockData.netIncome && stockData.quarter) {
+            const netIncomes = stockData.netIncome
+              .slice(-4)
+              .map((income) => {
+                const numericValue = typeof income === 'string' ? parseFloat(income.replace(',', '.')) : income;
+                return numericValue !== null ? this.billionFormatPipe.transform(numericValue) : '0';
+              });
+  
+            netIncomes.forEach((income, quarterIndex) => {
+              quarterDatasets[quarterIndex].data.push(income);
+            });
+          } else {
+            quarterDatasets.forEach((dataset) => dataset.data.push('0'));
+          }
+        } catch (error) {
+          console.error(`Error while loading data for ${ticker}:`, error);
+          quarterDatasets.forEach((dataset) => dataset.data.push('0'));
+        }
+      });
+    
+      await Promise.all(requests);
+      chartData.datasets = quarterDatasets;
+      this.renderChart(chartData);
+    }
+    
+    renderChart(data: { labels: string[]; datasets: any[] }): void {
+      if (this.chartInstance) {
+        this.chartInstance.destroy();
+      }
+  
+      this.chartInstance = new Chart(this.chart.nativeElement, {
+        type: 'bar',
+        data: {
+          labels: data.labels,
+          datasets: data.datasets,
         },
-        scales: {
-          x: {
-            ticks: {
-              display: false,
-            },
-          },
-          y: {
-            ticks: {
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Net income last 4 quarters',
               color: 'rgb(226 226 233)',
             },
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              callbacks: {
+                  label: function (context) { // Tooltip Settings. What to show on hover
+                      const label = context.dataset.label || '';
+                      const value = context.raw || '';
+                      return `${value}B`; // Show only Value
+                  },
+                  title: function () {
+                      return ''; // Remove Title of Quarter
+                  },
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: 'rgb(226 226 233)',
+              },
+            },
+            y: {
+              ticks: {
+                color: 'rgb(226 226 233)',
+              },
+            },
           },
         },
-      },
-    });
-  }
+      });
+    }  
 }
