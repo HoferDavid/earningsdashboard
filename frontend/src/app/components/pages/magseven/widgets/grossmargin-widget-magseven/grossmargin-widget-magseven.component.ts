@@ -115,7 +115,7 @@ export class GrossmarginWidgetMagsevenComponent {
                       label: function (context) { // Tooltip Settings. What to show on hover
                           const label = context.dataset.label || '';
                           const value = context.raw || '';
-                          return `${label}: ${value}B`; // Show only Value and Ticker
+                          return `${label}: ${value}%`; // Show only Value and Ticker
                       },
                       title: function () {
                           return ''; // Remove Title of Quarter
