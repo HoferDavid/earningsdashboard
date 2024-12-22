@@ -1,25 +1,26 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
+import { TickersService } from '../../../../../services/tickers.service';
 import { FirestoreService } from '../../../../../services/firestore.service';
-import { FavoritesService } from '../../../../../services/favorites.service';
 import { BillionFormatPipe } from '../../../../../pipes/billion-format.pipe';
+import { FavoritesService } from '../../../../../services/favorites.service';
 
 @Component({
-  selector: 'app-netincome-widget-favorites',
+  selector: 'app-netincomettm-widget-favorites',
   standalone: true,
   imports: [],
-  templateUrl: './netincome-widget-favorites.component.html',
-  styleUrl: './netincome-widget-favorites.component.scss',
+  templateUrl: './netincomettm-widget-favorites.component.html',
+  styleUrl: './netincomettm-widget-favorites.component.scss'
 })
-export class NetincomeWidgetFavoritesComponent {
+export class NetincomettmWidgetFavoritesComponent {
 
-   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
     private firestoreService = inject(FirestoreService);
     private chartInstance: Chart | null = null;
     private billionFormatPipe = inject(BillionFormatPipe);
     private favoritesService = inject(FavoritesService);
-    
+  
     tickers = this.favoritesService.favorites();
   
   
@@ -27,64 +28,63 @@ export class NetincomeWidgetFavoritesComponent {
       await this.loadAllStockData();
     }
   
-    
+  
     async loadAllStockData(): Promise<void> {
-      const chartData: { labels: string[]; datasets: any[] } = { labels: [], datasets: [] };
-      chartData.labels = this.tickers;
-    
-      const quarterDatasets: { label: string; data: string[]; backgroundColor: string }[] = [
-        { label: 'Q1', data: [], backgroundColor: '#C40C0C' },
-        { label: 'Q2', data: [], backgroundColor: '#FF6500' },
-        { label: 'Q3', data: [], backgroundColor: '#FF8A08' },
-        { label: 'Q4', data: [], backgroundColor: '#FFC100' },
-      ];
-    
+      const chartData: { labels: string[]; datasets: any[] } = { labels: this.tickers, datasets: [] };
+  
       const requests = this.tickers.map(async (ticker, index) => {
         try {
           const stockData = await firstValueFrom(this.firestoreService.getStockDetails(ticker));
-    
-          if (stockData && stockData.netIncome && stockData.quarter) {
-            const netIncomes = stockData.netIncome
-              .slice(-4)
-              .map((income) => {
-                const numericValue = typeof income === 'string' ? parseFloat(income.replace(',', '.')) : income;
-                return numericValue !== null ? this.billionFormatPipe.transform(numericValue) : '0';
-              });
   
-            netIncomes.forEach((income, quarterIndex) => {
-              quarterDatasets[quarterIndex].data.push(income);
+          if (stockData && stockData.netIncome) {
+            const netincoms = stockData.netIncome
+              .slice(-4)
+              .map((rev) =>
+                typeof rev === 'string' ? parseFloat(rev.replace(',', '.')) : rev
+              );
+  
+            const sum = netincoms.reduce((a, b) => a + b, 0);
+  
+            const formattedSum = this.billionFormatPipe.transform(sum);
+    
+            chartData.datasets.push({
+              label: `${ticker}`,
+              data: this.tickers.map((t, i) => (i === index ? formattedSum : null)),
+              // backgroundColor: this.colors()[index % this.colors().length],
+              // barThickness: 'flex', // Flexible Balkenbreite
+              // maxBarThickness: 40,  // Maximale Breite der Balken in Pixeln
+              categoryPercentage: 0.5,
+              barPercentage: 8, 
             });
-          } else {
-            quarterDatasets.forEach((dataset) => dataset.data.push('0'));
           }
         } catch (error) {
           console.error(`Error while loading data for ${ticker}:`, error);
-          quarterDatasets.forEach((dataset) => dataset.data.push('0'));
         }
       });
     
       await Promise.all(requests);
-      chartData.datasets = quarterDatasets;
       this.renderChart(chartData);
     }
-    
+  
+  
     renderChart(data: { labels: string[]; datasets: any[] }): void {
+    
       if (this.chartInstance) {
         this.chartInstance.destroy();
       }
-  
+    
       this.chartInstance = new Chart(this.chart.nativeElement, {
         type: 'bar',
         data: {
           labels: data.labels,
-          datasets: data.datasets,
+          datasets: data.datasets
         },
         options: {
           maintainAspectRatio: false,
           plugins: {
             title: {
               display: true,
-              text: 'Net income last 4 quarters',
+              text: 'Net income TTM',
               color: 'rgb(226 226 233)',
             },
             legend: {
@@ -95,10 +95,10 @@ export class NetincomeWidgetFavoritesComponent {
                   label: function (context) { // Tooltip Settings. What to show on hover
                       const label = context.dataset.label || '';
                       const value = context.raw || '';
-                      return `${value}B`; // Show only Value
+                      return `${value}B`; // Show only Value and Ticker
                   },
                   title: function () {
-                      return ''; // Remove Title of Quarter
+                      return ''; // Remove Title
                   },
               },
             },
@@ -117,5 +117,6 @@ export class NetincomeWidgetFavoritesComponent {
           },
         },
       });
-    }  
+    }
+
 }
