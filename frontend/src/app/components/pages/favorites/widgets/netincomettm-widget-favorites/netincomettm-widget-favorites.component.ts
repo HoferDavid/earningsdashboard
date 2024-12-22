@@ -20,8 +20,10 @@ export class NetincomettmWidgetFavoritesComponent {
     private chartInstance: Chart | null = null;
     private billionFormatPipe = inject(BillionFormatPipe);
     private favoritesService = inject(FavoritesService);
+    private magsevenTickers = inject(TickersService);
   
     tickers = this.favoritesService.favorites();
+    colors = this.magsevenTickers.getMagsevenColors();
   
   
     async ngOnInit(): Promise<void> {
@@ -50,7 +52,7 @@ export class NetincomettmWidgetFavoritesComponent {
             chartData.datasets.push({
               label: `${ticker}`,
               data: this.tickers.map((t, i) => (i === index ? formattedSum : null)),
-              // backgroundColor: this.colors()[index % this.colors().length],
+              backgroundColor: this.colors()[index % this.colors().length],
               // barThickness: 'flex', // Flexible Balkenbreite
               // maxBarThickness: 40,  // Maximale Breite der Balken in Pixeln
               categoryPercentage: 0.5,

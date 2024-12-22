@@ -9,11 +9,12 @@ import { PagesHeaderComponent } from "../../common/pages-header/pages-header.com
 import { GrossmarginWidgetFavoritesComponent } from "./widgets/grossmargin-widget-favorites/grossmargin-widget-favorites.component";
 import { NetincomeWidgetFavoritesComponent } from "./widgets/netincome-widget-favorites/netincome-widget-favorites.component";
 import { NetincomettmWidgetFavoritesComponent } from "./widgets/netincomettm-widget-favorites/netincomettm-widget-favorites.component";
+import { RevenueBreakdownWidgetFavoritesComponent } from "./widgets/revenue-breakdown-widget-favorites/revenue-breakdown-widget-favorites.component";
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, BasicWidgetFavoritesComponent, PagesHeaderComponent, GrossmarginWidgetFavoritesComponent, NetincomeWidgetFavoritesComponent, NetincomettmWidgetFavoritesComponent],
+  imports: [CommonModule, BasicWidgetFavoritesComponent, PagesHeaderComponent, GrossmarginWidgetFavoritesComponent, NetincomeWidgetFavoritesComponent, NetincomettmWidgetFavoritesComponent, RevenueBreakdownWidgetFavoritesComponent],
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
 })

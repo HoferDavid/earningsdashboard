@@ -19,7 +19,7 @@ export class NetincomeWidgetFavoritesComponent {
     private chartInstance: Chart | null = null;
     private billionFormatPipe = inject(BillionFormatPipe);
     private favoritesService = inject(FavoritesService);
-    
+
     tickers = this.favoritesService.favorites();
   
   
@@ -69,6 +69,7 @@ export class NetincomeWidgetFavoritesComponent {
     }
     
     renderChart(data: { labels: string[]; datasets: any[] }): void {
+      
       if (this.chartInstance) {
         this.chartInstance.destroy();
       }

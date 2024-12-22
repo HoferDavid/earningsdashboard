@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { firstValueFrom } from 'rxjs';
 import { FirestoreService } from '../../../../../services/firestore.service';
 import { FavoritesService } from '../../../../../services/favorites.service';
+import { TickersService } from '../../../../../services/tickers.service';
 
 @Component({
   selector: 'app-grossmargin-widget-favorites',
@@ -16,6 +17,9 @@ export class GrossmarginWidgetFavoritesComponent {
   private firestoreService = inject(FirestoreService);
   private favoritesService = inject(FavoritesService);
   private chartInstance: Chart | null = null;
+  private magsevenTickers = inject(TickersService);
+
+  colors = this.magsevenTickers.getMagsevenColors();
 
 
   async ngOnInit(): Promise<void> {
@@ -44,6 +48,8 @@ export class GrossmarginWidgetFavoritesComponent {
           chartData.datasets.push({
             label: `${ticker}`,
             data: grossmargins,
+            borderColor: this.colors()[index % this.colors().length],
+            backgroundColor: this.colors()[index % this.colors().length],
             fill: false,
             borderWidth: 1,
           });
