@@ -15,11 +15,13 @@ header {
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
-  background-color: var(--sys-secondary-container);
+  // background-color: var(--sys-secondary-container);
+  background-color: #28ebcf;
   padding: 0.5rem;
   border-radius: 0.75rem;
   width: 100%;
   max-width: 1440px;
+  color: #101112;
 
   @media (min-width: 680px) {
     flex-direction: row;
@@ -71,10 +73,10 @@ header {
   }
 
   .favorite-filled {
-    color: #28ebcf;
+    color: rgb(186 26 26);
   }
 
   .favorite-outline {
-    color: red;
+    color: rgb(186 26 26);
   }
 }
