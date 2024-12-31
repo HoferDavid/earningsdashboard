@@ -17,9 +17,9 @@ export class GrossmarginWidgetFavoritesComponent {
   private firestoreService = inject(FirestoreService);
   private favoritesService = inject(FavoritesService);
   private chartInstance: Chart | null = null;
-  private magsevenTickers = inject(TickersService);
+  private tickersService = inject(TickersService);
 
-  colors = this.magsevenTickers.getMagsevenColors();
+  colors = this.tickersService.getCustomChartColors();
 
 
   async ngOnInit(): Promise<void> {

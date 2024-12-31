@@ -21,7 +21,7 @@ export class RevenueBreakdownWidgetMagsevenComponent {
 
 
   tickers = this.magsevenTickers.getMagsevenTickers();
-  colors = this.magsevenTickers.getMagsevenColors();
+  colors = this.magsevenTickers.getCustomChartColors();
 
 
   async ngOnInit(): Promise<void> {

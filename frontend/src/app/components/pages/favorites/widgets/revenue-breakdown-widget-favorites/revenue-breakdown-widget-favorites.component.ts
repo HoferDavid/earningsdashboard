@@ -17,14 +17,14 @@ export class RevenueBreakdownWidgetFavoritesComponent {
 
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
     private firestoreService = inject(FirestoreService);
-    private magsevenTickers = inject(TickersService);
+    private tickersService = inject(TickersService);
     private chartInstance: Chart<'doughnut'> | null = null;
     private billionFormatPipe = inject(BillionFormatPipe);
     private favoritesService = inject(FavoritesService);
   
   
     tickers = this.favoritesService.favorites();
-    colors = this.magsevenTickers.getMagsevenColors();
+    colors = this.tickersService.getCustomChartColors();
   
   
     async ngOnInit(): Promise<void> {

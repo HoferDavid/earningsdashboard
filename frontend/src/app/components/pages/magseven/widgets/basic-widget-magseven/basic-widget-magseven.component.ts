@@ -17,8 +17,9 @@ import { TickersService } from '../../../../../services/tickers.service';
 export class BasicWidgetMagsevenComponent {
 
   firestoreService = inject(FirestoreService);
-  magsevenTickers = inject(TickersService);
-  tickers = this.magsevenTickers.getMagsevenTickers();
+  tickersService = inject(TickersService);
+  
+  tickers = this.tickersService.getMagsevenTickers();
   stocks$: Observable<BasicWidget[]> = this.firestoreService.getStocks();
 
 

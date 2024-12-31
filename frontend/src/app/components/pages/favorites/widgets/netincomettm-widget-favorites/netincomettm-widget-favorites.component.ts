@@ -20,10 +20,10 @@ export class NetincomettmWidgetFavoritesComponent {
     private chartInstance: Chart | null = null;
     private billionFormatPipe = inject(BillionFormatPipe);
     private favoritesService = inject(FavoritesService);
-    private magsevenTickers = inject(TickersService);
+    private tickersService = inject(TickersService);
   
     tickers = this.favoritesService.favorites();
-    colors = this.magsevenTickers.getMagsevenColors();
+    colors = this.tickersService.getCustomChartColors();
   
   
     async ngOnInit(): Promise<void> {

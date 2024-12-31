@@ -15,12 +15,12 @@ export class GrossmarginWidgetMagsevenComponent {
 
   @ViewChild('chart', { static: true }) chart!: ElementRef<HTMLCanvasElement>;
   private firestoreService = inject(FirestoreService);
-  private magsevenTickers = inject(TickersService);
+  private tickersService = inject(TickersService);
   private chartInstance: Chart | null = null;
 
 
-  tickers = this.magsevenTickers.getMagsevenTickers();
-  colors = this.magsevenTickers.getMagsevenColors();
+  tickers = this.tickersService.getMagsevenTickers();
+  colors = this.tickersService.getCustomChartColors();
 
 
   async ngOnInit(): Promise<void> {
