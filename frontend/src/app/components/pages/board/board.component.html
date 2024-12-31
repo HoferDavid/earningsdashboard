@@ -1,9 +1,11 @@
-<app-board-header></app-board-header>
+<header>
+  <app-board-header></app-board-header>
+</header>
 
-<section>
+<section class="main-widget-container">
   @if (stockService.stockData()) {
-    <app-quarterly-netincome-widget></app-quarterly-netincome-widget>
-    <app-quarterly-revenue-widget></app-quarterly-revenue-widget>
-    <app-quarterly-grossmargin-widget></app-quarterly-grossmargin-widget>
+  <app-quarterly-netincome-widget></app-quarterly-netincome-widget>
+  <app-quarterly-revenue-widget></app-quarterly-revenue-widget>
+  <app-quarterly-grossmargin-widget></app-quarterly-grossmargin-widget>
   } @else { loading data... }
 </section>

@@ -26,7 +26,7 @@ export class BoardHeaderComponent {
   }
 
 
-  // Check if Dtock is a Favorit
+  // Check if Stock is a Favorit
   isFavorite(): boolean {
     return this.ticker ? this.favoritesService.isFavorite(this.ticker) : false;
   }
