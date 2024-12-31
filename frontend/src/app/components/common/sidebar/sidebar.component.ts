@@ -48,11 +48,6 @@ export class SidebarComponent implements OnInit {
 
   menuItems = signal<MenuItem[]>([
     {
-      icon: 'groups',
-      label: 'Community',
-      route: 'community',
-    },
-    {
       icon: 'dashboard',
       label: 'Overview',
       route: 'overview',
@@ -66,6 +61,11 @@ export class SidebarComponent implements OnInit {
       icon: 'star',
       label: 'Mag7',
       route: 'magseven',
+    },
+    {
+      icon: 'groups',
+      label: 'Community',
+      route: 'community',
     },
     {
       icon: 'info',
