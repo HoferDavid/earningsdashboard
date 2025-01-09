@@ -10,15 +10,6 @@
       <button mat-fab extended>View Spreadsheet</button>
     </a>
 
-
-    <!-- Favorite Button -->
-    <!-- <button mat-fab extended (click)="toggleFavorite()" class="favorites-btn">
-      <mat-icon>
-        {{ isFavorite() ? 'favorite' : 'favorite_border' }}
-      </mat-icon>
-    </button> -->
-
-
     <button (click)="toggleFavorite()" class="favorites-btn" mat-icon-button>
       <mat-icon [ngClass]="isFavorite() ? 'favorite-filled' : 'favorite-outline'">
         {{ isFavorite() ? 'favorite' : 'favorite_border' }}
@@ -26,6 +17,6 @@
     </button>
   }
   @else {
-    <p>Sorry! Stock not found!</p>
+    <p>Sorry! Company not found!</p>
   }
 </header>
