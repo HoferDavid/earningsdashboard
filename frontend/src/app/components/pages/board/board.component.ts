@@ -15,6 +15,7 @@ import { QuarterlyGrossmarginWidgetComponent } from './widgets/quarterly-grossma
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
+  
   public stockService = inject(StockService);
   stockData$ = signal(this.stockService.stockData());
 

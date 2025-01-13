@@ -21,4 +21,11 @@ export class BasicWidgetComponent {
   goToDashboard() {
     this.router.navigate(['/board', this.data.ticker]);
   }
+
+
+  calculatePercentageChange(): number {
+    if (!this.data.lastRevenue || !this.data.lastYearRevenue) return 0;
+    const percentageChange = ((this.data.lastRevenue - this.data.lastYearRevenue) / this.data.lastYearRevenue) * 100;
+    return percentageChange;
+  }
 }

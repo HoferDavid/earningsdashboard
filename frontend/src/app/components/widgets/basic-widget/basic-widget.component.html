@@ -9,11 +9,21 @@
       </div>
   
       <div class="widget-body">
-        <p class="revenueText">Revenue {{ data.lastQuarter }}</p>
-        <p class="revenueNumber">
-          {{ data.lastRevenue ? (data.lastRevenue | billionFormat) : "-" }}
-        </p>
-        <p class="infoText">in Bill. USD</p>
+        <div class="current-year">
+          <p class="revenueText">Revenue {{ data.lastQuarter }}</p>
+          <p class="revenueNumber">
+            {{ data.lastRevenue ? (data.lastRevenue | billionFormat) : "-" }}
+          </p>
+          <p class="infoText">in Bill. USD</p>
+        </div>
+
+        <div class="change-year">
+          <p class="percentage-change" [ngClass]="{'positive': calculatePercentageChange() > 0, 'negative': calculatePercentageChange() < 0}">
+            {{ calculatePercentageChange() | number: '1.2-2' }}%
+          </p>
+          <p class="infoText">Change YoY</p>
+        </div>
       </div>
+
     
   </div>

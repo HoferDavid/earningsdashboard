@@ -48,20 +48,45 @@
 
 .widget-body {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 
-  .revenueText {
-    margin: 0;
-    font-size: 0.75rem;
+  .current-year {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .revenueText {
+      margin: 0;
+      font-size: 0.75rem;
+    }
+
+    .revenueNumber {
+      font-size: 1.5rem;
+      margin: 0;
+    }
   }
 
-  .revenueNumber {
-    font-size: 1.5rem;
-    margin: 0;
+  .change-year {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .percentage-change {
+      font-size: 1rem;
+      margin: 0;
+    }
   }
 
   .infoText {
     font-size: 0.5rem;
+    margin: 0;
   }
+}
+
+.percentage-change.positive {
+  color: rgb(76, 185, 68);
+}
+
+.percentage-change.negative {
+  color: rgb(228, 87, 46);
 }

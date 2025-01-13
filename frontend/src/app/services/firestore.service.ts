@@ -44,6 +44,7 @@ export class FirestoreService {
       ticker: stock.id,
       logo: `/logos/${stock.ticker}.png`,
       lastRevenue: stock.revenue ? stock.revenue[stock.revenue.length - 1] : undefined,
+      lastYearRevenue: stock.revenue ? stock.revenue[stock.revenue.length - 4] : undefined,
       lastQuarter: stock.quarter ? this.quarterFormatPipe.transform(stock.quarter[stock.quarter.length - 1]) : undefined,
     }));
   }
@@ -55,7 +56,7 @@ export class FirestoreService {
       map(docSnap => {
         if (docSnap.exists()) {
           const data = docSnap.data();
-          // console.log('Firestore Data:', data);
+          console.log('Firestore Data:', data);
   
           return {
             id: docSnap.id,
