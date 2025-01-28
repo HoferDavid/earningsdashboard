@@ -76,7 +76,6 @@ async function pushDataToFirestore(data) {
         ...entry,
       lastUpdated: timestamp });
     }
-
     console.log('Data successfully pushed to Firestore.');
   } catch (error) {
     console.error('Error pushing data to Firestore:', error);
