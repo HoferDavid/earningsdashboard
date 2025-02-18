@@ -9,18 +9,20 @@ jobs:
   update-data:
     runs-on: ubuntu-latest
     steps:
-      - name: Repository auschecken
+      - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Node.js einrichten
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Abhängigkeiten installieren
-        run: npm install
+      - name: Install dependencies
+        run: 
+          cd backend
+          npm install
 
-      - name: Service-Account speichern
+      - name: Save service account
         run: echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' > serviceAccountKey.json
 
       - name: Fetch & Push Data in Firestore

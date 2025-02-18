@@ -14,7 +14,7 @@ admin.initializeApp({
 });
 
 fetchAndStoreData().then(() => {
-  console.log('✅ Fetch & Store Job succesful.');
+  console.log('✅ Fetch & Store Job successful.');
   process.exit(0);
 }).catch(err => {
   console.error('❌ Error while fetching:', err);
