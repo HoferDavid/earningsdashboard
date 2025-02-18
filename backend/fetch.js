@@ -15,9 +15,14 @@ try {
   process.exit(1);
 }
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// Initialize Firebase only if it hasn't been initialized yet
+if (admin.apps.length === 0) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+} else {
+  console.log('Firebase app already initialized.');
+}
 
 fetchAndStoreData().then(() => {
   console.log('✅ Fetch & Store Job successful.');
