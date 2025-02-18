@@ -23,14 +23,13 @@ jobs:
           cd backend
           npm install
 
-      - name: Save service account key
-        run: echo "${{ secrets.FIREBASE_PRIVATE_KEY }}" > ./backend/serviceAccountKey.json
-
       - name: Fetch & Push Data in Firestore
         env:
           COMMUNITY_SPREADSHEET_ID: ${{ secrets.COMMUNITY_SPREADSHEET_ID }}
           API_KEY: ${{ secrets.API_KEY }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
         run: |
           cd backend
           node fetch.js
+
 
