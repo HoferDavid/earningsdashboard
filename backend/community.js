@@ -4,6 +4,9 @@ const admin = require('firebase-admin');
 const axios = require('axios'); // For HTTP-Requests
 const cron = require('node-cron');
 
+// Export fetchAndStoreData
+module.exports = { fetchAndStoreData };
+
 require('dotenv').config();
 
 // Firebase initialize
