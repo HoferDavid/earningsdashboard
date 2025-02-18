@@ -1,0 +1,30 @@
+name: Fetch Spreadsheet Data
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # daily at 00:00 UTC
+  workflow_dispatch:  # Manual execution possible
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v3
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Abhängigkeiten installieren
+        run: npm install
+
+      - name: Service-Account speichern
+        run: echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' > serviceAccountKey.json
+
+      - name: Fetch & Push Data in Firestore
+        env:
+          COMMUNITY_SPREADSHEET_ID: ${{ secrets.COMMUNITY_SPREADSHEET_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
+        run: node fetch.js
