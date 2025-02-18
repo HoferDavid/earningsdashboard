@@ -1,6 +1,6 @@
 require('dotenv').config();
 const admin = require('firebase-admin');
-const { fetchAndStoreData } = require('backend/community.js'); // change path
+const { fetchAndStoreData } = require('./community.js'); // change path
 const fs = require('fs');
 
 if (!fs.existsSync('./serviceAccountKey.json')) {
