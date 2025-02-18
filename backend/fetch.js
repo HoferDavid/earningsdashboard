@@ -1,16 +1,8 @@
 require('dotenv').config();
 const admin = require('firebase-admin');
-const { fetchAndStoreData } = require('./community.js'); // change path
-const fs = require('fs');
-
-if (!fs.existsSync('./serviceAccountKey.json')) {
-  console.error('Service Account Key file is missing!');
-  process.exit(1);
-}
-
-// Firebase initialisieren
+const serviceAccount = JSON.parse(process.env.FIREBASE_PRIVATE_KEY); // Secret als JSON
 admin.initializeApp({
-  credential: admin.credential.cert(require('./serviceAccountKey.json')),
+  credential: admin.credential.cert(serviceAccount),
 });
 
 fetchAndStoreData().then(() => {

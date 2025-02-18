@@ -8,6 +8,7 @@ on:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -22,8 +23,8 @@ jobs:
           cd backend
           npm install
 
-      - name: Save service account
-        run: echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' > serviceAccountKey.json
+      - name: Save service account key
+        run: echo "${{ secrets.FIREBASE_PRIVATE_KEY }}" > ./backend/serviceAccountKey.json
 
       - name: Fetch & Push Data in Firestore
         env:
