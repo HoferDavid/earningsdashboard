@@ -1,5 +1,6 @@
 require('dotenv').config();
 const admin = require('firebase-admin');
+const { fetchAndStoreData } = require('./community.js');
 
 if (!process.env.FIREBASE_PRIVATE_KEY) {
   console.error('🔥 FIREBASE_PRIVATE_KEY is not set!');
