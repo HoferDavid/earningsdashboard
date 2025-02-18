@@ -29,4 +29,6 @@ jobs:
         env:
           COMMUNITY_SPREADSHEET_ID: ${{ secrets.COMMUNITY_SPREADSHEET_ID }}
           API_KEY: ${{ secrets.API_KEY }}
-        run: node fetch.js
+        run: |
+          cd backend
+          node fetch.js
