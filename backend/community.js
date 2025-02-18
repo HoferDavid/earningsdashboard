@@ -3,31 +3,36 @@ const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
 const axios = require('axios'); // For HTTP-Requests
 const cron = require('node-cron');
-const serviceAccount = require('./serviceAccountKey.json');
-
 
 require('dotenv').config();
 
-
 // Firebase initialize
+if (!process.env.FIREBASE_PRIVATE_KEY) {
+  console.error('🔥 FIREBASE_PRIVATE_KEY is not set!');
+  process.exit(1);
+}
+
+let serviceAccount;
+try {
+  serviceAccount = JSON.parse(process.env.FIREBASE_PRIVATE_KEY); // Secret als JSON
+} catch (error) {
+  console.error('❌ Failed to parse FIREBASE_PRIVATE_KEY:', error);
+  process.exit(1);
+}
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
-
 
 const firestore = admin.firestore();
 const app = express();
 app.use(bodyParser.json());
 
-
 // Google Spreadsheet ID and API Key
 const spreadsheetId = process.env.COMMUNITY_SPREADSHEET_ID; // Set this in .env
 const apiKey = process.env.API_KEY; // Set this in .env
 
-
-/**
- * Fetches data from Google Spreadsheet
- */
+// Fetch data from Google Spreadsheet
 async function fetchSpreadsheetData() {
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?key=${apiKey}`;
 
@@ -59,7 +64,6 @@ async function fetchSpreadsheetData() {
   }
 }
 
-
 async function pushDataToFirestore(data) {
   try {
     const collectionRef = firestore.collection('communityPrediction');
@@ -74,7 +78,8 @@ async function pushDataToFirestore(data) {
 
       await docRef.set({
         ...entry,
-      lastUpdated: timestamp });
+        lastUpdated: timestamp
+      });
     }
     console.log('Data successfully pushed to Firestore.');
   } catch (error) {
@@ -82,10 +87,7 @@ async function pushDataToFirestore(data) {
   }
 }
 
-
-/**
- * Fetch and store data (main function)
- */
+// Fetch and store data (main function)
 async function fetchAndStoreData() {
   const data = await fetchSpreadsheetData();
   if (data.length > 0) {
@@ -95,13 +97,11 @@ async function fetchAndStoreData() {
   }
 }
 
-
 // Schedule a cron job to update data periodically (e.g., daily at midnight)
 // cron.schedule('0 0 * * *', () => {
 //   console.log('Running scheduled job: Fetch and Store Data');
 //   fetchAndStoreData();
 // });
-
 
 // Endpoint to manually trigger data fetch and store
 app.get('/update-stocks', async (req, res) => {
@@ -113,7 +113,6 @@ app.get('/update-stocks', async (req, res) => {
     res.status(500).send('Failed to update stock data.');
   }
 });
-
 
 // Start the server
 const PORT = process.env.PORT || 3000;
