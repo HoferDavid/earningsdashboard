@@ -21,10 +21,12 @@ if (!admin.apps.length) {
   });
 }
 
-fetchAndStoreData().then(() => {
-  console.log('✅ Fetch & Store Job successful.');
-  process.exit(0);
-}).catch(err => {
-  console.error('❌ Error while fetching:', err);
-  process.exit(1);
-});
+fetchAndStoreData()
+  .then(() => {
+    console.log('✅ Fetch & Store Job successful.');
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error('❌ Error while fetching:', err);
+    process.exit(1);
+  });

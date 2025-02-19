@@ -6,9 +6,7 @@ const cron = require('node-cron');
 const serviceAccount = require('./serviceAccountKey.json');
 const stocks = require('./stocks.json');
 
-
 require('dotenv').config();
-
 
 // Firebase initialize
 if (!admin.apps.length) {
@@ -17,16 +15,21 @@ if (!admin.apps.length) {
   });
 }
 
+let serviceAccount;
+try {
+  serviceAccount = JSON.parse(process.env.FIREBASE_PRIVATE_KEY);
+} catch (error) {
+  console.error('❌ Fehler beim Parsen des FIREBASE_PRIVATE_KEY:', error);
+  process.exit(1);
+}
 
 const firestore = admin.firestore();
 const app = express();
 app.use(bodyParser.json());
 
-
 // Google Spreadsheet ID and API Key
 const spreadsheetId = process.env.SPREADSHEET_ID;
 const apiKey = process.env.API_KEY;
-
 
 function convertToAbsolute(value, format) {
   // Remove thousands separator
@@ -43,9 +46,14 @@ function convertToAbsolute(value, format) {
   return numericValue * multiplier;
 }
 
-
 // Function, to load Data from Google Spreadsheet
-async function getStockOverviewData(sheetName, revenueRow, quarterRow, netIncomeRow, grossMarginRow) {
+async function getStockOverviewData(
+  sheetName,
+  revenueRow,
+  quarterRow,
+  netIncomeRow,
+  grossMarginRow
+) {
   const revenueRange = `${sheetName}!A${revenueRow}:BZ${revenueRow}`;
   const quarterRange = `${sheetName}!A${quarterRow}:BZ${quarterRow}`;
   const netIncomeRange = `${sheetName}!A${netIncomeRow}:BZ${netIncomeRow}`;
@@ -61,7 +69,6 @@ async function getStockOverviewData(sheetName, revenueRow, quarterRow, netIncome
   }
 }
 
-
 // Load Google Spreadsheet Data into Firestore for all stocks
 async function syncSpreadsheetToFirestore() {
   try {
@@ -75,18 +82,28 @@ async function syncSpreadsheetToFirestore() {
       const netIncomeRow = stock.netIncomeRow;
       const grossMarginRow = stock.grossMarginRow;
       const numbersFormat = stock.numbersFormat; // Read format from stocks.json
-    
+
       console.log(`Synchronizing ${stockName}...`);
-    
-      const stockData = await getStockOverviewData(sheetName, revenueRow, quarterRow, netIncomeRow, grossMarginRow);
-      
+
+      const stockData = await getStockOverviewData(
+        sheetName,
+        revenueRow,
+        quarterRow,
+        netIncomeRow,
+        grossMarginRow
+      );
+
       if (stockData) {
         // Data cleansing and conversion
-        const revenueData = stockData[0].values[0].map(value => convertToAbsolute(value, numbersFormat));
+        const revenueData = stockData[0].values[0].map((value) =>
+          convertToAbsolute(value, numbersFormat)
+        );
         const quarterData = stockData[1].values[0]; // No conversion required
-        const netIncomeData = stockData[2].values[0].map(value => convertToAbsolute(value, numbersFormat));
+        const netIncomeData = stockData[2].values[0].map((value) =>
+          convertToAbsolute(value, numbersFormat)
+        );
         const grossMarginData = stockData[3].values[0]; // No conversion required
-    
+
         // Save in Firestore
         const stockRef = firestore.collection('stocks').doc(stock.ticker);
         await stockRef.set({
@@ -97,22 +114,20 @@ async function syncSpreadsheetToFirestore() {
           netIncome: netIncomeData,
           grossMargin: grossMarginData,
           url: stock.url,
-          updatedAt: admin.firestore.FieldValue.serverTimestamp()
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         });
-    
+
         console.log(`Data for ${stockName} saved.`);
       } else {
         console.error(`Failed to fetch data for ${stockName}`);
       }
     }
-    
-    console.log('Synchronization complete.');
 
+    console.log('Synchronization complete.');
   } catch (error) {
     console.error('Error loading data:', error);
   }
 }
-
 
 // API route for manual synchronization
 app.post('/api/sync', async (req, res) => {
@@ -120,10 +135,8 @@ app.post('/api/sync', async (req, res) => {
   res.send('Spreadsheet synchronized.');
 });
 
-
 // Cronjob every 24 hours
 // cron.schedule('0 0 * * *', syncSpreadsheetToFirestore);
-
 
 // Start Server
 const PORT = 5001;

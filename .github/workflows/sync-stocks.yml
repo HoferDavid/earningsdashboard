@@ -23,11 +23,28 @@ jobs:
           cd backend
           npm install
 
-      - name: Sync Spreadsheet Data to Firestore
-        env:
-          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
-          API_KEY: ${{ secrets.API_KEY }}
-          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+        - name: Check Environment Variables
         run: |
-          cd backend
-          node index.js
+            if [ -z "${{ secrets.FIREBASE_PRIVATE_KEY }}" ]; then
+                echo "❌ FIREBASE_PRIVATE_KEY ist nicht gesetzt!"
+                exit 1
+            fi
+            if [ -z "${{ secrets.SPREADSHEET_ID }}" ]; then
+                echo "❌ SPREADSHEET_ID ist nicht gesetzt!"
+                exit 1
+            fi
+            if [ -z "${{ secrets.API_KEY }}" ]; then
+                echo "❌ API_KEY ist nicht gesetzt!"
+                exit 1
+            fi
+  
+        - name: Sync Spreadsheet Data to Firestore
+          env:
+            SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+            API_KEY: ${{ secrets.API_KEY }}
+            FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          run: |
+            cd backend
+            node index.js
+  
+
