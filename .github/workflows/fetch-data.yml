@@ -29,12 +29,11 @@ jobs:
           echo "SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }}" >> backend/.env
           echo "API_KEY=${{ secrets.API_KEY }}" >> backend/.env
 
-      - name: Save Firebase Credentials
+      - name: Save Firebase Credentials as File
         run: |
           echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' | jq '.' > backend/serviceAccountKey.json
           ls -lah backend  # Check whether the file exists
           cat backend/serviceAccountKey.json  # Debugging: Output file content
-  
 
       - name: Fetch & Push Data in Firestore
         run: |
