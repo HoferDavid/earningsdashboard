@@ -1,0 +1,433 @@
+{
+  "Apple": {
+    "ticker": "AAPL",
+    "name": "Apple",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1248043629#gid=1248043629",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 9,
+    "netIncomeRow": 36,
+    "grossMarginRow": 23
+  },
+  "Airbnb": {
+    "ticker": "ABNB",
+    "name": "Airbnb",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1318954402#gid=1318954402",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 20,
+    "netIncomeRow": 64,
+    "grossMarginRow": 65
+  },
+  "Adobe": {
+    "ticker": "ADBE",
+    "name": "Adobe",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=707483201#gid=707483201",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 14,
+    "netIncomeRow": 43,
+    "grossMarginRow": 24
+  },
+  "Affirm": {
+    "ticker": "AFRM",
+    "name": "Affirm",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1827311867#gid=1827311867",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 17,
+    "netIncomeRow": 51,
+    "grossMarginRow": 47
+  },
+  "Arista": {
+    "ticker": "ANET",
+    "name": "Arista",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1204976596#gid=1204976596",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 11,
+    "netIncomeRow": 41,
+    "grossMarginRow": 26
+  },
+  "Amazon": {
+    "ticker": "AMZN",
+    "name": "Amazon",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1790479069#gid=1790479069",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 9,
+    "netIncomeRow": 41,
+    "grossMarginRow": 15,
+    "revenueFormat": "billion"
+  },
+  "Asml": {
+    "ticker": "ASML",
+    "name": "Asml",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1121895573#gid=1121895573",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 9,
+    "netIncomeRow": 30,
+    "grossMarginRow": 15
+  },
+  "Coursera": {
+    "ticker": "COUR",
+    "name": "Coursera",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=199443480#gid=199443480",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 28,
+    "grossMarginRow": 11
+  },
+  "Coupang": {
+    "ticker": "CPNG",
+    "name": "Coupang",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1497214837#gid=1497214837",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 7,
+    "netIncomeRow": 25,
+    "grossMarginRow": 12
+  },
+  "Datadog": {
+    "ticker": "DDOG",
+    "name": "Datadog",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=910255405#gid=910255405",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 28,
+    "grossMarginRow": 11
+  },
+  "Digital Ocean": {
+    "ticker": "DOCN",
+    "name": "Digital Ocean",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=999987591#gid=999987591",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 27,
+    "grossMarginRow": 9
+  },
+  "Ebay": {
+    "ticker": "EBAY",
+    "name": "Ebay",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=191416648#gid=191416648",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 10,
+    "netIncomeRow": 38,
+    "grossMarginRow": 16
+  },
+  "Etsy": {
+    "ticker": "ETSY",
+    "name": "Etsy",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=2071367401#gid=2071367401",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 16,
+    "netIncomeRow": 39,
+    "grossMarginRow": 22
+  },
+  "Alphabet": {
+    "ticker": "GOOG",
+    "name": "Alphabet",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=561150333#gid=561150333",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 47,
+    "grossMarginRow": 31
+  },
+  "Hims": {
+    "ticker": "HIMS",
+    "name": "Hims",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=969014986#gid=969014986",
+    "numbersFormat": "millions",
+    "quarterRow": 4,
+    "revenueRow": 10,
+    "netIncomeRow": 38,
+    "grossMarginRow": 16
+  },
+  "Mercado Libre": {
+    "ticker": "MELI",
+    "name": "Mercado Libre",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=411069715#gid=411069715",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 23,
+    "netIncomeRow": 47,
+    "grossMarginRow": 27
+  },
+  "Meta": {
+    "ticker": "META",
+    "name": "Meta",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1277615936#gid=1277615936",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 27,
+    "grossMarginRow": 11
+  },
+  "Monday": {
+    "ticker": "MNDY",
+    "name": "Monday",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=732871312#gid=732871312",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 26,
+    "grossMarginRow": 10
+  },
+  "Microsoft": {
+    "ticker": "MSFT",
+    "name": "Microsoft",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=244946188#gid=244946188",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 9,
+    "netIncomeRow": 32,
+    "grossMarginRow": 16
+  },
+  "Cloudflare": {
+    "ticker": "NET",
+    "name": "Cloudflare",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=674259468#gid=674259468",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 29,
+    "grossMarginRow": 11
+  },
+  "Netflix": {
+    "ticker": "NFLX",
+    "name": "Netflix",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1439322263#gid=1439322263",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 28,
+    "grossMarginRow": 12
+  },
+  "Servicenow": {
+    "ticker": "NOW",
+    "name": "Servicenow",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=804307371#gid=804307371",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 8,
+    "netIncomeRow": 29,
+    "grossMarginRow": 31
+  },
+  "Nvidia": {
+    "ticker": "NVDA",
+    "name": "Nvidia",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=838783939#gid=838783939",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 29,
+    "grossMarginRow": 31
+  },
+  "On": {
+    "ticker": "ONON",
+    "name": "On",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=2116163342#gid=2116163342",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 34,
+    "grossMarginRow": 36
+  },
+  "Pinduoduo": {
+    "ticker": "PDD",
+    "name": "Pinduoduo",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=626992469#gid=626992469",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 11,
+    "netIncomeRow": 39,
+    "grossMarginRow": 41
+  },
+  "Pinterest": {
+    "ticker": "PINS",
+    "name": "Pinterest",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1150541372#gid=1150541372",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 27,
+    "grossMarginRow": 29
+  },
+  "Palantir": {
+    "ticker": "PLTR",
+    "name": "Palantir",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=41389715#gid=41389715",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 36,
+    "grossMarginRow": 12
+  },
+  "Peloton": {
+    "ticker": "PTON",
+    "name": "Peloton",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=8614417#gid=8614417",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 9,
+    "netIncomeRow": 50,
+    "grossMarginRow": 52
+  },
+  "Paypal": {
+    "ticker": "PYPL",
+    "name": "Paypal",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1960091909#gid=1960091909",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 7,
+    "netIncomeRow": 35,
+    "grossMarginRow": 37
+  },
+  "Reddit": {
+    "ticker": "RDDT",
+    "name": "Reddit",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=2129931946#gid=2129931946",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 27,
+    "grossMarginRow": 29
+  },
+  "Revolve": {
+    "ticker": "RVLV",
+    "name": "Revolve",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=570420164#gid=570420164",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 31,
+    "grossMarginRow": 11
+  },
+  "Sea": {
+    "ticker": "SE",
+    "name": "Sea",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1661332327#gid=1661332327",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 11,
+    "netIncomeRow": 52,
+    "grossMarginRow": 31
+  },
+  "Shopify": {
+    "ticker": "SHOP",
+    "name": "Shopify",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1643742320#gid=1643742320",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 16,
+    "netIncomeRow": 48,
+    "grossMarginRow": 28
+  },
+  "Snap Inc.": {
+    "ticker": "SNAP",
+    "name": "Snap Inc.",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=270224833#gid=270224833",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 27,
+    "grossMarginRow": 10
+  },
+  "Snowflake": {
+    "ticker": "SNOW",
+    "name": "Snowflake",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=614885432#gid=614885432",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 9,
+    "netIncomeRow": 33,
+    "grossMarginRow": 35
+  },
+  "Spotify": {
+    "ticker": "SPOT",
+    "name": "Spotify",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=2140039624#gid=2140039624",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 34,
+    "grossMarginRow": 36
+  },
+  "Block": {
+    "ticker": "SQ",
+    "name": "Square",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=2088404706#gid=2088404706",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 13,
+    "netIncomeRow": 58,
+    "grossMarginRow": 61
+  },
+  "Teladoc": {
+    "ticker": "TDOC",
+    "name": "Teladoc",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=727278898#gid=727278898",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 34,
+    "grossMarginRow": 13
+  },
+  "Atlassian": {
+    "ticker": "TEAM",
+    "name": "Atlassian",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1337406373#gid=1337406373",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 13,
+    "netIncomeRow": 37,
+    "grossMarginRow": 39
+  },
+  "Tesla": {
+    "ticker": "TSLA",
+    "name": "Tesla",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=674086900#gid=674086900",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 14,
+    "netIncomeRow": 47,
+    "grossMarginRow": 28
+  },
+  "TSMC": {
+    "ticker": "TSMC",
+    "name": "TSMC",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=931955380#gid=931955380",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 27,
+    "grossMarginRow": 11
+  },
+  "TheTradeDesk": {
+    "ticker": "TTD",
+    "name": "theTradeDesk",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1135579092#gid=1135579092",
+    "numbersFormat": "millions",
+    "quarterRow": 3,
+    "revenueRow": 5,
+    "netIncomeRow": 25,
+    "grossMarginRow": 7
+  },
+  "Uber": {
+    "ticker": "UBER",
+    "name": "Uber",
+    "url": "https://docs.google.com/spreadsheets/d/1m3h9Xce3SRMaq20li2Qg4HuSZowwxQSd9FkQmeuI7Dw/edit?gid=1033659730#gid=1033659730",
+    "numbersFormat": "billions",
+    "quarterRow": 3,
+    "revenueRow": 7,
+    "netIncomeRow": 36,
+    "grossMarginRow": 13
+  }
+}
