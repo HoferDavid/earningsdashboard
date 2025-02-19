@@ -30,7 +30,9 @@ jobs:
           echo "API_KEY=${{ secrets.API_KEY }}" >> backend/.env
 
       - name: Save Firebase Credentials
-        run: echo '${{ secrets.FIREBASE_CREDENTIALS }}' > backend/serviceAccountKey.json
+        run: |
+          echo '${{ secrets.FIREBASE_CREDENTIALS }}' > backend/serviceAccountKey.json
+          sed -i 's/\\n/\n/g' backend/serviceAccountKey.json  # Newline fix
 
       - name: Fetch Community Spreadsheet Data and Push to Firestore
         run: |
