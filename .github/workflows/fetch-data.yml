@@ -1,12 +1,12 @@
-name: Fetch Spreadsheet Data
+name: Fetch and Sync Spreadsheet Data
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # daily at 00:00 UTC
+    - cron: "0 0 * * *"  # daily at 00:00 UTC
   workflow_dispatch:  # Manual execution possible
 
 jobs:
-  update-data:
+  fetch-and-sync:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,13 +23,21 @@ jobs:
           cd backend
           npm install
 
-      - name: Fetch & Push Data in Firestore
-        env:
-          COMMUNITY_SPREADSHEET_ID: ${{ secrets.COMMUNITY_SPREADSHEET_ID }}
-          API_KEY: ${{ secrets.API_KEY }}
-          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+      - name: Create .env file
+        run: |
+          echo "COMMUNITY_SPREADSHEET_ID=${{ secrets.COMMUNITY_SPREADSHEET_ID }}" >> backend/.env
+          echo "SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }}" >> backend/.env
+          echo "API_KEY=${{ secrets.API_KEY }}" >> backend/.env
+
+      - name: Save Firebase Credentials
+        run: echo '${{ secrets.FIREBASE_CREDENTIALS }}' > backend/serviceAccountKey.json
+
+      - name: Fetch Community Spreadsheet Data and Push to Firestore
         run: |
           cd backend
           node fetch.js
 
-
+      - name: Sync Stock Data to Firestore
+        run: |
+          cd backend
+          node index.js
