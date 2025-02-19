@@ -1,12 +1,12 @@
-name: Fetch and Sync Spreadsheet Data
+name: Fetch Spreadsheet Data
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # daily at 00:00 UTC
-  workflow_dispatch:  # Manual execution possible
+    - cron: "0 0 * * *"  # daily 00:00 UTC
+  workflow_dispatch:  # Manual start possible
 
 jobs:
-  fetch-and-sync:
+  update-data:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,15 +31,12 @@ jobs:
 
       - name: Save Firebase Credentials
         run: |
-          echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' > backend/serviceAccountKey.json
-          sed -i 's/\\n/\n/g' backend/serviceAccountKey.json  # Newline fix
+          echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' | jq '.' > backend/serviceAccountKey.json
+          ls -lah backend  # Check whether the file exists
+          cat backend/serviceAccountKey.json  # Debugging: Output file content
+  
 
-      - name: Fetch Community Spreadsheet Data and Push to Firestore
+      - name: Fetch & Push Data in Firestore
         run: |
           cd backend
           node fetch.js
-
-      - name: Sync Stock Data to Firestore
-        run: |
-          cd backend
-          node index.js
