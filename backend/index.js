@@ -11,9 +11,11 @@ require('dotenv').config();
 
 
 // Firebase initialize
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
 
 
 const firestore = admin.firestore();
@@ -27,10 +29,10 @@ const apiKey = process.env.API_KEY;
 
 
 function convertToAbsolute(value, format) {
-  // Entferne Tausendertrennzeichen
+  // Remove thousands separator
   const numericValue = parseFloat(value.replace(/,/g, ''));
 
-  // Wähle den Multiplikator basierend auf dem Format
+  // Select the multiplier based on the format
   let multiplier = 1;
   if (format === 'millions') {
     multiplier = 1e3;
@@ -72,20 +74,20 @@ async function syncSpreadsheetToFirestore() {
       const quarterRow = stock.quarterRow;
       const netIncomeRow = stock.netIncomeRow;
       const grossMarginRow = stock.grossMarginRow;
-      const numbersFormat = stock.numbersFormat; // Format aus stocks.json lesen
+      const numbersFormat = stock.numbersFormat; // Read format from stocks.json
     
       console.log(`Synchronizing ${stockName}...`);
     
       const stockData = await getStockOverviewData(sheetName, revenueRow, quarterRow, netIncomeRow, grossMarginRow);
       
       if (stockData) {
-        // Datenbereinigung und Umrechnung
+        // Data cleansing and conversion
         const revenueData = stockData[0].values[0].map(value => convertToAbsolute(value, numbersFormat));
-        const quarterData = stockData[1].values[0]; // Keine Umrechnung erforderlich
+        const quarterData = stockData[1].values[0]; // No conversion required
         const netIncomeData = stockData[2].values[0].map(value => convertToAbsolute(value, numbersFormat));
-        const grossMarginData = stockData[3].values[0]; // Keine Umrechnung erforderlich
+        const grossMarginData = stockData[3].values[0]; // No conversion required
     
-        // Speichern in Firestore
+        // Save in Firestore
         const stockRef = firestore.collection('stocks').doc(stock.ticker);
         await stockRef.set({
           name: stockName,
@@ -112,7 +114,7 @@ async function syncSpreadsheetToFirestore() {
 }
 
 
-// API-Route for manual Synchronisation
+// API route for manual synchronization
 app.post('/api/sync', async (req, res) => {
   await syncSpreadsheetToFirestore();
   res.send('Spreadsheet synchronized.');
