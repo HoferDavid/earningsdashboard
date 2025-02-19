@@ -1,9 +1,9 @@
-name: Sync Stock Data
+name: Sync Stock Data From Spreadsheet to Firebase
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # daily at 00:00 UTC
-  workflow_dispatch:  # Manual execution possible
+    - cron: '0 0 * * *'  # täglich um 00:00 UTC
+  workflow_dispatch:  # Manuelle Ausführung möglich
 
 jobs:
   sync-stocks:
@@ -23,28 +23,26 @@ jobs:
           cd backend
           npm install
 
-        - name: Check Environment Variables
+      - name: Check Environment Variables
         run: |
-            if [ -z "${{ secrets.FIREBASE_PRIVATE_KEY }}" ]; then
-                echo "❌ FIREBASE_PRIVATE_KEY ist nicht gesetzt!"
-                exit 1
-            fi
-            if [ -z "${{ secrets.SPREADSHEET_ID }}" ]; then
-                echo "❌ SPREADSHEET_ID ist nicht gesetzt!"
-                exit 1
-            fi
-            if [ -z "${{ secrets.API_KEY }}" ]; then
-                echo "❌ API_KEY ist nicht gesetzt!"
-                exit 1
-            fi
-  
-        - name: Sync Spreadsheet Data to Firestore
-          env:
-            SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
-            API_KEY: ${{ secrets.API_KEY }}
-            FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
-          run: |
-            cd backend
-            node index.js
-  
+          if [ -z "${{ secrets.FIREBASE_PRIVATE_KEY }}" ]; then
+            echo "❌ FIREBASE_PRIVATE_KEY ist nicht gesetzt!"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SPREADSHEET_ID }}" ]; then
+            echo "❌ SPREADSHEET_ID ist nicht gesetzt!"
+            exit 1
+          fi
+          if [ -z "${{ secrets.API_KEY }}" ]; then
+            echo "❌ API_KEY ist nicht gesetzt!"
+            exit 1
+          fi
 
+      - name: Sync Spreadsheet Data to Firestore
+        env:
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+        run: |
+          cd backend
+          node index.js

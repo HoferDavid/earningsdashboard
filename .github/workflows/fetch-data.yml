@@ -1,4 +1,4 @@
-name: Fetch Spreadsheet Data
+name: Fetch Community Spreadsheet Data
 
 on:
   schedule:
