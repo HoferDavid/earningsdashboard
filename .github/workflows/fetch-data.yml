@@ -31,9 +31,14 @@ jobs:
 
       - name: Save Firebase Credentials as File
         run: |
-          echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' | jq '.' > backend/serviceAccountKey.json
-          ls -lah backend  # Check whether the file exists
+          echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' | sed 's/\\n/\n/g' > backend/serviceAccountKey.json
+          ls -lah backend  # Check if file exists
           cat backend/serviceAccountKey.json  # Debugging: Output file content
+
+      - name: Check if serviceAccountKey.json exists
+        run: |
+          ls -lah backend
+          cat backend/serviceAccountKey.json  # Sollte lesbare JSON-Daten anzeigen
 
       - name: Fetch & Push Data in Firestore
         run: |
