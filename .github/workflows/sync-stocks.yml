@@ -2,8 +2,8 @@ name: Sync Stock Data From Spreadsheet to Firebase
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # täglich um 00:00 UTC
-  workflow_dispatch:  # Manuelle Ausführung möglich
+    - cron: '0 0 * * *'  # daily at 00:00 UTC
+  workflow_dispatch:  # Manual start possible
 
 jobs:
   sync-stocks:
@@ -26,15 +26,15 @@ jobs:
       - name: Check Environment Variables
         run: |
           if [ -z "${{ secrets.FIREBASE_PRIVATE_KEY }}" ]; then
-            echo "❌ FIREBASE_PRIVATE_KEY ist nicht gesetzt!"
+            echo "❌ FIREBASE_PRIVATE_KEY not set!"
             exit 1
           fi
           if [ -z "${{ secrets.SPREADSHEET_ID }}" ]; then
-            echo "❌ SPREADSHEET_ID ist nicht gesetzt!"
+            echo "❌ SPREADSHEET_ID not set!"
             exit 1
           fi
           if [ -z "${{ secrets.API_KEY }}" ]; then
-            echo "❌ API_KEY ist nicht gesetzt!"
+            echo "❌ API_KEY ot set!"
             exit 1
           fi
 
