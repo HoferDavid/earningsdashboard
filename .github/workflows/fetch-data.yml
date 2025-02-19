@@ -2,8 +2,8 @@ name: Fetch Spreadsheet Data
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # daily 00:00 UTC
-  workflow_dispatch:  # Manual start possible
+    - cron: '0 0 * * *'  # daily at 00:00 UTC
+  workflow_dispatch:  # Manual execution possible
 
 jobs:
   update-data:
@@ -23,24 +23,12 @@ jobs:
           cd backend
           npm install
 
-      - name: Create .env file
-        run: |
-          echo "COMMUNITY_SPREADSHEET_ID=${{ secrets.COMMUNITY_SPREADSHEET_ID }}" >> backend/.env
-          echo "SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }}" >> backend/.env
-          echo "API_KEY=${{ secrets.API_KEY }}" >> backend/.env
-
-      - name: Save Firebase Credentials as File
-        run: |
-          echo '${{ secrets.FIREBASE_PRIVATE_KEY }}' | sed 's/\\n/\n/g' > backend/serviceAccountKey.json
-          ls -lah backend  # Check if file exists
-          cat backend/serviceAccountKey.json  # Debugging: Output file content
-
-      - name: Check if serviceAccountKey.json exists
-        run: |
-          ls -lah backend
-          cat backend/serviceAccountKey.json  # Sollte lesbare JSON-Daten anzeigen
-
       - name: Fetch & Push Data in Firestore
+        env:
+          COMMUNITY_SPREADSHEET_ID: ${{ secrets.COMMUNITY_SPREADSHEET_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
         run: |
           cd backend
           node fetch.js
+
