@@ -15,9 +15,11 @@ try {
   process.exit(1);
 }
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
 
 fetchAndStoreData().then(() => {
   console.log('✅ Fetch & Store Job successful.');
