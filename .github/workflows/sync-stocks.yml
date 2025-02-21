@@ -45,4 +45,4 @@ jobs:
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
         run: |
           cd backend
-          node index.js
+          node sync.js  # ✅ Führt nur die Synchronisation aus

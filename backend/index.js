@@ -5,6 +5,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const stocks = require('./stocks.json');
 
+// Export syncSpreadsheetToFirestore
+module.exports = { syncSpreadsheetToFirestore };
+
 // Firebase-Credentials aus Umgebungsvariable parsen
 let serviceAccount;
 try {
