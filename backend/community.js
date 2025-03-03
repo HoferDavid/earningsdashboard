@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
-const axios = require('axios'); // For HTTP-Requests
+const axios = require('axios');
 const cron = require('node-cron');
 
 // Export fetchAndStoreData
@@ -9,19 +9,8 @@ module.exports = { fetchAndStoreData };
 
 require('dotenv').config();
 
-// Firebase initialize
-if (!process.env.FIREBASE_PRIVATE_KEY) {
-  console.error('🔥 FIREBASE_PRIVATE_KEY is not set!');
-  process.exit(1);
-}
-
-let serviceAccount;
-try {
-  serviceAccount = JSON.parse(process.env.FIREBASE_PRIVATE_KEY); // Secret als JSON
-} catch (error) {
-  console.error('❌ Failed to parse FIREBASE_PRIVATE_KEY:', error);
-  process.exit(1);
-}
+// Firebase initialize using serviceAccountKey.json
+const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -31,19 +20,23 @@ const firestore = admin.firestore();
 const app = express();
 app.use(bodyParser.json());
 
-// Google Spreadsheet ID and API Key
+// Google Spreadsheet ID and API Key from .env
 const spreadsheetId = process.env.COMMUNITY_SPREADSHEET_ID; // Set this in .env
 const apiKey = process.env.API_KEY; // Set this in .env
+
+// Validate environment variables
+if (!spreadsheetId || !apiKey) {
+  console.error('🔥 COMMUNITY_SPREADSHEET_ID or API_KEY is not set in .env!');
+  process.exit(1);
+}
 
 // Fetch data from Google Spreadsheet
 async function fetchSpreadsheetData() {
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?key=${apiKey}`;
 
   try {
-    // Fetch data from Google Sheets
     const response = await axios.get(url);
 
-    // Data from the sheet (assumes the first row is headers)
     const rows = response.data.values;
 
     if (!rows || rows.length === 0) {
@@ -51,7 +44,6 @@ async function fetchSpreadsheetData() {
       return [];
     }
 
-    // Map rows to objects (assumes headers are in the first row)
     const [headers, ...data] = rows;
     const formattedData = data.map((row) =>
       headers.reduce((acc, header, index) => {
@@ -62,7 +54,7 @@ async function fetchSpreadsheetData() {
 
     return formattedData;
   } catch (error) {
-    console.error('Error fetching spreadsheet data:', error);
+    console.error('Error fetching spreadsheet data:', error.message);
     return [];
   }
 }
@@ -70,7 +62,7 @@ async function fetchSpreadsheetData() {
 async function pushDataToFirestore(data) {
   try {
     const collectionRef = firestore.collection('communityPrediction');
-    const timestamp = admin.firestore.FieldValue.serverTimestamp(); // Current Server Timestamp
+    const timestamp = admin.firestore.FieldValue.serverTimestamp();
 
     for (const entry of data) {
       if (!entry.username || typeof entry.username !== 'string' || entry.username.trim() === '') {
@@ -81,12 +73,12 @@ async function pushDataToFirestore(data) {
 
       await docRef.set({
         ...entry,
-        lastUpdated: timestamp
+        lastUpdated: timestamp,
       });
     }
     console.log('Data successfully pushed to Firestore.');
   } catch (error) {
-    console.error('Error pushing data to Firestore:', error);
+    console.error('Error pushing data to Firestore:', error.message);
   }
 }
 
@@ -112,7 +104,7 @@ app.get('/update-stocks', async (req, res) => {
     await fetchAndStoreData();
     res.send('Stock data successfully updated.');
   } catch (error) {
-    console.error('Error updating stock data:', error);
+    console.error('Error updating stock data:', error.message);
     res.status(500).send('Failed to update stock data.');
   }
 });
